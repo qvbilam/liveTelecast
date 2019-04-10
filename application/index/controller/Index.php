@@ -1,18 +1,21 @@
 <?php
 namespace app\index\controller;
 use app\sms\UcpaasConf;
+use think\Config;
 use think\Log;
-use think\controller;
+use think\Controller;
 
-class Index extends controller
+class Index extends Controller
 {
     public function index()
     {
-        return $this->fetch('/public/static/live/login.html');
+        return '';
     }
 
     public function qvbilam()
     {
+        echo 123;
+        print_r(Config::get('code'));
         return 'qvbilam';
     }
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sinwa图片直播 - 登录</title>
+    <title>郭毅小天使图片直播 - 登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta content="yes" name="apple-mobile-web-app-capable"/>
     <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
@@ -85,7 +85,7 @@
     登录
 </header>
 <form class="login" id="form">
-    <h2>singwa体育赛事图文直播平台</h2>
+    <h2>魔王直播平台</h2>
     <div class="login-item">
         <input type="text" placeholder="手机号" class="phone-num" name="phone_num"/>
         <button type="button" id="authCodeBtn">验证码</button>
@@ -99,21 +99,29 @@
     $(function () {
         var $back = $('#back');
         var $submitBtn = $('#submit-btn');
-        var url = 'http:live.dev:9503/index/send/index'
+        //获取当前的请求地址
+        var host = window.location.host;
+        //获取当前协议
+        var agreement = window.location.protocol;
+        var send_url = agreement + '//' + host+ '/index/send/index'
+        var form_url = agreement + '//' + host + '/index/login/index'
+
         // 获取验证吗
         $('#authCodeBtn').click(function (event) {
 
             var phone_num = $(" input[ name='phone_num' ] ").val()
-            url = url + "?phone_num=" + phone_num;
+            url = send_url + "?phone_num=" + phone_num;
             $(this).html('已发送').attr('disabled', true);
             // $.post()
             $.get(url, function (data) {
                 // TODO: 将下面3行代码删除
-                if (data.status == 'ok') {
-                    alert('发送完成');
-                }
-                // if (result.status != 'ok') {
-                // 	alert('网络错误');
+                console.log(data);
+                data = JSON.parse(data)
+                alert(data.msg)
+                // if (data.code == 0) {
+                //     alert('发送完成');
+                // }else {
+                // 	alert(data.msg);
                 // }
             });
         });
@@ -123,9 +131,8 @@
             event.preventDefault();
             var formData = $('form').serialize();
             // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
-            $.get("https://www.easy-mock.com/mock/5ab1188bddac7967e4398146/example/query?" + formData, function (data) {
-                console.log("https://www.easy-mock.com/mock/5ab1188bddac7967e4398146/example/query?" + formData);
-                // location.href='index.html';
+            $.get(form_url + '?' + formData, function (data) {
+                console.log(data)
             });
         });
 
