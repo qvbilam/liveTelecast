@@ -25,15 +25,12 @@ websocketLive.onerror = function (evt, e) {
 
 function messagePush(data) {
     data = JSON.parse(data);
-    console.log(data)
     console.log(data.type)
-    var div_type = '#number_' . data.type
-    console.log(div_type)
-    if($(div_type).size>0){
+    if ($('#number_' + data.type).length > 0) {
         content_html = '<div class="frame-item">'
         content_html += '<span class="frame-dot"></span>'
         content_html += '<div class="frame-item-author">'
-        if (data.uimage != null) {
+        if (data.u_image != null) {
             content_html += '<img src="' + data.u_image + '" width="20px" height="20px"/>'
         }
 
@@ -44,28 +41,37 @@ function messagePush(data) {
         }
         content_html += '</div>'
         content_html += '<p>' + data.content + '</p>'
-        if (data.data.live[i][j].image != null) {
+        if (data.image != null) {
             content_html += '<image width="200px" src="' + data.image + '"/>'
         }
         content_html += '</div>'
         $('#number_' + data.type).append(content_html)
-    }else{
-        html = '<div class="frame">'
+        console.log('success')
+    } else {
+        html = '<div class="frame" id="number_' + data.type + '">'
         html += '<h3 class="frame-header">'
         html += '<i class="icon iconfont icon-shijian"></i>第' + data.type + '节</h3>'
         html += '<div class="frame-item">'
         html += '<span class="frame-dot"></span>'
         html += '<div class="frame-item-author">'
-        html += '<img src="' + data.u_image + '" width="20px" height="20px" />'
-        html += data.u_name
+        if (data.u_image != null) {
+            html += '<img src="' + data.u_image + '" width="20px" height="20px" />'
+        }
+        if (data.u_name != null) {
+            html += data.u_name
+        } else {
+            html += '解说员'
+        }
         html += '</div>'
         html += '<p>' + data.content + '</p>'
-        html += '<image src="' + data.image + '" style="width: 200px" />'
+        if (data.image != null) {
+            html += '<image src="' + data.image + '" style="width: 200px" />'
+        }
         html += '</div>'
         html += '</div>'
         $('#match-result').prepend(html)
+        console.log('eles')
     }
-
 
 
 }
