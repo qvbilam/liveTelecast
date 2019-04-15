@@ -63,6 +63,7 @@ class Ws
     /*request 回调*/
     public function onRequest($request, $response)
     {
+        $_SERVER = [];
         if (isset($request->server)) {
             foreach ($request->server as $key => $val) {
                 $_SERVER[strtoupper($key)] = $val;
@@ -92,6 +93,9 @@ class Ws
                 $_FILES[$key] = $val;
             }
         }
+
+
+
 //        这样在别的地方就可以全局时候httpserver的东西了
         $_POST['http_server'] = $this->websocket;
 
@@ -123,9 +127,8 @@ class Ws
 
     public function onOpen($ws, $frame)
     {
-
 //        将用户存放到redis
-        \app\command\Predis::getIntance()->sadd($this->set_redis_key, $frame->fd);
+//        \app\command\Predis::getIntance()->sadd($this->set_redis_key, $frame->fd);
         echo $frame->fd;
 
     }

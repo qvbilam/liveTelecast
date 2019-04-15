@@ -15,7 +15,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -241,5 +241,5 @@ return [
         'list_rows' => 15,
     ],
 
-    'extra_config_list' => ['code','redis','web'],
+    'extra_config_list' => ['code','redis','web','Upy'],
 ];

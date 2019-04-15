@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<script src="../live/js/jquery-3.3.1.min.js"></script>
+<script src="../live/js/jquery.cookie.js"></script>
+<script src="../live/js/VerToken.js"></script>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>手机app通用模板演唱会在线订票明星列表页面模板</title>
+    <link href="./css/style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+
+<section class="aui-flexView" id="search">
+    <header class="aui-navBar aui-navBar-fixed b-line">
+        <div class="aui-center">
+            <div class="aui-jop-search">
+                <i class="icon icon-search"></i>
+                <input type="text" placeholder="请搜索">
+            </div>
+        </div>
+        <a href="javascript:;" class="aui-navBar-item">
+            取消
+        </a>
+    </header>
+
+
+    <div class="aui-flex">
+        <div class="aui-flex-box">
+            <div class="aui-star-img">
+                <img src="images/banner2.jpeg" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="aui-flex">
+        <div class="aui-flex-box">
+            <div class="aui-star-img">
+                <img src="images/banner1.jpeg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+<script>
+    var addDiv = $('#search');
+    var host = window.location.host;
+    //获取当前协议
+    var agreement = window.location.protocol;
+    var send_url = agreement + '//' + host + '/index/bank/index'
+    // 提交表单
+    $.ajax({
+        type: "get",
+        url: send_url,
+        beforeSend: function (XMLHttpRequest) {
+            XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
+        },
+        success: function (data) {
+            console.log(data)
+            data = JSON.parse(data)
+            for (var i = 0; i < data.data.length; i++) {
+                html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
+                html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + data.data[i].id + '">'
+                html += '<img src="' + data.data[i].image + '" alt=""></a>'
+                html += '</div></div></div>'
+                addDiv.append(html)
+            }
+        }
+
+    });
+
+</script>

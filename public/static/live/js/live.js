@@ -25,20 +25,47 @@ websocketLive.onerror = function (evt, e) {
 
 function messagePush(data) {
     data = JSON.parse(data);
-    html = '<div class="frame">'
-    html += '<h3 class="frame-header">'
-    html += '<i class="icon iconfont icon-shijian"></i>第' + data.type + '节</h3>'
-    html += '<div class="frame-item">'
-    html += '<span class="frame-dot"></span>'
-    html += '<div class="frame-item-author">'
-    html += '<img src="./imgs/team1.png" width="20px" height="20px" />'
-    html += '马刺次'
-    html += '</div>'
-    html += '<p>' + data.content + '</p>'
-    html += '</div>'
-    html += '</div>'
+    console.log(data)
+    console.log(data.type)
+    var div_type = '#number_' . data.type
+    console.log(div_type)
+    if($(div_type).size>0){
+        content_html = '<div class="frame-item">'
+        content_html += '<span class="frame-dot"></span>'
+        content_html += '<div class="frame-item-author">'
+        if (data.uimage != null) {
+            content_html += '<img src="' + data.u_image + '" width="20px" height="20px"/>'
+        }
 
-    $('#match-result').prepend(html)
+        if (data.u_name != null) {
+            content_html += data.u_name
+        } else {
+            content_html += '解说员：'
+        }
+        content_html += '</div>'
+        content_html += '<p>' + data.content + '</p>'
+        if (data.data.live[i][j].image != null) {
+            content_html += '<image width="200px" src="' + data.image + '"/>'
+        }
+        content_html += '</div>'
+        $('#number_' + data.type).append(content_html)
+    }else{
+        html = '<div class="frame">'
+        html += '<h3 class="frame-header">'
+        html += '<i class="icon iconfont icon-shijian"></i>第' + data.type + '节</h3>'
+        html += '<div class="frame-item">'
+        html += '<span class="frame-dot"></span>'
+        html += '<div class="frame-item-author">'
+        html += '<img src="' + data.u_image + '" width="20px" height="20px" />'
+        html += data.u_name
+        html += '</div>'
+        html += '<p>' + data.content + '</p>'
+        html += '<image src="' + data.image + '" style="width: 200px" />'
+        html += '</div>'
+        html += '</div>'
+        $('#match-result').prepend(html)
+    }
+
 
 
 }

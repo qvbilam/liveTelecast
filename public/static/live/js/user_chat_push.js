@@ -5,8 +5,6 @@ $(function () {
 //获取当前协议
     var agreement = window.location.protocol;
     var send_url = agreement + '//' + host + '/index/chat/index'
-
-
     $('#chatPush').keydown(function (event) {
 
         /*回车事件*/
@@ -15,11 +13,19 @@ $(function () {
             $(this).val('')
             var data = {'content': text, 'game_id': 1}
             /*向服务端发送数据*/
-            $.post(send_url, data, function (result) {
-                /**/
+            // $.post(send_url, data, function (result) {
+            //     /**/
+            //
+            // }, 'json')
 
-            }, 'json')
-
+            $.ajax({
+                type: "post",
+                url: send_url,
+                data:data,
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
+                }
+            });
         }
 
     })

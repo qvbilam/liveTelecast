@@ -155,3 +155,11 @@ create table `live_chart`(
   `update_time` int (0) unsigned not null default 0,
   primary key (`id`)
 )engine=innodb auto_increment=1 default charset=utf8;
+
+create table `live_user`(
+ `id` int(10) auto_increment PRIMARY key,
+ `phone` varchar(11) not null default '',
+ `name` VARCHAR(10) not null DEFAULT '',
+ `create_time` int (0) unsigned not null default 0 comment '创建时间',
+  `update_time` int (0) unsigned not null default 0 comment '更新时间'
+)

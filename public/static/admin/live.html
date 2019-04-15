@@ -45,9 +45,7 @@
             </label>
             <div class="layui-input-inline">
                 <select id="team_id" name="team_id" class="valid">
-                    <option value="0">请选择</option>
-                    <option value="1">马刺</option>
-                    <option value="4">火箭</option>
+
                 </select>
             </div>
         </div>
@@ -92,7 +90,33 @@
     //获取当前协议
     var agreement = window.location.protocol;
 
+    var send_url = agreement + '//' + host + '/admin/live/data'
+    var getData = window.location.search
+    var getData = getData.substr(1) //去掉?asd=123前面的问好
 
+
+    /*获取直播的数据*/
+    $.ajax({
+        type: "get",
+        url: send_url,
+        data: getData,
+        success: function (data) {
+            data = JSON.parse(data)
+            if (data.msg == 'ok') {
+                /*todo*/
+                html = '<option value="0">请选择</option>'
+                html += '<option value="' + data.data.a_id + '">' + data.data.a_name + '</option>'
+                html += '<option value="' + data.data.b_id + '">' + data.data.b_name + '</option>'
+                $('#team_id').append(html);
+
+            } else {
+                alert(data.data)
+            }
+        }
+    });
+
+
+    /*图片上传*/
     var $list = $("#fileList")
 
 
@@ -108,10 +132,10 @@
         auto: true,
 
         // swf文件路径
-        swf: agreement + host + '/webuploader/Uploader.swf',
+        swf: agreement + '//' + host + '/webuploader/Uploader.swf',
 
         // 文件接收服务端。
-        server: agreement + host + '/admin/image/index',
+        server: agreement + '//' + host + '/admin/image/index',
 
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -167,10 +191,10 @@
     });
 
     // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-    uploader.on('uploadSuccess', function (file,response) {
-        if(response.code == 0){
+    uploader.on('uploadSuccess', function (file, response) {
+        if (response.code == 0) {
             console.log(response.data.image)
-            $('#'+file.id).append("<input type='hidden' name='image' value='" + response.data.image + "' />")
+            $('#' + file.id).append("<input type='hidden' name='image' value='" + response.data.image + "' />")
         }
         $('#' + file.id).addClass('upload-state-done');
     });
@@ -200,9 +224,10 @@
         event.preventDefault();
         var formData = $('form').serialize();
         // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
-        console.log(agreement + '//' + host + "/admin/live/push")
-        console.log(formData)
-        $.get(agreement + '//' + host + "/admin/live/push?" + formData, function (data) {
+        //  ?fight_id=1&type=1&team_id=0&content=
+        // console.log(agreement + '//' + host + "/admin/live/push?" + getData + "&" + formData)
+        console.log($('#fileList').html());
+        $.get(agreement + '//' + host + "/admin/live/push?" + getData + "&" + formData, function (data) {
 
             if (data.status == 1) {
                 // 登录成功
