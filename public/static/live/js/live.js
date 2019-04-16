@@ -1,4 +1,4 @@
-var WsUrl = "ws://127.0.0.1:9505"
+var WsUrl = "ws://39.97.177.28:9505"
 var websocketLive = new WebSocket(WsUrl);
 
 //链接websock服务

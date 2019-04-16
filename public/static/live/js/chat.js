@@ -1,4 +1,4 @@
-var WsChatUrl = "ws://127.0.0.1:9504"
+var WsChatUrl = "ws://39.97.177.28:9504"
 var websocketChat = new WebSocket(WsChatUrl);
 
 //链接websock服务
