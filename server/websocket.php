@@ -28,9 +28,8 @@ class Ws
             'worker_num' => 4,
             'task_worker_num' => 4
         ]);
-
-
-
+        /*平滑重启*/
+        $this->websocket->on('start',[$this,'onStart']);
         $this->websocket->on('open', [$this, 'onOpen']);
         $this->websocket->on('message', [$this, 'onMessage']);
         $this->websocket->on('workerstart', [$this, 'onWorkerStart']);
@@ -43,6 +42,16 @@ class Ws
     }
 
     /*
+     * 平滑重启服务
+     * */
+    public function onStart($server)
+    {
+        /*给个进程名称 给祝进程起别名*/
+        swoole_set_process_name('live_game');
+
+    }
+
+    /*
      * */
     public function onWorkerStart($server, $worker_id)
     {
@@ -50,8 +59,8 @@ class Ws
         define('APP_PATH', __DIR__ . '/../application/');
         // 再去加载php的引导文件  不直接复制index.php的文件中的引入start.php.是因为在start.php中还有执行应用我们不需要。所以直接引入base.php就行
         // x加载基础文件
-//        require __DIR__ . '/../thinkphp/base.php';
-//        直接引入这个才可以是用tp的功能。要不然回找不到下面app的类。只要让index/index/index人 turn空就行
+        // require __DIR__ . '/../thinkphp/base.php';
+        // 直接引入这个才可以是用tp的功能。要不然回找不到下面app的类。只要让index/index/index人 turn空就行
         require __DIR__ . '/../thinkphp/start.php';
 
         $this->set_redis_key = \think\Config::get('redis.live_game_key');
@@ -64,6 +73,15 @@ class Ws
     /*request 回调*/
     public function onRequest($request, $response)
     {
+        /*
+         * 处理请求的一种方法哟～
+        if($request->server['request_uri'] == '/xxx'){
+            // 返回404 并结束。如果不用end() 会报500。这个请求就协程自己的吧
+            $response->status(404);
+            $response->end();
+            return ;
+        }*/
+
         $_SERVER = [];
         if (isset($request->server)) {
             foreach ($request->server as $key => $val) {
@@ -95,9 +113,9 @@ class Ws
             }
         }
 
-
-
-//        这样在别的地方就可以全局时候httpserver的东西了
+        /*记录日志*/
+        $this->writeLog();
+        /*这样在别的地方就可以全局时候httpserver的东西了*/
         $_POST['http_server'] = $this->websocket;
 
         // 执行应用
@@ -105,7 +123,7 @@ class Ws
         try {
             think\App::run()->send();
         } catch (\Exception $e) {
-//        可以输出一些错误。打错误日志什么的。根据自己业务吧
+            /*可以输出一些错误。打错误日志什么的。根据自己业务吧*/
         }
         $rst = ob_get_contents();
         ob_end_clean();
@@ -128,8 +146,10 @@ class Ws
 
     public function onOpen($ws, $frame)
     {
-//        将用户存放到redis
-//        \app\command\Predis::getIntance()->sadd($this->set_redis_key, $frame->fd);
+        /*
+         * 将用户存放到redis 弃用啦～
+         * \app\command\Predis::getIntance()->sadd($this->set_redis_key, $frame->fd);
+         * */
         echo $frame->fd;
 
     }
@@ -146,6 +166,41 @@ class Ws
         \app\command\Predis::getIntance()->srem($this->set_redis_key, $fd);
         echo $fd . '/close' . PHP_EOL;
 
+    }
+
+    /*记录日志*/
+    public function writeLog()
+    {
+        $data = array_merge(['data' => date('Y-m-d H:i:s')], $_GET, $_POST, $_SERVER);
+        $logs = '';
+        foreach ($data as $key => $val) {
+            $logs .= $key . ':' . $val . ' ';
+        }
+        /*
+         * swoole_async_writefile
+         * 异步文件写日志
+         * 日志文件路径 日记内容 回调函数  追加的形式
+         * APP_Path就是我们的application目录
+         * tmd 没这个方法了。要想用要么使用协程自己替换。要么下载async-ext扩展https://github.com/swoole/ext-async
+         * */
+        go(function () use ($logs) {
+            /*判断目录存在不存在*/
+            $dir = APP_PATH . '../runtime/log/' . date('Ym') . '/';
+            if (!is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+            $this->exeWriteLog($dir . date('d') . '_success.log', $logs);
+        });
+    }
+
+    /*执行写入日志*/
+    public function exeWriteLog($filename, $content)
+    {
+        /*
+         * 如果文件不存在，则创建文件，相当于fopen()函数行为。
+         * 如果文件存在，默认将清空文件内的内容，可设置 flags 参数值为 FILE_APPEND。
+         * */
+        file_put_contents($filename, PHP_EOL . $content, FILE_APPEND);
     }
 }
 
