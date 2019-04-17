@@ -13,7 +13,8 @@ class Ws
     CONST CHAT_PORT = 9504;
     CONST LIVE_PORT = 9505;
     public $websocket = null;
-    public $document_root = "/Users/qvbilam/Sites/liveTelecast/public/static";
+    //public $document_root = "/Users/qvbilam/Sites/liveTelecast/public/static";
+    public $document_root = "/data/wwwroot/liveTelecast/public/static";
     public $set_redis_key = '';
 
     public function __construct()

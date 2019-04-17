@@ -1691,3 +1691,4 @@ class Request
         return isset($this->bind[$name]);
     }
 }
+
