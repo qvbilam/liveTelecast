@@ -67,7 +67,8 @@
             var formData = $('form').serialize();
             // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
             $.get(form_url + '?' + formData, function (data) {
-                data = JSON.parse(data)
+                // data = JSON.parse(data)
+                console.log(data)
                 $.cookie(host,data.data.token)
                 if (data.msg == 'perfect') {
                     /*跳转信息页面*/
