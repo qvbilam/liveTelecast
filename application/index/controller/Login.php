@@ -17,17 +17,20 @@ use app\command\Mysql;
 use Firebase\JWT\JWT;
 use app\index\controller\Token;
 
-class Login
+class Login extends Base
 {
 
-    /*用户登录*/
+    // 用户登录 GET
     public function index()
     {
-        $phone = intval($_GET['phone_num']);
-        $code = intval($_GET['code']);
-        if (empty($phone) || empty($code)) {
-            return Util::show(Config::get('code.error_phone_code_empty'), '手机号或验证码不能为空');
+        if(empty($_GET['code']) && empty($_POST['code'])){
+            return Util::show(Config::get('code.error_phone_code_empty'), '验证码不能为空');
         }
+        if (empty($_GET['phone_num']) && empty($_POST['phone_num'])) {
+            return Util::show(Config::get('code.error_phone_code_empty'), '手机号不能为空');
+        }
+        $phone = isset($_GET['phone_num'])?$_GET['phone_num']:$_POST['phone_num'];
+        $code = isset($_GET['code'])?$_GET['code']:$_POST['code'];
         /*获取Redis code*/
         $redis_code = Predis::getIntance()->get(Redis::smsKey($phone));
         if ($redis_code == $code) {
@@ -48,12 +51,15 @@ class Login
 
     public function perfect()
     {
-        $name = $_GET['name'];
-        $authorization = $_SERVER['AUTHORIZATION'];
-        if (!$name || !$authorization) {
-            return Util::show(Config::get('code.error_perfect_empty'), 'error');
+        if(empty($_GET['name']) && empty($_POST['name'])){
+            return Util::show(Config::get('code.error_perfect_empty'), '昵称不能为空');
         }
-        $userId = Token::getUserId($authorization);
+        // 验证token
+        if (empty($_SERVER['HTTP_AUTHORIZATION'])) {
+            return Util::show(Config::get('code.error_perfect_empty'), 'token不能为空');
+        }
+        $userId = $this->getUserId($_SERVER['HTTP_AUTHORIZATION']);
+        $name = isset($_GET['name'])?$_GET['name']:$_POST['name'];
         if ($userId) {
             $res = Db::table('live_user')->where(['id' => $userId])->update([
                 'name' => $name,
@@ -94,11 +100,6 @@ class Login
         return $data;
     }
 
-    /*完善用户信息*/
-    public function updateUser($phone, $name)
-    {
-
-    }
 
     /*创建token*/
     public function createJwt($userId)

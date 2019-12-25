@@ -64,7 +64,6 @@ class Token
             ];
         }
         return $msg;
-
     }
 
 }
