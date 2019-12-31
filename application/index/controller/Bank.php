@@ -24,9 +24,7 @@ class Bank
 //            ->select();
         $data = Db::table('live_bank')->where('state', 1)->field('id as bank_id,name as bank_name')->order('order', 'desc')->select();
         foreach ($data as &$v) {
-            $v['data'] = [];
-            $res = Db::table('live_program')->where('bank_id', $v['bank_id'])->field('id,name,image')->order('order', 'desc')->limit(4)->select();
-            array_push($v['data'], $res);
+            $v['data']  = Db::table('live_program')->where('bank_id', $v['bank_id'])->field('id,name,image')->order('order', 'desc')->limit(4)->select();
         }
         return Util::show(0, 'ok', $data);
     }
