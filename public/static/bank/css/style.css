@@ -142,7 +142,14 @@ a {
     -webkit-align-items: center;
     align-items: center;
     padding: 15px;
+    padding: 7.5px;
     position: relative;
+    
+    /* float: left; */
+    
+}
+.contentBox{
+    width: 50%;
 }
 
 .aui-flex-box {
@@ -152,6 +159,7 @@ a {
     min-width: 0;
     font-size: 14px;
     color: #333;
+    float: left;
 }
 
 /* 必要布局样式css */
@@ -264,7 +272,7 @@ a {
     align-items: center;
     height: 44px;
     width: 50%;
-    margin-left: 25%;
+    /* margin-left: 25%; */
 }
 
 .aui-center-title {
@@ -333,6 +341,7 @@ a {
 .aui-star-img img {
     width: 100%;
     height: auto;
+    /* height: 5rem; */
     display: block;
     border: none;
 }
@@ -347,7 +356,14 @@ a {
     font-size: 0.9rem;
     padding: 0.3rem 0.8rem 0.3rem 1.6rem;
 }
-
+.contentName, .contentTitle{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.contentTitle{
+    color: #999;
+}
 .icon-add {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAABt0lEQVRoQ+1avU4CQRj8vjsLOy01Nlr4ExrujpgDHsEX0dj5AJqYmNjbanwMHwFEA3c0xJ9CCws7ExtJzO2aU4iI2jFLAkNFtXMz38zOZu9UpuynU8ZXSNjFxAuFzYUcp9O5fnaBN4jhfMKloLornpx8PoQxO8308swlafeEo+qNiKz3SN42W7WNiSYchZUHVV3OSVprH1tJfYWEgQo4tzQnTEsD/Szi/uBBS9PStPRIFWAtjVTOPxbjpsVNC+sxZhirrwgzzAxjPcYMY/VlhnnFg3YYMxwE8Zan/raInQOpHavqbO/WsisiDQSOqrxkxpymaePi34v4YrGyNOPrE+IB+mtaa0X1y1iD/1GYb933xcE3HD8sHQTxqu/5dyjwYZIuCGcmW0vTxn2f068Mh2F5R8U7VpV5BHF3E7avxspektTPx/puiWdpnqURQfpekz2M1ZdnaZ6l0Q5jhtEKs4fZw1iPMcNYfdnD7GG0w5hhtMLsYfYw1mPMMFZf9vDk93Bp2j4QL4WVA1E9zKNjrOwnSe0IHaOx3kvn4FEUl7PMM+12/col2RzL+S7tmuAwHgmPewJo/A+uiL1M2nW9UQAAAABJRU5ErkJggg==');
     background-size: 15px;
@@ -459,3 +475,41 @@ a {
     color: #5c6efe;
     border-color: #5c6efe;
 }
+
+.section{
+    margin-top: 10px;
+    height: 44px;
+    background: #fff;
+    display: flex;
+    padding: 0 0.5rem;
+    justify-content: space-between;
+    line-height: 44px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+}
+.section .title{
+    font-size: 0.8rem;
+    color: #000;
+}
+.section .more{
+    text-align: right;
+    font-size: 0.8rem;
+    color: #999;
+}
+.box{
+    width: 40%;
+    float: left;
+}
+.box img{
+    width: 100%;
+}
+.content{
+    display: flex;
+    flex-wrap: wrap;
+}
+/* #banner{
+    height: 100px;
+}
+#banner img{
+    width: 100%;
+} */

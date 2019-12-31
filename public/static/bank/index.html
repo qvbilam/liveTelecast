@@ -2,6 +2,7 @@
 <script src="../live/js/jquery-3.3.1.min.js"></script>
 <script src="../live/js/jquery.cookie.js"></script>
 <script src="../live/js/VerToken.js"></script>
+<script src="./js/carousel.js"></script>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,34 +24,51 @@
             取消
         </a>
     </header>
-
-
-    <!--<div class="aui-flex">-->
-        <!--<div class="aui-flex-box">-->
-            <!--<div class="aui-star-img">-->
-                <!--<img src="images/banner2.jpeg" alt="">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
-    <!--<div class="aui-flex">-->
-        <!--<div class="aui-flex-box">-->
-            <!--<div class="aui-star-img">-->
-                <!--<img src="images/banner1.jpeg" alt="">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div id="banner" class="aui-flex"></div>
+    <!-- <div class="section">
+        <span class="title">傻逼的一个狗栏目</span>
+        <span class="more">查看更多傻逼</span>
+    </div>
+    <div id="content" class="content">
+        <div class="aui-flex">
+            <div class="aui-flex-box">
+                <div class="aui-star-img">
+                    <img src="images/banner2.jpeg" alt="">
+                    <div class="contentName">傻逼战争冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊</div>
+                    <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="aui-flex">
+            <div class="aui-flex-box">
+                <div class="aui-star-img">
+                    <img src="images/banner1.jpeg" alt="">
+                    <div class="contentName">傻逼战争</div>
+                    <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </section>
 
 </body>
 </html>
 <script>
-    var addDiv = $('#search');
-    var host = window.location.host;
+    var banner = document.getElementById('banner')
+    carousel(banner);
+    // var addDiv = $('#search');
+    var addBox = $('#search');
+    var addDiv = $('#content');
+    
+    // var host = window.location.host;
+    var host = 'http://live.qvbilam.xin:9503/';
     //获取当前协议
-    var agreement = window.location.protocol;
-    var send_url = agreement + '//' + host + '/index/bank/index'
+    // var agreement = window.location.protocol;
+    var agreement ='http://';
+    // var send_url = agreement + '//' + host + '/index/bank/index'
+    var send_url = host + '/index/bank/index'
     // 提交表单
     $.ajax({
         type: "get",
@@ -58,18 +76,149 @@
         beforeSend: function (XMLHttpRequest) {
             XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
         },
-        success: function (data) {
-            console.log(data)
-            data = JSON.parse(data)
-            for (var i = 0; i < data.data.length; i++) {
-                html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
-                html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + data.data[i].id + '">'
-                html += '<img src="' + data.data[i].image + '" alt=""></a>'
-                html += '</div></div></div>'
-                addDiv.append(html)
-            }
+        success: function (res) {
+            console.log(res)
+            res = JSON.parse(res)
+            console.log(res.data)
+            // for(var i = 0;i < data.data.length; i++){
+            //     html = '<div class="section">'
+            //     html += '<span class="title">'+data.data[i].bank_name+'</span>'
+            //     html += '<span class="more">查看更多傻逼</span>'
+            //     html += '</div>'
+            //     html += '<div class="content" id="content'+i+'"></div>'
+            //     addBox.append(html)
+            //     var addDiv = $('#content'+i);
+            //     for(var j=0; j < 4; j++){
+            //         html = '<div class="aui-flex contentBox"><div class="aui-flex-box"><div class="aui-star-img">'
+            //         html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + data[i].data[j].id + '">'
+            //         html += '<img src="' + data.data[i].data[j].image + '" alt="">'
+            //         html += '<div class="contentName">'+data.data[i].data[j].name+'</div>'
+            //         html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
+            //         html += '</div></div></div>'
+            //         addDiv.append(html)
+            //     }
+            // }
         }
 
     });
+
+
+    console.log(1111111)
+
+ //模拟数据
+ var data={
+    "code": 0,
+    "msg": "ok",
+    "data": [
+        {
+            'lanmu':'狗栏目1',
+            'content':[
+                {
+                "id": 1,
+                "name": "Fate Zero",
+                "image": "http://image.qvbilam.xin/animation/fatezero/logo/fatezero.jpeg"
+                },
+                {
+                    "id": 2,
+                    "name": "Fate Stay Night",
+                    "image": "http://image.qvbilam.xin//animation/fatestaynight/logo/fate_stay_night.jpeg"
+                },
+                {
+                    "id": 3,
+                    "name": "进击的巨人",
+                    "image": "http://image.qvbilam.xin/animation/jinjidejuren/logo/jinjidejuren.jpg"
+                },
+                {
+                    "id": 4,
+                    "name": "东京喰种",
+                    "image": "http://image.qvbilam.xin/animation/dongjingcanzhong/logo/dongjingcanzhong.jpg"
+                }
+            ]
+        },
+        {
+            'lanmu':'狗栏目1',
+            'content':[
+                {
+                "id": 1,
+                "name": "Fate Zero",
+                "image": "http://image.qvbilam.xin/animation/fatezero/logo/fatezero.jpeg"
+                },
+                {
+                    "id": 2,
+                    "name": "Fate Stay Night",
+                    "image": "http://image.qvbilam.xin//animation/fatestaynight/logo/fate_stay_night.jpeg"
+                },
+                {
+                    "id": 3,
+                    "name": "进击的巨人",
+                    "image": "http://image.qvbilam.xin/animation/jinjidejuren/logo/jinjidejuren.jpg"
+                },
+                {
+                    "id": 4,
+                    "name": "东京喰种",
+                    "image": "http://image.qvbilam.xin/animation/dongjingcanzhong/logo/dongjingcanzhong.jpg"
+                }
+            ]
+        },
+        {
+            'lanmu':'狗栏目1',
+            'content':[
+                {
+                "id": 1,
+                "name": "Fate Zero",
+                "image": "http://image.qvbilam.xin/animation/fatezero/logo/fatezero.jpeg"
+                },
+                {
+                    "id": 2,
+                    "name": "Fate Stay Night",
+                    "image": "http://image.qvbilam.xin//animation/fatestaynight/logo/fate_stay_night.jpeg"
+                },
+                {
+                    "id": 3,
+                    "name": "进击的巨人",
+                    "image": "http://image.qvbilam.xin/animation/jinjidejuren/logo/jinjidejuren.jpg"
+                },
+                {
+                    "id": 4,
+                    "name": "东京喰种",
+                    "image": "http://image.qvbilam.xin/animation/dongjingcanzhong/logo/dongjingcanzhong.jpg"
+                }
+            ]
+        }
+    ]
+}
+// var data = data.data
+// console.log(data)
+// for(var i = 0;i < data.length; i++){
+//     html = '<div class="section">'
+//     html += '<span class="title">'+data[i].bank_name+'</span>'
+//     html += '<span class="more">查看更多傻逼</span>'
+//     html += '</div>'
+//     html += '<div class="content" id="content'+i+'"></div>'
+//     addBox.append(html)
+//     var addDiv = $('#content'+i);
+//     for(var j=0; j < 4; j++){
+//         html = '<div class="aui-flex contentBox"><div class="aui-flex-box"><div class="aui-star-img">'
+//         html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + data[i].data[j].id + '">'
+//         html += '<img src="' + data[i].data[j].image + '" alt="">'
+//         html += '<div class="contentName">'+data[i].data[j].name+'</div>'
+//         html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
+//         html += '</div></div></div>'
+//         addDiv.append(html)
+//     }
+// }
+
+
+
+// for (var i = 0; i < data.data.length; i++) {
+//     html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
+//     html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + data.data[i].id + '">'
+//     html += '<img src="' + data.data[i].image + '" alt="">'
+//     html += '<div class="contentName">'+data.data[i].name+'</div>'
+//     html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
+//     html += '</div></div></div>'
+//     addDiv.append(html)
+// }
+
 
 </script>
