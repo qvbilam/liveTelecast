@@ -13,6 +13,7 @@ var rollImg,imgCon,dotUl,pre;
         var bodys=document.getElementsByTagName("body")
         console.log(bodys[0])
         var IMG_WIDTH=window.document.body.offsetWidth;
+        console.log();
         window.onresize=function(){
             IMG_WIDTH=window.document.body.offsetWidth;
         }
