@@ -10,7 +10,8 @@ var rollImg,imgCon,dotUl,pre;
         //不改前两个图，后面的图是轮播图，接口请求出来push就ok了。
         imgSrcList=["left.png","right.png","a.jpeg","b.jpeg","c.jpeg","d.jpeg","e.jpeg"];
         // console.log(window)
-        // console.log(window.document.body.offsetWidth)
+        var bodys=document.getElementsByTagName("body")
+        console.log(bodys[0])
         var IMG_WIDTH=window.document.body.offsetWidth;
         window.onresize=function(){
             IMG_WIDTH=window.document.body.offsetWidth;

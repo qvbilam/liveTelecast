@@ -513,3 +513,15 @@ a {
 #banner img{
     width: 100%;
 } */
+/* //分页 */
+.swiper-container {
+    /* width: 600px; */
+    height: auto;
+}
+/* 按钮 */
+.swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after{
+    font-size: 1rem!important;
+}
+.swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after{
+    font-size: 1rem!important;
+}
