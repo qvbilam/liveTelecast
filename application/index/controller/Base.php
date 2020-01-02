@@ -19,6 +19,7 @@ use app\index\controller\Token;
 
 class Base
 {
+
     public function getUserId($jwt)
     {
         $key = md5('nobita');
@@ -28,5 +29,19 @@ class Base
             return $authInfo['data']['user_id'];
         }
         return false;
+    }
+
+    // 获取分页
+    public function getPagingDatas($count,$size,$data)
+    {
+        $totalPage = ceil($count / $size);
+        $data = $data ?: [];
+        // $data = array_slice($data,$this->params['from'],$this->params['size']);
+        return [
+            'total_page' => $totalPage,
+            'page_size' => $size,
+            'count' => $count,
+            'lists' => $data
+        ];
     }
 }
