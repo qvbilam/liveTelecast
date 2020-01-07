@@ -341,9 +341,24 @@ a {
 .aui-star-img img {
     width: 100%;
     height: auto;
-    /* height: 5rem; */
+    
     display: block;
     border: none;
+}
+@media screen and (min-width:0px) and (max-width:600px){
+    .aui-star-img img {
+        height: 5rem;
+    }
+}
+@media screen and (min-width:601px) and (max-width:1200px){
+    .aui-star-img img {
+        height: 15rem;
+    }
+}
+@media screen  and (min-width:1201px){
+    .aui-star-img img {
+        height: 25rem;
+    }
 }
 
 .aui-star-img button {
@@ -504,15 +519,9 @@ a {
     width: 100%;
 }
 .content{
-    display: flex;
+    display: flex!important;
     flex-wrap: wrap;
 }
-/* #banner{
-    height: 100px;
-}
-#banner img{
-    width: 100%;
-} */
 /* //分页 */
 .swiper-container {
     /* width: 600px; */

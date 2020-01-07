@@ -8,24 +8,22 @@
 <head>
     <meta charset="UTF-8">
     <title>郭毅小天使直播板块</title>
-    <link href="./css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/index.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">  
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">    
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="./../live/assert/font/css/font-awesome.min.css">
 </head>
 <body>
-
-
-<section class="aui-flexView" id="search">
-    <header class="aui-navBar aui-navBar-fixed b-line">
-        <div class="aui-center">
-            <div class="aui-jop-search">
-                <i class="icon icon-search"></i>
-                <input type="text" placeholder="请搜索">
-            </div>
-        </div>
-        <a href="javascript:;" class="aui-navBar-item">
-            取消
-        </a>
+<section id="search">
+    <header>
+      <div class="herder_Left">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="请搜索">
+      </div>
+      <a href="javascript:;" class="headerRight">
+        取消
+      </a>
     </header>
     <div>
         <div class="swiper-container">
@@ -49,26 +47,16 @@
         <span class="more">查看更多傻逼</span>
     </div>
     <div id="content" class="content">
-        <div class="aui-flex">
-            <div class="aui-flex-box">
-                <div class="aui-star-img">
-                    <img src="images/banner2.jpeg" alt="">
-                    <div class="contentName">傻逼战争冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊</div>
-                    <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
-                </div>
-            </div>
-        </div>
-    
-    
-        <div class="aui-flex">
-            <div class="aui-flex-box">
-                <div class="aui-star-img">
-                    <img src="images/banner1.jpeg" alt="">
-                    <div class="contentName">傻逼战争</div>
-                    <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
-                </div>
-            </div>
-        </div>
+      <div class="contentItem">
+          <img src="images/banner2.jpeg" alt="">
+          <div class="contentName">傻逼战争冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊冲啊</div>
+          <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
+      </div>
+      <div class="contentItem">
+          <img src="images/banner1.jpeg" alt="">
+          <div class="contentName">傻逼战争</div>
+          <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
+      </div>
     </div> -->
 </section>
 
@@ -122,20 +110,6 @@ window.onload=function(){
     }
   });
 
-  // img.forEach(item=>{
-  //   imgOne = document.createElement('img')
-  //   imgOne.src = item
-  //   imgOne.className = 'swiper-slide'
-	// 	swiperWrapper.append(imgOne)
-	// 	console.log(item,'@@@@@@@@@@')
-  // })
-  // for(var i = 0; i < img.length; i++){
-  //   html='<img src="'+img[i]+'" alt="" class="swiper-slide" />'
-  //   swiperWrapper.append(html)
-  // }
-	
-
-  // var addDiv = $('#search');
   var addBox = $('#search');
   var addDiv = $('#content');
   
@@ -162,35 +136,25 @@ window.onload=function(){
           for(var i = 0;i < res.data.length; i++){
             html = '<div class="section">'
             html += '<span class="title">'+res.data[i].bank_name+'</span>'
-            html += '<a  href="' + host + 'bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
-            html += '</div>'
+            // html += '<a  href="' + host + 'bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
+						html += '<a  href="file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
+						html += '</div>'
             html += '<div class="content" id="content'+i+'"></div>'
             addBox.append(html)
             var addDiv = $('#content'+i);
             for(var j=0; j < res.data[i].data.length; j++){
-              html = '<div class="aui-flex contentBox"><div class="aui-flex-box"><div class="aui-star-img">'
+              html = '<div class="contentItem">'
               html += '<a href="' + host + 'bank/fight.html?program_id=' + res.data[i].data[j].id + '">'
               html += '<img src="' + res.data[i].data[j].image + '" alt="">'
               html += '<div class="contentName">'+res.data[i].data[j].name+'</div>'
               html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
-              html += '</div></div></div>'
+              html += '</div>'
               addDiv.append(html)
             }
           }
         }
     }
   });
-
-	// for (var i = 0; i < data.data.length; i++) {
-	  // html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
-	  // html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + data.data[i].id + '">'
-	  // html += '<img src="' + data.data[i].image + '" alt="">'
-	  // html += '<div class="contentName">'+data.data[i].name+'</div>'
-	  // html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
-	  // html += '</div></div></div>'
-	  // addDiv.append(html)
-	// }
-
 }
 </script>
 

@@ -5,59 +5,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="./css/style.css" rel="stylesheet" type="text/css"/>
-  <link rel="stylesheet" type="text/css" href="./../live/assert/css/reset.css"/>
-  <link rel="stylesheet" type="text/css" href="./../live/assert/css/main.css"/>
-  <link rel="stylesheet" type="text/css" href="./../live/css/detail.css"/>
-  <link rel="stylesheet" href="./../live/assert/iconfont/iconfont.css">
+  <link href="./css/index.css" rel="stylesheet" type="text/css"/>
+  <link href="./css/detail.css" rel="stylesheet" type="text/css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="./../live/assert/font/css/font-awesome.min.css">
+  <script src="./../live/assert/jq-paginator.min.js"></script>
   <title>版块详情</title>
 </head>
 <body>
-  <header class="header xxl-font">
-    <i id="title" class="icon iconfont icon-fanhui back" id="back"></i>
+  <header>
+    <div id="back">
+      <i class="fa fa-angle-left"></i>
+    </div>
   </header>
+  <div class="content" id="content"></div>
+  <div>
+    <div id="pagination"></div>
+  </div> 
 </body>
 <script>
+
   $(function () {
     var $back = $('#back');
     $back.click(function () {
       window.history.back();
+      console.log(111)
     });
   });
+  var host = 'http://live.qvbilam.xin:9503/';
+  var detailUrl = host + 'index/bank/detail'
 
-  var getData = window.location.search
-	console.log(getData);
-	var getData = getData.substr(1) //去掉?asd=123前面的问号
-	console.log(getData);
-  var addDiv = $('#search');
-	// var host = window.location.host;
-	var host = 'http://live.qvbilam.xin:9503/';
-  //获取当前协议
-	// var agreement = window.location.protocol;
-	var agreement ='http://';
-	// var send_url = agreement + '//' + host + '/index/bank/fight'
-	var send_url = host + '/index/bank/fight'
-  // 提交表单
-  $.ajax({
-    type: "get",
-    url: send_url,
-    data: getData,
-    beforeSend: function (XMLHttpRequest) {
-      XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
-    },
-    success: function (data) {
-      console.log(data)
-      data = JSON.parse(data)
-      for (var i = 0; i < data.data.length; i++) {
-        html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
-        html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data.data[i].id + '">'
-        html += '<img src="' + data.data[i].image + '" alt=""></a>'
-        html += '</div></div></div>'
-        addDiv.append(html)
+  var addDiv = $('#content');
+  var bank_id = window.location.search.substr(1)
+  // var bank_id = bank_id.substr(1) //去掉?asd=123前面的问号
+  var index=bank_id.lastIndexOf("=");
+  bank_id=bank_id.substring(index+1,bank_id.length);
+  var getData={}
+  let tempState = Object.assign({}, getData, { bank_id: bank_id });
+  getData=tempState
+
+  $('#pagination').jqPaginator({
+      totalPages: 2,
+      visiblePages: 1,
+      currentPage: 1,
+      onPageChange: function (num, type) {
+          // $('#pagination').append('当前第' + num+'/'+2+'页');
+          addDiv.empty()
+          let tempState = Object.assign({}, getData, { page: num });
+          getData=tempState
+          axio(getData)
       }
-    }
   });
+  function axio(getData){
+      $.ajax({
+      type: "get",
+      url: detailUrl,
+      data: getData,
+      beforeSend: function (XMLHttpRequest) {
+          XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
+      },
+      success: function (res) {
+          console.log(res)
+          res = JSON.parse(res)
+          console.log(res.data)
+          if(res.code != 0){
+              alert(res.msg)
+          }else{
+            for(var i=0; i < res.data.lists.length; i++){
+              html = '<div class="contentItem">'
+              html += '<a href="' + host + 'bank/fight.html?program_id=' + res.data.lists[i].id + '">'
+              html += '<img src="' + res.data.lists[i].image + '" alt="">'
+              html += '<div class="contentName">'+res.data.lists[i].name+'</div>'
+              html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
+              html += '</div>'
+              addDiv.append(html)
+            }
+          }
+      }
+    });
+  }
 </script>
 </html>

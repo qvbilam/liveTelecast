@@ -1,0 +1,43 @@
+header{
+  border-bottom: 1px solid #ccc;
+}
+header .fa-angle-left{
+  font-size: 0.2rem;
+}
+#back{
+  height: 100%;
+  width: 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.first, .last{
+  display: none;
+}
+#pagination{
+  display: flex;
+  /* bottom: 0.3rem; */
+  justify-content: space-around;
+  margin: 0 auto;
+}
+.content{
+  margin-bottom: 0.5rem;
+}
+
+/* .prev, .next{ */
+#pagination li{
+  height: 0.3rem;
+  width: 0.7rem;
+  line-height: 0.3rem;
+  text-align: center;
+  border: 1px solid #ccc;
+} 
+#pagination a{
+  color: #000;
+}
+.page{
+  border: none!important;
+}
+.disabled{
+  background: #eee;
+}
