@@ -1,34 +1,66 @@
 <!DOCTYPE html>
 <script src="../live/js/jquery-3.3.1.min.js"></script>
 <script src="../live/js/jquery.cookie.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.js"> </script>  
+<script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>郭毅小天使直播板块</title>
-  <link href="css/style.css" rel="stylesheet" type="text/css"/>
+  <link href="./css/index.css" rel="stylesheet" type="text/css"/>
+  <link href="./css/detail.css" rel="stylesheet" type="text/css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="./../live/assert/font/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">  
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> 
 </head>
 <body>
 
 
 <section class="aui-flexView" id="search">
-    <header class="aui-navBar aui-navBar-fixed b-line">
-        <div class="aui-center">
-            <div class="aui-jop-search">
-                <i class="icon icon-search"></i>
-                <input type="text" placeholder="请搜索">
-            </div>
+  <header>
+    <div id="back">
+      <i class="fa fa-angle-left"></i>
+    </div>
+  </header>
+  <div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id='imgs'>
+            <!-- <div class="swiper-slide">图片一</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div> -->
         </div>
-        <a href="javascript:;" class="aui-navBar-item">
-            取消
-        </a>
-    </header>
-
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 如果需要导航按钮 -->
+        <!-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> -->
+        
+        <!-- 如果需要滚动条 -->
+        <!-- <div class="swiper-scrollbar"></div> -->
+    </div>
+</div>
 </section>
 
 </body>
 </html>
 
 <script>
+    $(function () {
+    var $back = $('#back');
+    $back.click(function () {
+      window.history.back();
+      console.log(111)
+    });
+  });
+  
+
+
+
+
+
+
+
 	var getData = window.location.search
 	console.log(getData);
 	var getData = getData.substr(1) //去掉?asd=123前面的问号
@@ -40,7 +72,8 @@
 	// var agreement = window.location.protocol;
 	var agreement ='http://';
 	// var send_url = agreement + '//' + host + '/index/bank/fight'
-	var send_url = host + '/index/bank/fight'
+  var send_url = host + '/index/bank/fight'
+  var swiperWrapper = $('#imgs')
   // 提交表单
   $.ajax({
     type: "get",
@@ -49,16 +82,44 @@
     beforeSend: function (XMLHttpRequest) {
       XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
     },
-    success: function (data) {
+    success: function (res) {
+      res = JSON.parse(res)
+      data = res.data
       console.log(data)
-      data = JSON.parse(data)
-      for (var i = 0; i < data.data.length; i++) {
-        html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
-        html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data.data[i].id + '">'
-        html += '<img src="' + data.data[i].image + '" alt=""></a>'
-        html += '</div></div></div>'
-        addDiv.append(html)
-      }
+      data.forEach(item=>{
+						imgOne = document.createElement('img')
+						imgOne.src = item.image
+						imgOne.className = 'swiper-slide'
+						swiperWrapper.append(imgOne)
+					})
+					//轮播的配置
+					var mySwiper = new Swiper ('.swiper-container', {
+						// direction: 'vertical', // 垂直切换选项
+						loop: false, // 循环模式选项
+						
+						// 如果需要分页器
+						pagination: {
+								el: '.swiper-pagination',
+						},
+					
+						// 如果需要前进后退按钮
+						// navigation: {
+						// 		nextEl: '.swiper-button-next',
+						// 		prevEl: '.swiper-button-prev',
+						// },
+					
+						// 如果需要滚动条
+						scrollbar: {
+						el: '.swiper-scrollbar',
+						},
+					})   
+      // for (var i = 0; i < data.data.length; i++) {
+      //   html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
+      //   html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data.data[i].id + '">'
+      //   html += '<img src="' + data.data[i].image + '" alt=""></a>'
+      //   html += '</div></div></div>'
+      //   addDiv.append(html)
+      // }
     }
   });
 
