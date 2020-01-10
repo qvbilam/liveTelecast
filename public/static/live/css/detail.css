@@ -47,9 +47,16 @@
 }
 .tab-block {
     flex: 1;
-    overflow-y: scroll;
+    height: 300px;
 }
-
+#match-result{
+    overflow-y: scroll;
+    height: 100%;
+}
+#comments{
+    overflow-y: scroll;
+    height: 100%;
+}
 /******************赛况 frame时间片段的意思*****************/
 .frame {
     padding: 5px;

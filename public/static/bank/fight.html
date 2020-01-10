@@ -23,7 +23,7 @@
       <i class="fa fa-angle-left"></i>
     </div>
   </header>
-  <div>
+  <div class="contentBox">
     <div class="swiper-container">
         <div class="swiper-wrapper" id='imgs'>
             <!-- <div class="swiper-slide">图片一</div>
@@ -87,32 +87,48 @@
       data = res.data
       console.log(data)
       data.forEach(item=>{
+            linkTo = document.createElement('a')
+            linkTo.href =  host + '/live/detail.html?fight_id=' + item.id 
+            linkTo.className = 'swiper-slide'
+            linkTo.href = 'file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/live/detail.html?fight_id=' + item.id 
 						imgOne = document.createElement('img')
 						imgOne.src = item.image
-						imgOne.className = 'swiper-slide'
-						swiperWrapper.append(imgOne)
+            imgOne.className = 'swiper-slide'
+            linkTo.append(imgOne)
+						swiperWrapper.append(linkTo)
 					})
-					//轮播的配置
-					var mySwiper = new Swiper ('.swiper-container', {
-						// direction: 'vertical', // 垂直切换选项
-						loop: false, // 循环模式选项
+          //轮播的配置
+					// var mySwiper = new Swiper ('.swiper-container', {
+					// 	// direction: 'vertical', // 垂直切换选项
+					// 	loop: false, // 循环模式选项
 						
-						// 如果需要分页器
-						pagination: {
-								el: '.swiper-pagination',
-						},
+					// 	// 如果需要分页器
+					// 	pagination: {
+					// 			el: '.swiper-pagination',
+					// 	},
 					
-						// 如果需要前进后退按钮
-						// navigation: {
-						// 		nextEl: '.swiper-button-next',
-						// 		prevEl: '.swiper-button-prev',
-						// },
+					// 	// 如果需要前进后退按钮
+					// 	// navigation: {
+					// 	// 		nextEl: '.swiper-button-next',
+					// 	// 		prevEl: '.swiper-button-prev',
+					// 	// },
 					
-						// 如果需要滚动条
-						scrollbar: {
-						el: '.swiper-scrollbar',
-						},
-					})   
+					// 	// 如果需要滚动条
+					// 	scrollbar: {
+					// 	el: '.swiper-scrollbar',
+					// 	},
+          // })   
+
+          //一页四个滑动
+          var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+          });
+
       // for (var i = 0; i < data.data.length; i++) {
       //   html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
       //   html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data.data[i].id + '">'
