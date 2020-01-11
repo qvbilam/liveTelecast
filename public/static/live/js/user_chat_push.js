@@ -29,10 +29,7 @@ $(function () {
 				}
 			});
 		}
-		setTimeout(() => {
-			let comments = document.getElementById('comments')
-			comments.scrollTop = comments.scrollHeight
-		}, 1)
+
 
 	})
 })

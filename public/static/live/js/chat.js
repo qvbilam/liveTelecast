@@ -30,5 +30,9 @@ function chatPush(data) {
 	html += '</div>'
 
 	$('#comments').append(html)
+	setTimeout(() => {
+		let comments = document.getElementById('comments')
+		comments.scrollTop = comments.scrollHeight
+	}, 1)
 
 }
