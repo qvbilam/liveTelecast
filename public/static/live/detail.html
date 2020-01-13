@@ -177,6 +177,10 @@
 					let comments = document.getElementById('comments')
 					comments.scrollTop = comments.scrollHeight
 				}, 1)
+				// setTimeout(function(){
+				// 		let matchResult = document.getElementById('match-result')
+				// 		matchResult.scrollTop = matchResult.scrollHeight
+				// },100)
 			});
 
 			$back.click(function () {
@@ -246,7 +250,8 @@
 							$('#number_' + data.data.live[i][j].type).append(content_html)
 						}
 					}
-
+						let matchResult = document.getElementById('match-result')
+						matchResult.scrollTop = matchResult.scrollHeight
 
 					/*卧槽nm啊！ 真有人能看到这 能体会到老子拼数据的痛苦吗*/
 					// for (i = 1; i < data.data.live.length; i++) {
