@@ -7,18 +7,19 @@ $(function () {
 	var agreement = window.location.protocol;
 	// var send_url = agreement + '//' + host + '/index/chat/index'
 	var send_url = host + '/index/chat/index'
+    $.cookie(host)
 	$('#chatPush').keydown(function (event) {
 
 		/*回车事件*/
 		if (event.keyCode == 13) {
 			var text = $(this).val();
 			$(this).val('')
-            if( $.cookie(host)){
+            if($.cookie(host)){
                 userInfo =  $.cookie(host)
             }{
                 userInfo = ''
             }
-			var data = { 'content': text, 'game_id': 1, "authorization":userInfo}
+			var data = { 'content': text, 'game_id': 1, "token":userInfo}
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
