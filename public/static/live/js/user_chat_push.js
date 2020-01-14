@@ -13,7 +13,12 @@ $(function () {
 		if (event.keyCode == 13) {
 			var text = $(this).val();
 			$(this).val('')
-			var data = { 'content': text, 'game_id': 1 }
+            if( $.cookie(host)){
+                userInfo =  $.cookie(host)
+            }{
+                userInfo = ''
+            }
+			var data = { 'content': text, 'game_id': 1, "authorization":userInfo}
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
