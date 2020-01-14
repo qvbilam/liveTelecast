@@ -17,7 +17,7 @@ class Chat
     public function index()
     {
         // $authorization = $_SERVER['AUTHORIZATION'];
-        $authorization = $_POST['authorization'];
+        $authorization = $_POST['token'];
         if(empty($authorization)){
             $userId = -1;
         }else{
