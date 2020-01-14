@@ -88,10 +88,10 @@
       console.log(data)
       data.forEach(item=>{
             linkTo = document.createElement('a')
-            linkTo.href =  host + '/live/detail.html?fight_id=' + item.id 
+            linkTo.href = host + '/live/detail.html?fight_id=' + item.id 
             linkTo.className = 'swiper-slide'
-            linkTo.href = 'file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/live/detail.html?fight_id=' + item.id 
-						imgOne = document.createElement('img')
+            // linkTo.href = 'file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/live/detail.html?fight_id=' + item.id 
+            imgOne = document.createElement('img')
 						imgOne.src = item.image
             imgOne.className = 'swiper-slide'
             linkTo.append(imgOne)
