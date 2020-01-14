@@ -69,6 +69,9 @@
             $.get(form_url + '?' + formData, function (data) {
                 data = JSON.parse(data)
                 $.cookie(host,data.data.token)
+                console.log(host,data.data.token)
+                console.log($.cookie(host))
+                console.log(1231414)
                 if (data.msg == 'perfect') {
                     /*跳转信息页面*/
                     window.location.href = agreement + '//' + host + '/live/perfect.html'
