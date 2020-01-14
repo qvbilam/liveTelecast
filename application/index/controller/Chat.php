@@ -19,7 +19,8 @@ class Chat
 
         // $authorization = $_SERVER['AUTHORIZATION'];
         // $userId = Token::getUserId($authorization);
-        $userId = $_POST['authorization'];
+        $authorization = $_POST['authorization'];
+        $userId = Token::getUserId($authorization);
         $name = Db::table('live_user')->where(['id'=>$userId])->value('name')?:'用户'.rand(1000,9999);
         $data = [
             'user' => $name,
