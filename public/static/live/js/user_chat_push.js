@@ -7,7 +7,8 @@ $(function () {
 	var agreement = window.location.protocol;
 	// var send_url = agreement + '//' + host + '/index/chat/index'
 	var send_url = host + '/index/chat/index'
-    $.cookie(host)
+    console.log($.cookie(host))
+    console.log(12341231)
 	$('#chatPush').keydown(function (event) {
 
 		/*回车事件*/
