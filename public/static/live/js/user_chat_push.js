@@ -8,6 +8,7 @@ $(function () {
 	// var send_url = agreement + '//' + host + '/index/chat/index'
 	var send_url = host + '/index/chat/index'
     console.log($.cookie('token'))
+    var token = $.cookie('token')
     console.log(12341231)
 	$('#chatPush').keydown(function (event) {
 
@@ -15,8 +16,8 @@ $(function () {
 		if (event.keyCode == 13) {
 			var text = $(this).val();
 			$(this).val('')
-            if($.cookie('token')){
-                userInfo =  $.cookie('token')
+            if(token){
+                userInfo = $.cookie('token')
             }{
                 userInfo = ''
             }
