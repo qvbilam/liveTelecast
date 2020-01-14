@@ -28,7 +28,9 @@ class Chat
         $name = Db::table('live_user')->where(['id'=>$userId])->value('name')?:'用户'.rand(1000,9999);
         $data = [
             'user' => $name,
-            'connect' => $_POST['content']
+            'connect' => $_POST['content'],
+            'token' => $authorization,
+            'type' => gettype($authorization)
         ];
         Db::table('live_chart')->insert([
             'game_id' => 1,
