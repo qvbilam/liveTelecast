@@ -16,12 +16,14 @@ $(function () {
 		if (event.keyCode == 13) {
 			var text = $(this).val();
 			$(this).val('')
-            if(token){
-                userInfo = $.cookie('token')
-            }{
-                userInfo = ''
-            }
-			var data = { 'content': text, 'game_id': 1, "token":userInfo}
+            // if(token){
+            //     userInfo = token
+            //     console.log('@@@@@@@@@@@@@@@@@@@@@@')
+            // }{
+            //     userInfo = ''
+            //     console.log('##########','bucunzai ')
+            // }
+			var data = { 'content': text, 'game_id': 1, "token":token?token:'123456'}
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
