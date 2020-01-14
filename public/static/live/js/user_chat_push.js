@@ -1,8 +1,8 @@
 $(function () {
 	var $submitBtn = $('#submit-btn');
 	//获取当前的请求地址
-	// var host = window.location.host;
-	var host = 'http://live.qvbilam.xin:9503/';
+	var host = window.location.host;
+	// var host = 'http://live.qvbilam.xin:9503/';
 	//获取当前协议
 	var agreement = window.location.protocol;
 	// var send_url = agreement + '//' + host + '/index/chat/index'
