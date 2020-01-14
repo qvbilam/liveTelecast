@@ -20,8 +20,10 @@ class Chat
         $authorization = $_POST['token'];
         if(empty($authorization)){
             $userId = -1;
+            echo 'cnm-' . $userId . PHP_EOL;
         }else{
             $userId = Token::getUserId($authorization);
+            echo '1-' . $userId . PHP_EOL;
         }
         $name = Db::table('live_user')->where(['id'=>$userId])->value('name')?:'用户'.rand(1000,9999);
         $data = [
