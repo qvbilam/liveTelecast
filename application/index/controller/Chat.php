@@ -16,7 +16,7 @@ class Chat
     /*接受用户聊天室传来的数据*/
     public function index()
     {
-        $authorization = $_SERVER['AUTHORIZATION'];
+        $authorization = $_SERVER['HTTP_AUTHORIZATION'];
         $userId = Token::getUserId($authorization);
         $name = Db::table('live_user')->where(['id'=>$userId])->value('name')?:'用户'.rand(1000,9999);
         $data = [
