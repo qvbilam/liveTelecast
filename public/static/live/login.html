@@ -68,7 +68,7 @@
             // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
             $.get(form_url + '?' + formData, function (data) {
                 data = JSON.parse(data)
-                $.cookie(host,data.data.token)
+                $.cookie('token',data.data.token)
                 if (data.msg == 'perfect') {
                     /*跳转信息页面*/
                     window.location.href = agreement + '//' + host + '/live/perfect.html'
