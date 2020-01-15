@@ -109,3 +109,9 @@ header{
 .contentBox{
   padding-top: 0.2rem;
 }
+.linkBox img{
+  width: 100%;
+}
+.linkBox{
+  margin: 0.2rem 0;
+}
