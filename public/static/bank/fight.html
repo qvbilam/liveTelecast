@@ -102,10 +102,10 @@
       //       },
       //     });
 
-      for (var i = 0; i < data.data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         html = '<div class="aui-flex"><div class="aui-flex-box"><div class="aui-star-img">'
-        html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data.data[i].id + '">'
-        html += '<img src="' + data.data[i].image + '" alt=""></a>'
+        html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data[i].id + '">'
+        html += '<img src="' + data[i].image + '" alt=""></a>'
         html += '</div></div></div>'
         addDiv.append(html)
       }
