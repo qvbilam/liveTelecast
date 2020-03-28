@@ -29,15 +29,15 @@ class Token
 
     }
 
-    static public function getUserId($token)
+    static public function getUserId($token=0)
     {
+        $token = $_POST['token'];
         $key = md5('nobita');
-        $jwtAuth = json_encode(JWT::decode($token, $key, array('HS256')));
-        $authInfo = json_decode($jwtAuth, true );
-        if($authInfo['code'] != 0){
+        $jwtAuth = JWT::decode($token, $key, array('HS256'));
+        if($jwtAuth['code'] != 0){
             return 0;
         }else{
-            return $jwtAuth['data']['user_id'];
+            return $jwtAuth['data']->user_id;
         }
     }
 
