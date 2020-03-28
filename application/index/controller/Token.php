@@ -33,11 +33,11 @@ class Token
     {
         $key = md5('nobita');
         $jwtAuth = json_encode(JWT::decode($token, $key, array('HS256')));
-        $authInfo = json_decode($jwtAuth, true);
-        if (!empty($authInfo['user_id'])) {
-            return $authInfo['user_id'];
-        }else{
+        $authInfo = json_decode($jwtAuth, true );
+        if($authInfo['code'] != 0){
             return 0;
+        }else{
+            return $jwtAuth['data']['user_id'];
         }
     }
 
