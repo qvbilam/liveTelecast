@@ -50,7 +50,7 @@
             // 获取验证吗
             $('#authCodeBtn').click(function (event) {
                 var phone_num = $(" input[ name='phone_num' ] ").val()
-                url = send_url + "?phone_num=" + phone_num;
+                var url = send_url + "?phone_num=" + phone_num;
                 $(this).html('已发送').attr('disabled', true);
                 // $.post()
                 $.get(url, function (data) {
