@@ -72,10 +72,8 @@
       var bannerIndex = host + '/index/bank/banner'
 
       try {
-        bankBanner({},function(res){
-          console.log(res)
-        })
-        // console.log(res)
+        var res = bankBanner()
+        console.log(res)
         // res = JSON.parse(res)
         // console.log(res.data)
         // if (res.code != 0) {

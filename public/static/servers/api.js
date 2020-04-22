@@ -9,7 +9,7 @@ export const baseUrl='http://live.qvbilam.xin:9503'
 // export const bankBanner =()=> get(baseUrl+'/index/bank/banner')
 
 export const login = (data,callBack) => ajax(baseUrl+'/index/login/index', 'GET', true, data,callBack)
-export const bankBanner =(data,callBack)=> ajax(baseUrl+'/index/bank/banner' ,'POST', true, data,callBack)
+export const bankBanner =()=> ajax(baseUrl+'/index/bank/banner' ,'POST', true)
 
 
 
