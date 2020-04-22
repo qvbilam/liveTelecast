@@ -8,8 +8,8 @@ export const baseUrl='http://live.qvbilam.xin:9503'
 //bank的banner
 // export const bankBanner =()=> get(baseUrl+'/index/bank/banner')
 
-export const login = (callBack) => ajax(baseUrl+'/index/login/index', 'GET', true, data,callBack)
-export const bankBanner =(data)=> ajax(baseUrl+'/index/bank/banner' ,'POST', true, data)
+export const login = (data,callBack) => ajax(baseUrl+'/index/login/index', 'GET', true, data,callBack)
+export const bankBanner =(callBack)=> ajax(baseUrl+'/index/bank/banner' ,'POST', true, data,callBack)
 
 
 
