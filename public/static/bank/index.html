@@ -82,7 +82,7 @@
             alert(res.msg)
           } else {
             res.data.forEach(item => {
-              imgOne = document.createElement('img')
+              imgOne = window.document.createElement('img')
               imgOne.src = item.image
               imgOne.className = 'swiper-slide'
               swiperWrapper.append(imgOne)
