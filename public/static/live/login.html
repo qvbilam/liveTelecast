@@ -72,10 +72,10 @@
                 // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
                 login(formData,function(res){
                     var res=JSON.parse(res)
-                    if (data.msg == 'perfect') {
+                    if (res.msg == 'perfect') {
                         /*跳转信息页面*/
                         window.location.href = agreement + '//' + host + '/live/perfect.html'
-                    } else if (data.msg == 'login') {
+                    } else if (res.msg == 'login') {
                         /*跳转板块页*/
                         window.location.href = agreement + '//' + host + '/bank/index.html'
                     } else {
