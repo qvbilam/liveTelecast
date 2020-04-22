@@ -46,7 +46,7 @@ export function ajax(url, method, async, data, callBack, type) {
   callBack = callBack || function () {
       console.log("默认回调函数");
   };
-  type = type || "xml";
+  type = type || "text";
   type = type.toLowerCase();
 
   var xhr = false;
