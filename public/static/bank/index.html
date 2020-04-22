@@ -72,44 +72,44 @@
       var bannerIndex = host + '/index/bank/banner'
 
       try {
-        var res = bankBanner()
-        console.log(res)
-        bankBanner({},function(res,res1){
-          console.log(res,res1)
+        // var res = bankBanner()
+        // console.log(res)
+        bankBanner({}, function (rej, res) {
+          res = JSON.parse(res)
+          console.log(res.data)
+          if (res.code != 0) {
+            alert(res.msg)
+          } else {
+            res.data.forEach(item => {
+              imgOne = document.createElement('img')
+              imgOne.src = item.image
+              imgOne.className = 'swiper-slide'
+              swiperWrapper.append(imgOne)
+            })
+            //轮播的配置
+            var mySwiper = new Swiper('.swiper-container', {
+              // direction: 'vertical', // 垂直切换选项
+              loop: true, // 循环模式选项
+              autoplay: true,//等同于以下设置
+              // 如果需要分页器
+              pagination: {
+                el: '.swiper-pagination',
+              },
+
+              // 如果需要前进后退按钮
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+
+              // 如果需要滚动条
+              scrollbar: {
+                el: '.swiper-scrollbar',
+              },
+            })
+          }
         })
-        // res = JSON.parse(res)
-        // console.log(res.data)
-        // if (res.code != 0) {
-        //   alert(res.msg)
-        // } else {
-        //   res.data.forEach(item => {
-        //     imgOne = document.createElement('img')
-        //     imgOne.src = item.image
-        //     imgOne.className = 'swiper-slide'
-        //     swiperWrapper.append(imgOne)
-        //   })
-        //   //轮播的配置
-        //   var mySwiper = new Swiper('.swiper-container', {
-        //     // direction: 'vertical', // 垂直切换选项
-        //     loop: true, // 循环模式选项
-        //     autoplay: true,//等同于以下设置
-        //     // 如果需要分页器
-        //     pagination: {
-        //       el: '.swiper-pagination',
-        //     },
 
-        //     // 如果需要前进后退按钮
-        //     navigation: {
-        //       nextEl: '.swiper-button-next',
-        //       prevEl: '.swiper-button-prev',
-        //     },
-
-        //     // 如果需要滚动条
-        //     scrollbar: {
-        //       el: '.swiper-scrollbar',
-        //     },
-        //   })
-        // }
       } catch (error) {
         console.log(error)
       }
