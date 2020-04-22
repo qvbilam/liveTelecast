@@ -74,6 +74,9 @@
       try {
         var res = bankBanner()
         console.log(res)
+        bankBanner(function(res,res1){
+          console.log(res,res1)
+        })
         // res = JSON.parse(res)
         // console.log(res.data)
         // if (res.code != 0) {

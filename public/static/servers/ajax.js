@@ -91,10 +91,8 @@ export function ajax(url, method, async, data, callBack, type) {
       if (xhr.readyState == 4 && xhr.status == 200) {
           //成功之后调用回调函数
           if (type == "xml") {
-            console.log(callBack(xhr.responseXML, xhr))
               return callBack(xhr.responseXML, xhr);
           } else if (type == "text") {
-            console.log(callBack(xhr.responseText, xhr))
               return callBack(xhr.responseText, xhr);
           }
       }
