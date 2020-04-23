@@ -205,8 +205,8 @@
 
 			/*追加赛况*/
 			if (data.data.live.length > 0) {
-				for (i = 1; i < data.data.live.length + 1; i++) {
-					class_html = '<div class="frame" id="number_' + i + '">'
+				for (var i = 1; i < data.data.live.length + 1; i++) {
+					var class_html = '<div class="frame" id="number_' + i + '">'
 					class_html += '<h3 class="frame-header">'
 					class_html += '<i class="icon iconfont icon-shijian"></i>第 ' + i + ' 节'
 					class_html += '</h3>'
@@ -215,9 +215,9 @@
 					$('#match-result').prepend(class_html);
 				}
 
-				for (i = 0; i < data.data.live.length; i++) {
-					for (j = 0; j < data.data.live[i].length; j++) {
-						content_html = '<div class="frame-item">'
+				for (var i = 0; i < data.data.live.length; i++) {
+					for (var j = 0; j < data.data.live[i].length; j++) {
+						var content_html = '<div class="frame-item">'
 						content_html += '<span class="frame-dot"></span>'
 						content_html += '<div class="frame-item-author">'
 						if (data.data.live[i][j].uimage != null) {
@@ -259,8 +259,8 @@
 			}
 
 			/*追加聊天室*/
-			for (k = 0; k < data.data.chat.length; k++) {
-				html = '<div class="comment">'
+			for (var k = 0; k < data.data.chat.length; k++) {
+				var html = '<div class="comment">'
 				html += '<span>' + data.data.chat[k].uname + '：</span>'
 				html += '<span>' + data.data.chat[k].content + '</span>'
 				html += '</div>'
