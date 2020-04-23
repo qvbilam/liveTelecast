@@ -57,8 +57,9 @@
       // $('#pagination').append('当前第' + num+'/'+2+'页');
       addDiv.empty()
       let tempState = Object.assign({}, getData, { page: num });
-      getData = tempState
-      detail(getData, function (res) {
+      // getData = tempState
+      console.log(tempState)
+      detail(tempState, function (res) {
         console.log(res.data)
         if (res.code != 0) {
           alert(res.msg)
