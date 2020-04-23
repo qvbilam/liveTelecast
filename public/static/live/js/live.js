@@ -24,7 +24,7 @@ websocketLive.onerror = function (evt, e) {
 
 
 function messagePush(data) {
-    data = JSON.parse(data);
+    // data = JSON.parse(data);
     console.log(data.type)
     if ($('#number_' + data.type).length > 0) {
         content_html = '<div class="frame-item">'

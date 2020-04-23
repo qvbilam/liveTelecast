@@ -71,7 +71,6 @@
                 var formData = $('form').serialize();
                 // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
                 login(formData,function(res){
-                    var res=JSON.parse(res)
                     if (res.msg == 'perfect') {
                         /*跳转信息页面*/
                         window.location.href = agreement + '//' + host + '/live/perfect.html'
@@ -82,20 +81,6 @@
                         alert('去你妈的');
                     }
                 })
-
-                // $.get(form_url + '?' + formData, function (data) {
-                //     data = JSON.parse(data)
-                //     $.cookie('token', data.data.token)
-                //     if (data.msg == 'perfect') {
-                //         /*跳转信息页面*/
-                //         window.location.href = agreement + '//' + host + '/live/perfect.html'
-                //     } else if (data.msg == 'login') {
-                //         /*跳转板块页*/
-                //         window.location.href = agreement + '//' + host + '/bank/index.html'
-                //     } else {
-                //         alert('去你妈的');
-                //     }
-                // });
             });
 
             // 返回上一页

@@ -1,57 +1,46 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <script src="./js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/perfect.css">
     <script src="./js/jquery.cookie.js"></script>
-
-
     <title>完善个人信息</title>
 </head>
 
 <body>
-<h1 class="odform-tit"><img src="">完善信息</h1>
-<div class="odform">
-    <form action="#">
-        <div class="input-group">
-            <label for="name">角色名字</label>
-            <input type="text" id="name" placeholder="请输入您的客户姓名">
-        </div>
-        <button id="submitBtn">完成</button>
-    </form>
-</div>
+    <h1 class="odform-tit"><img src="">完善信息</h1>
+    <div class="odform">
+        <form action="#">
+            <div class="input-group">
+                <label for="name">角色名字</label>
+                <input type="text" id="name" placeholder="请输入您的客户姓名">
+            </div>
+            <button id="submitBtn">完成</button>
+        </form>
+    </div>
 </body>
+
 </html>
-<script>
+<script type="module">
+    import { editUser } from './../servers/api.js'
     var $submitBtn = $('#submitBtn')
     var host = window.location.host;
-    //获取当前协议
     var agreement = window.location.protocol;
-    var send_url = agreement + '//' + host + '/index/login/perfect'
     // 提交表单
     $submitBtn.click(function () {
         var name = $('#name').val();
-        $.ajax({
-            type: "get",
-            url: send_url,
-            dataType: "json",
-            data:{'name':name},
-            beforeSend: function (XMLHttpRequest) {
-                XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
-            },
-            success: function (data) {
-                if(data.msg == 'ok'){
-                    alert('成功')
-                }else{
-                    alert('失败')
-                }
-                window.location.href = agreement + '//' + host + '/bank/index.html'
+        var data = { 'name': name }
+        editUser(data, function (res) {
+            if (data.msg == 'ok') {
+                alert('成功')
+            } else {
+                alert('失败')
             }
-
-        });
-
+            window.location.href = agreement + '//' + host + '/bank/index.html'
+        })
     });
 </script>
