@@ -45,9 +45,7 @@
   // var bank_id = bank_id.substr(1) //去掉?asd=123前面的问号
   var index = bank_id.lastIndexOf("=");
   bank_id = bank_id.substring(index + 1, bank_id.length);
-  var getData = {}
-  let tempState = Object.assign({}, getData, { bank_id: bank_id });
-  getData = tempState
+  var getData = { bank_id: bank_id }
 
   $('#pagination').jqPaginator({
     totalPages: 2,
