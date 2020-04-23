@@ -1,7 +1,7 @@
 import { ajax } from './ajax.js';
  
 
-export const baseUrl='http://live.qvbilam.xin:9503'
+const baseUrl='http://live.qvbilam.xin:9503'
 //live
 // live/login
 export const login = (data,callBack) => ajax(baseUrl+'/index/login/index', 'POST', true, data,callBack)
@@ -14,11 +14,6 @@ export const chat =(data,callBack)=> ajax(baseUrl+'/index/chat/index' ,'POST', t
 export const game =(callBack)=> ajax(baseUrl+'/index/game/getdata' ,'POST', true,null,callBack)
 //live/perfect
 export const editUser =(data,callBack)=> ajax(baseUrl+'/index/login/perfect' ,'POST', true,data,callBack,'json')
-
-
-
-
-
 
 //bank
 //bank/index
