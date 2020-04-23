@@ -98,7 +98,7 @@ class Game
     }
 
     /*聊天室数据*/
-    public function chatData($game_id)
+    public function chatData($game_id = 1)
     {
         $data = Db::table('live_chart')->alias('t1')
             ->join('live_user t2', 't1.user_id=t2.id', 'left', 'left')
