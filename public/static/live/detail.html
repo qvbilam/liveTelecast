@@ -191,7 +191,7 @@
 
 		/*获取数据*/
 		var host = window.location.host;
-		game(function (res) {
+		game(function (data) {
 			/*追加首页信息*/
 			console.log(data.data.game)
 			$('#banner').attr('src', data.data.game[0].banner_image)
