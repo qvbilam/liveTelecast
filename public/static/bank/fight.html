@@ -76,7 +76,7 @@
   console.log(getData)
   fight(getData, function (res) {
     console.log(res)
-    data = res.data
+    var data = res.data
     console.log(data)
     // data.forEach(item=>{
     //       linkTo = document.createElement('a')
@@ -101,7 +101,7 @@
     //       },
     //     });
     for (var i = 0; i < data.length; i++) {
-      html = '<div class="linkBox">'
+     var html = '<div class="linkBox">'
       html += '<a href="' + agreement + '//' + host + '/live/detail.html?fight_id=' + data[i].id + '">'
       html += '<img src="' + data[i].image + '" alt=""></a>'
       html += '</div>'

@@ -62,7 +62,7 @@
           alert(res.msg)
         } else {
           for (var i = 0; i < res.data.lists.length; i++) {
-            html = '<div class="contentItem">'
+           var html = '<div class="contentItem">'
             html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + res.data.lists[i].id + '">'
             html += '<img src="' + res.data.lists[i].image + '" alt="">'
             html += '<div class="contentName">' + res.data.lists[i].name + '</div>'
