@@ -63,8 +63,8 @@ export function ajax(url, method, async, data, callBack, type) {
           if (type == "xml") {
               return callBack(JSON.parse(xhr.responseXML), xhr);
           } else if (type == "text") {
-            //   return callBack(JSON.parse(xhr.responseText), xhr);
-              return callBack(xhr.responseText, xhr);
+              return callBack(JSON.parse(xhr.responseText), xhr);
+            //   return callBack(xhr.responseText, xhr);
           }
       }
   };
