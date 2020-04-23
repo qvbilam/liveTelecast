@@ -122,9 +122,9 @@
           alert(res.msg)
         } else {
           for (var i = 0; i < res.data.length; i++) {
-           var html = '<div class="section">'
+            var html = '<div class="section">'
             html += '<span class="title">' + res.data[i].bank_name + '</span>'
-            html += '<a  href="' + host + 'bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
+            html += '<a href="' + host + '/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
             // html += '<a  href="file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
             html += '</div>'
             html += '<div class="content" id="content' + i + '"></div>'

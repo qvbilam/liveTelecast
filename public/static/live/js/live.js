@@ -72,8 +72,8 @@ function messagePush(data) {
         $('#match-result').prepend(html)
         console.log('eles')
     }
-        let matchResult = document.getElementById('match-result')
-        matchResult.scrollTop = matchResult.scrollHeight
+    let matchResult = document.getElementById('match-result')
+    matchResult.scrollTop = matchResult.scrollHeight
     // setTimeout(function(){
     //     let matchResult = document.getElementById('match-result')
     //     matchResult.scrollTop = matchResult.scrollHeight

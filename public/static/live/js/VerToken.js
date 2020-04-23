@@ -4,7 +4,7 @@ var ajax_host = window.location.host;
 // var ajax_agreement = window.location.protocol;
 // var ajax_send_url = ajax_agreement + '//' + ajax_host + '/index/send/index'
 
-send(function(res){
+send(function (res) {
     console.log(res)
 })
 
