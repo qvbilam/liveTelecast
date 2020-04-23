@@ -67,6 +67,7 @@
     import { bankBanner, bankIndex } from './../servers/api.js'
     window.onload = function () {
       var host = window.location.host;
+      var agreement = window.location.protocol;
       //轮播放在这个叫做#banner的盒子里
       var swiperWrapper = $('#imgs')
       // var bannerIndex = host + '/index/bank/banner'
@@ -115,7 +116,7 @@
 
       var addBox = $('#search');
       var addDiv = $('#content');
-
+ 
       bankIndex(function (res) {
         console.log(res.data)
         if (res.code != 0) {
@@ -124,7 +125,7 @@
           for (var i = 0; i < res.data.length; i++) {
             var html = '<div class="section">'
             html += '<span class="title">' + res.data[i].bank_name + '</span>'
-            html += '<a href="' + host + '/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
+            html += '<a href="' + agreement + '//' + host + '/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
             // html += '<a  href="file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
             html += '</div>'
             html += '<div class="content" id="content' + i + '"></div>'
@@ -132,7 +133,7 @@
             var addDiv = $('#content' + i);
             for (var j = 0; j < res.data[i].data.length; j++) {
               html = '<div class="contentItem">'
-              html += '<a href="' + host + '/bank/fight.html?program_id=' + res.data[i].data[j].id + '">'
+              html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + res.data[i].data[j].id + '">'
               html += '<img src="' + res.data[i].data[j].image + '" alt="">'
               html += '<div class="contentName">' + res.data[i].data[j].name + '</div>'
               html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'

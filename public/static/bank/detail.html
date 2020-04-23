@@ -37,6 +37,7 @@
   });
   // var host = 'http://live.qvbilam.xin:9503/';
   var host = window.location.host;
+  var agreement = window.location.protocol;
   var detailUrl = host + '/index/bank/detail'
 
   var addDiv = $('#content');
@@ -64,7 +65,7 @@
         } else {
           for (var i = 0; i < res.data.lists.length; i++) {
             html = '<div class="contentItem">'
-            html += '<a href="' + host + '/bank/fight.html?program_id=' + res.data.lists[i].id + '">'
+            html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + res.data.lists[i].id + '">'
             html += '<img src="' + res.data.lists[i].image + '" alt="">'
             html += '<div class="contentName">' + res.data.lists[i].name + '</div>'
             html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
