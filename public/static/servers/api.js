@@ -20,7 +20,7 @@ export const editUser =(data,callBack)=> ajax(baseUrl+'/index/login/perfect' ,'P
 export const bankBanner =(callBack)=> ajax(baseUrl+'/index/bank/banner' ,'POST', true,null,callBack)
 export const bankIndex =(callBack)=> ajax(baseUrl+'/index/bank/index' ,'POST', true,null,callBack)
 //bank/detail
-export const detail =(data,callBack)=> ajax(baseUrl+'/index/bank/detail' ,'POST', true,data,callBack,'json')
+export const detail =(data,callBack)=> ajax(baseUrl+'/index/bank/detail' ,'GET', true,data,callBack,'json')
 //bank/fight
 export const fight =(data,callBack)=> ajax(baseUrl+'/index/bank/fight' ,'POST', true,data,callBack)
 
