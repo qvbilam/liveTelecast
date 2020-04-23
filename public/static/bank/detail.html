@@ -54,10 +54,7 @@
     onPageChange: function (num, type) {
       // $('#pagination').append('当前第' + num+'/'+2+'页');
       addDiv.empty()
-      var getData = {
-        'bank_id': parseInt(bank_id),
-        'page': num
-      }
+      var getData ='bank_id='+ parseInt(bank_id)+'&page='+num
       console.log(getData)
       detail(getData, function (res) {
         console.log(res)
