@@ -26,17 +26,16 @@ class Token
             $checkJwtToken = $this->verifyJwt($authorization);
             return Util::show(0, '0k', $checkJwtToken);
         }
-
     }
 
-    static public function getUserId($token=0)
+    static public function getUserId($token = 0)
     {
         $key = md5('nobita');
         $jwtAuth = JWT::decode($token, $key, array('HS256'));
-        if($jwtAuth['code'] != 0){
+        if ($jwtAuth['code'] != 0) {
             return 0;
-        }else{
-            return $jwtAuth['data']->user_id;
+        } else {
+            return $jwtAuth['data'];
         }
     }
 

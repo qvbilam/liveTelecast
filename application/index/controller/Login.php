@@ -23,21 +23,21 @@ class Login extends Base
     // 用户登录 GET
     public function index()
     {
-        if(empty($_GET['code']) && empty($_POST['code'])){
+        if (empty($_GET['code']) && empty($_POST['code'])) {
             return Util::show(Config::get('code.error_phone_code_empty'), '验证码不能为空');
         }
         if (empty($_GET['phone_num']) && empty($_POST['phone_num'])) {
             return Util::show(Config::get('code.error_phone_code_empty'), '手机号不能为空');
         }
-        $phone = isset($_GET['phone_num'])?$_GET['phone_num']:$_POST['phone_num'];
-        $code = isset($_GET['code'])?$_GET['code']:$_POST['code'];
+        $phone = isset($_GET['phone_num']) ? $_GET['phone_num'] : $_POST['phone_num'];
+        $code = isset($_GET['code']) ? $_GET['code'] : $_POST['code'];
         /*获取Redis code*/
         $redis_code = Predis::getIntance()->get(Redis::smsKey($phone));
         if ($redis_code == $code) {
             /*记录用户手机号登录时间等，*/
             $autoName = 'auto_id' . rand(1000, 9999);
             $user = json_decode(self::createUser($phone, $autoName), true);
-            $token = self::createJwt($user['user_id']);
+            $token = self::createJwt($user['user_id'], md5('nobita'));
             if ($user['type'] == 'register') {
                 return Util::show(Config::get('code.success'), 'perfect', ['token' => $token]);
             } else {
@@ -51,7 +51,7 @@ class Login extends Base
 
     public function perfect()
     {
-        if(empty($_GET['name']) && empty($_POST['name'])){
+        if (empty($_GET['name']) && empty($_POST['name'])) {
             return Util::show(Config::get('code.error_perfect_empty'), '昵称不能为空');
         }
         // 验证token
@@ -59,7 +59,7 @@ class Login extends Base
             return Util::show(Config::get('code.error_perfect_empty'), 'token不能为空');
         }
         $userId = $this->getUserId($_SERVER['HTTP_AUTHORIZATION']);
-        $name = isset($_GET['name'])?$_GET['name']:$_POST['name'];
+        $name = isset($_GET['name']) ? $_GET['name'] : $_POST['name'];
         if ($userId) {
             $res = Db::table('live_user')->where(['id' => $userId])->update([
                 'name' => $name,
