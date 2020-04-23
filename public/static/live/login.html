@@ -2,17 +2,17 @@
 <html>
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>郭毅小天使图片直播 - 登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta content="yes" name="apple-mobile-web-app-capable"/>
-    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-    <meta content="telephone=no" name="format-detection"/>
-    <meta content="email=no" name="format-detection"/>
-    <link rel="stylesheet" type="text/css" href="./assert/css/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="./assert/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="./css/login.css"/>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link rel="stylesheet" type="text/css" href="./assert/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="./assert/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./css/login.css" />
     <link rel="stylesheet" href="./assert/iconfont/iconfont.css">
     <link rel="shortcut icon" href="./favicon.ico">
     <script src="./js/jquery-3.3.1.min.js"></script>
@@ -20,73 +20,75 @@
 </head>
 
 <body>
-<header class="header xxl-font">
-    <i class="icon iconfont icon-fanhui back" id="back"></i>
-    登录
-</header>
-<form class="login" id="form">
-    <h2>魔王直播平台</h2>
-    <div class="login-item">
-        <input type="text" placeholder="手机号" class="phone-num" name="phone_num"/>
-        <button type="button" id="authCodeBtn">验证码</button>
-    </div>
-    <div class="login-item">
-        <input type="text" placeholder="验证码" name="code"/>
-    </div>
-    <button type="submit" class="submit-btn" id="submit-btn">进入平台</button>
-</form>
-<script>
-    $(function () {
-        var $back = $('#back');
-        var $submitBtn = $('#submit-btn');
-        //获取当前的请求地址
-        var host = window.location.host;
-        //获取当前协议
-        var agreement = window.location.protocol;
-        var send_url = agreement + '//' + host + '/index/send/index'
-        var form_url = agreement + '//' + host + '/index/login/index'
+    <header class="header xxl-font">
+        <i class="icon iconfont icon-fanhui back" id="back"></i>
+        登录
+    </header>
+    <form class="login" id="form">
+        <h2>魔王直播平台</h2>
+        <div class="login-item">
+            <input type="text" placeholder="手机号" class="phone-num" name="phone_num" />
+            <button type="button" id="authCodeBtn">验证码</button>
+        </div>
+        <div class="login-item">
+            <input type="text" placeholder="验证码" name="code" />
+        </div>
+        <button type="submit" class="submit-btn" id="submit-btn">进入平台</button>
+    </form>
+    <script type="module">
+        import { login } from './../servers/api.js'
+        $(function () {
+            var $back = $('#back');
+            var $submitBtn = $('#submit-btn');
+            //获取当前的请求地址
+            var host = window.location.host;
+            //获取当前协议
+            var agreement = window.location.protocol;
+            var send_url = agreement + '//' + host + '/index/send/index'
+            var form_url = agreement + '//' + host + '/index/login/index'
 
-        // 获取验证吗
-        $('#authCodeBtn').click(function (event) {
+            // 获取验证吗
+            $('#authCodeBtn').click(function (event) {
+                var phone_num = $(" input[ name='phone_num' ] ").val()
+                var url = send_url + "?phone_num=" + phone_num;
+                $(this).html('已发送').attr('disabled', true);
+                // $.post()
+                $.get(url, function (data) {
+                    // TODO: 将下面3行代码删除
+                    console.log(data);
+                    data = JSON.parse(data)
+                    alert(data.msg)
+                });
+            });
 
-            var phone_num = $(" input[ name='phone_num' ] ").val()
-            url = send_url + "?phone_num=" + phone_num;
-            $(this).html('已发送').attr('disabled', true);
-            // $.post()
-            $.get(url, function (data) {
-                // TODO: 将下面3行代码删除
-                console.log(data);
-                data = JSON.parse(data)
-                alert(data.msg)
+            // 提交表单
+            $submitBtn.click(function (event) {
+                event.preventDefault();
+                var formData = $('form').serialize();
+                // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
+                console.log(formData, '提交表单')
+                event.preventDefault();
+                var formData = $('form').serialize();
+                // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
+                login(formData, function (res) {
+                    if (res.msg == 'perfect') {
+                        /*跳转信息页面*/
+                        window.location.href = agreement + '//' + host + '/live/perfect.html'
+                    } else if (res.msg == 'login') {
+                        /*跳转板块页*/
+                        window.location.href = agreement + '//' + host + '/bank/index.html'
+                    } else {
+                        alert('去你妈的');
+                    }
+                })
+            });
+
+            // 返回上一页
+            $back.click(function (e) {
+                window.history.back();
             });
         });
-
-        // 提交表单
-        $submitBtn.click(function (event) {
-            event.preventDefault();
-            var formData = $('form').serialize();
-            // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
-            $.get(form_url + '?' + formData, function (data) {
-                data = JSON.parse(data)
-                $.cookie('token',data.data.token)
-                if (data.msg == 'perfect') {
-                    /*跳转信息页面*/
-                    window.location.href = agreement + '//' + host + '/live/perfect.html'
-                } else if (data.msg == 'login') {
-                    /*跳转板块页*/
-                    window.location.href = agreement + '//' + host + '/bank/index.html'
-                } else {
-                    alert('去你妈的');
-                }
-            });
-        });
-
-        // 返回上一页
-        $back.click(function (e) {
-            window.history.back();
-        });
-    });
-</script>
+    </script>
 </body>
 
 </html>

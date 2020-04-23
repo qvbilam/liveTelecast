@@ -23,7 +23,7 @@ websocketChat.onerror = function (evt, e) {
 }
 
 function chatPush(data) {
-	data = JSON.parse(data)
+	// data = JSON.parse(data)
 	html = '<div class="comment">'
 	html += '<span>' + data.user + '：</span>'
 	html += '<span>' + data.connect + '</span>'

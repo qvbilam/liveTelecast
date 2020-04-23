@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <script src="../live/js/jquery-3.3.1.min.js"></script>
 <script src="../live/js/jquery.cookie.js"></script>
-<script src="../live/js/VerToken.js"></script>
-<script src="https://unpkg.com/swiper/js/swiper.js"> </script>  
+<script src="../live/js/VerToken.js" type="module"></script>
+<script src="https://unpkg.com/swiper/js/swiper.js"> </script>
 <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>郭毅小天使直播板块</title>
-    <link href="./css/index.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">  
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="./../live/assert/font/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <title>郭毅小天使直播板块</title>
+  <link href="./css/index.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="./../live/assert/font/css/font-awesome.min.css">
 </head>
+
 <body>
-<section id="search">
+  <section id="search">
     <header>
       <div class="herder_Left">
         <i class="fa fa-search"></i>
@@ -26,21 +29,21 @@
       </a>
     </header>
     <div>
-        <div class="swiper-container">
-            <div class="swiper-wrapper" id='imgs'>
-                <!-- <div class="swiper-slide">图片一</div>
+      <div class="swiper-container">
+        <div class="swiper-wrapper" id='imgs'>
+          <!-- <div class="swiper-slide">图片一</div>
                 <div class="swiper-slide">Slide 2</div>
                 <div class="swiper-slide">Slide 3</div> -->
-            </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            
-            <!-- 如果需要滚动条 -->
-            <!-- <div class="swiper-scrollbar"></div> -->
         </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <!-- <div class="swiper-scrollbar"></div> -->
+      </div>
     </div>
     <!-- <div class="section">
         <span class="title">傻逼的一个狗栏目</span>
@@ -58,105 +61,91 @@
           <div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div>
       </div>
     </div> -->
-</section>
+  </section>
 
-<script>
-window.onload=function(){
-  var host = 'http://live.qvbilam.xin:9503/';
-  //轮播放在这个叫做#banner的盒子里
-  var swiperWrapper = $('#imgs')
-	var bannerIndex = host + '/index/bank/banner'
-	$.ajax({
-    type: "get",
-    url: bannerIndex,
-    beforeSend: function (XMLHttpRequest) {
-        XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
-    },
-    success: function (res) {
-        console.log(res)
-        res = JSON.parse(res)
-        console.log(res.data)
-        if(res.code != 0){
-            alert(res.msg)
-        }else{
-          res.data.forEach(item=>{
-						imgOne = document.createElement('img')
-						imgOne.src = item.image
-						imgOne.className = 'swiper-slide'
-						swiperWrapper.append(imgOne)
-					})
-					//轮播的配置
-					var mySwiper = new Swiper ('.swiper-container', {
-							// direction: 'vertical', // 垂直切换选项
-							loop: true, // 循环模式选项
-							autoplay:true,//等同于以下设置
-							// 如果需要分页器
-							pagination: {
-									el: '.swiper-pagination',
-							},
-						
-							// 如果需要前进后退按钮
-							navigation: {
-									nextEl: '.swiper-button-next',
-									prevEl: '.swiper-button-prev',
-							},
-						
-							// 如果需要滚动条
-							scrollbar: {
-							el: '.swiper-scrollbar',
-							},
-						})   
-        }
-    }
-  });
+  <script type="module">
+    import { bankBanner, bankIndex } from './../servers/api.js'
+    window.onload = function () {
+      var host = window.location.host;
+      var agreement = window.location.protocol;
+      //轮播放在这个叫做#banner的盒子里
+      var swiperWrapper = $('#imgs')
+      // var bannerIndex = host + '/index/bank/banner'
 
-  var addBox = $('#search');
-  var addDiv = $('#content');
-  
-  // var host = window.location.host;
-  //获取当前协议
-  // var agreement = window.location.protocol;
-  // var agreement ='http';
-  // var send_url = agreement + '//' + host + '/index/bank/index'
-  var bankIndex = host + '/index/bank/index'
-  // 提交表单
-  $.ajax({
-    type: "get",
-    url: bankIndex,
-    beforeSend: function (XMLHttpRequest) {
-        XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
-    },
-    success: function (res) {
-        console.log(res)
-        res = JSON.parse(res)
-        console.log(res.data)
-        if(res.code != 0){
+      try {
+        // var res = bankBanner()
+        // console.log(res)
+        bankBanner(function (res) {
+          console.log(res)
+          console.log(res.data)
+          if (res.code != 0) {
             alert(res.msg)
-        }else{
-          for(var i = 0;i < res.data.length; i++){
-            html = '<div class="section">'
-            html += '<span class="title">'+res.data[i].bank_name+'</span>'
-            html += '<a  href="' + host + 'bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
-						// html += '<a  href="file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
-						html += '</div>'
-            html += '<div class="content" id="content'+i+'"></div>'
+          } else {
+            res.data.forEach(item => {
+              var imgOne = document.createElement('img')
+              imgOne.src = item.image
+              imgOne.className = 'swiper-slide'
+              swiperWrapper.append(imgOne)
+            })
+            //轮播的配置
+            var mySwiper = new Swiper('.swiper-container', {
+              // direction: 'vertical', // 垂直切换选项
+              loop: true, // 循环模式选项
+              autoplay: true,//等同于以下设置
+              // 如果需要分页器
+              pagination: {
+                el: '.swiper-pagination',
+              },
+
+              // 如果需要前进后退按钮
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+
+              // 如果需要滚动条
+              scrollbar: {
+                el: '.swiper-scrollbar',
+              },
+            })
+          }
+        })
+      } catch (error) {
+        console.log(error)
+      }
+
+      var addBox = $('#search');
+      var addDiv = $('#content');
+ 
+      bankIndex(function (res) {
+        console.log(res.data)
+        if (res.code != 0) {
+          alert(res.msg)
+        } else {
+          for (var i = 0; i < res.data.length; i++) {
+            var html = '<div class="section">'
+            html += '<span class="title">' + res.data[i].bank_name + '</span>'
+            html += '<a href="' + agreement + '//' + host + '/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
+            // html += '<a  href="file:///D:/newFile/直播版块/git版本/liveTelecast/public/static/bank/detail.html?bank_id=' + res.data[i].bank_id + '" class="more">查看更多</a>'
+            html += '</div>'
+            html += '<div class="content" id="content' + i + '"></div>'
             addBox.append(html)
-            var addDiv = $('#content'+i);
-            for(var j=0; j < res.data[i].data.length; j++){
+            var addDiv = $('#content' + i);
+            for (var j = 0; j < res.data[i].data.length; j++) {
               html = '<div class="contentItem">'
-              html += '<a href="' + host + 'bank/fight.html?program_id=' + res.data[i].data[j].id + '">'
+              html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + res.data[i].data[j].id + '">'
               html += '<img src="' + res.data[i].data[j].image + '" alt="">'
-              html += '<div class="contentName">'+res.data[i].data[j].name+'</div>'
+              html += '<div class="contentName">' + res.data[i].data[j].name + '</div>'
               html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
               html += '</div>'
               addDiv.append(html)
             }
           }
         }
+      })
     }
-  });
-}
-</script>
+  </script>
 
 </body>
+
 </html>

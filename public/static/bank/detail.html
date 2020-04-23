@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <script src="../live/js/jquery-3.3.1.min.js"></script>
 <script src="../live/js/jquery.cookie.js"></script>
-<script src="../live/js/VerToken.js"></script>
+<script src="../live/js/VerToken.js" type="module"></script>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <link href="./css/index.css" rel="stylesheet" type="text/css"/>
-  <link href="./css/detail.css" rel="stylesheet" type="text/css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link href="./css/index.css" rel="stylesheet" type="text/css" />
+  <link href="./css/detail.css" rel="stylesheet" type="text/css" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="./../live/assert/font/css/font-awesome.min.css">
   <script src="./../live/assert/jq-paginator.min.js"></script>
   <title>版块详情</title>
 </head>
+
 <body>
   <header>
     <div id="back">
@@ -21,10 +24,10 @@
   <div class="content" id="content"></div>
   <div>
     <div id="pagination"></div>
-  </div> 
+  </div>
 </body>
-<script>
-
+<script type="module">
+  import { detail } from './../servers/api.js'
   $(function () {
     var $back = $('#back');
     $back.click(function () {
@@ -32,57 +35,46 @@
       console.log(111)
     });
   });
-  var host = 'http://live.qvbilam.xin:9503/';
-  var detailUrl = host + 'index/bank/detail'
+  // var host = 'http://live.qvbilam.xin:9503/';
+  var host = window.location.host;
+  var agreement = window.location.protocol;
+  var detailUrl = host + '/index/bank/detail'
 
   var addDiv = $('#content');
   var bank_id = window.location.search.substr(1)
   // var bank_id = bank_id.substr(1) //去掉?asd=123前面的问号
-  var index=bank_id.lastIndexOf("=");
-  bank_id=bank_id.substring(index+1,bank_id.length);
-  var getData={}
-  let tempState = Object.assign({}, getData, { bank_id: bank_id });
-  getData=tempState
+  var index = bank_id.lastIndexOf("=");
+  bank_id = bank_id.substring(index + 1, bank_id.length);
+  console.log(bank_id)
 
   $('#pagination').jqPaginator({
-      totalPages: 2,
-      visiblePages: 1,
-      currentPage: 1,
-      onPageChange: function (num, type) {
-          // $('#pagination').append('当前第' + num+'/'+2+'页');
-          addDiv.empty()
-          let tempState = Object.assign({}, getData, { page: num });
-          getData=tempState
-          axio(getData)
-      }
-  });
-  function axio(getData){
-      $.ajax({
-      type: "get",
-      url: detailUrl,
-      data: getData,
-      beforeSend: function (XMLHttpRequest) {
-          XMLHttpRequest.setRequestHeader("authorization", $.cookie(host));
-      },
-      success: function (res) {
-          console.log(res)
-          res = JSON.parse(res)
-          console.log(res.data)
-          if(res.code != 0){
-              alert(res.msg)
-          }else{
-            for(var i=0; i < res.data.lists.length; i++){
-              html = '<div class="contentItem">'
-              html += '<a href="' + host + 'bank/fight.html?program_id=' + res.data.lists[i].id + '">'
-              html += '<img src="' + res.data.lists[i].image + '" alt="">'
-              html += '<div class="contentName">'+res.data.lists[i].name+'</div>'
-              html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
-              html += '</div>'
-              addDiv.append(html)
-            }
+    totalPages: 2,
+    visiblePages: 1,
+    currentPage: 1,
+    onPageChange: function (num, type) {
+      // $('#pagination').append('当前第' + num+'/'+2+'页');
+      addDiv.empty()
+      var getData ='bank_id='+ parseInt(bank_id)+'&page='+num
+      console.log(getData)
+      detail(getData, function (res) {
+        console.log(res)
+        if (res.code != 0) {
+          alert(res.msg)
+        } else {
+          for (var i = 0; i < res.data.lists.length; i++) {
+           var html = '<div class="contentItem">'
+            html += '<a href="' + agreement + '//' + host + '/bank/fight.html?program_id=' + res.data.lists[i].id + '">'
+            html += '<img src="' + res.data.lists[i].image + '" alt="">'
+            html += '<div class="contentName">' + res.data.lists[i].name + '</div>'
+            html += '<div class="contentTitle">给老子打冲啊冲啊冲啊司马傻逼草你妈的cnm给老子超出超出超出超出</div></a>'
+            html += '</div>'
+            addDiv.append(html)
           }
-      }
-    });
-  }
+        }
+      })
+    }
+  });
+
 </script>
+
 </html>
