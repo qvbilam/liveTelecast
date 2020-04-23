@@ -46,7 +46,6 @@
   var index = bank_id.lastIndexOf("=");
   bank_id = bank_id.substring(index + 1, bank_id.length);
   console.log(bank_id)
-  var getData = { 'bank_id': parseInt(bank_id) }
 
   $('#pagination').jqPaginator({
     totalPages: 2,
@@ -55,10 +54,12 @@
     onPageChange: function (num, type) {
       // $('#pagination').append('当前第' + num+'/'+2+'页');
       addDiv.empty()
-      let tempState = Object.assign({}, getData, { page: num });
-      // getData = tempState
-      console.log(tempState)
-      detail(tempState, function (res) {
+      var getData = {
+        'bank_id': parseInt(bank_id),
+        'page': num
+      }
+      console.log(getData)
+      detail(getData, function (res) {
         console.log(res)
         if (res.code != 0) {
           alert(res.msg)
