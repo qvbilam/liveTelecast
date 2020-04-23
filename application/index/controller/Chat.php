@@ -16,14 +16,11 @@ class Chat
     /*接受用户聊天室传来的数据*/
     public function index()
     {
-        // $authorization = $_SERVER['AUTHORIZATION'];
-        $authorization = $_POST['token'];
+        $authorization = $_SERVER['AUTHORIZATION'];
         if(empty($authorization)){
             $userId = -1;
-            echo 'cnm-' . $userId . PHP_EOL;
         }else{
             $userId = Token::getUserId($authorization);
-            echo '1-' . $userId . PHP_EOL;
         }
         $name = Db::table('live_user')->where(['id'=>$userId])->value('name')?:'用户'.rand(1000,9999);
         $data = [
