@@ -73,7 +73,9 @@
   var send_url = host + '/index/bank/fight'
   var swiperWrapper = $('#imgs')
   // 提交表单
+  console.log(getData)
   fight(getData, function (res) {
+    console.log(res)
     data = res.data
     console.log(data)
     // data.forEach(item=>{
