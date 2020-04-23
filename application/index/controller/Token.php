@@ -31,7 +31,6 @@ class Token
 
     static public function getUserId($token=0)
     {
-        $token = $_POST['token'];
         $key = md5('nobita');
         $jwtAuth = JWT::decode($token, $key, array('HS256'));
         if($jwtAuth['code'] != 0){
