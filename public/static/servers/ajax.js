@@ -61,9 +61,22 @@ export function ajax(url, method, async, data, callBack, type) {
       if (xhr.readyState == 4 && xhr.status == 200) {
           //成功之后调用回调函数
           if (type == "xml") {
-              return callBack(JSON.parse(xhr.responseXML), xhr);
+            //   return callBack(JSON.parse(xhr.responseXML), xhr);
+            if (!xhr.responseXML || typeof xhr.responseXML != "string") {
+                return callBack(xhr.responseXML, xhr);
+            }
+            if (typeof responseXML == "string") {
+                return callBack(JSON.parse(xhr.responseXML), xhr);
+            }
+             
           } else if (type == "text") {
-              return callBack(JSON.parse(xhr.responseText), xhr);
+            if (!xhr.responseText || typeof xhr.responseText != "string") {
+                return callBack(xhr.responseText, xhr);
+            }
+            if (typeof responseText == "string") {
+                return callBack(JSON.parse(xhr.responseText), xhr);
+            }
+            //   return callBack(xhr.responseText, xhr);
             //   return callBack(xhr.responseText, xhr);
           }
       }
