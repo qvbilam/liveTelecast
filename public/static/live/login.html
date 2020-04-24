@@ -72,11 +72,13 @@
                 // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
                 login(formData, function (res) {
                     if (res.msg == 'perfect') {
+                        console.log(res)
                         /*跳转信息页面*/
-                        window.location.href = agreement + '//' + host + '/live/perfect.html'
+                        // window.location.href = agreement + '//' + host + '/live/perfect.html'
                     } else if (res.msg == 'login') {
+                        console.log(res)
                         /*跳转板块页*/
-                        window.location.href = agreement + '//' + host + '/bank/index.html'
+                        // window.location.href = agreement + '//' + host + '/bank/index.html'
                     } else {
                         alert('去你妈的');
                     }
