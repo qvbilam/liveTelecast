@@ -16,9 +16,9 @@ export function ajax(url, method, async, data, callBack, istoken, type) {
     callBack = callBack || function () {
         console.log("默认回调函数");
     };
+    // istoken = istoken || true
     type = type || "text";
     type = type.toLowerCase();
-    istoken = istoken || true
     var xhr = false;
     //初始化XMLHttpRequest 对象
     if (window.XMLHttpRequest) {//Mozilla 浏览器
