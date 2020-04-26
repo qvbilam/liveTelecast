@@ -7,7 +7,7 @@
  * @param Callback  回调函数(数据,对象)
  * @param type  回调数据类型 text||xml
  */
-export function ajax(url, method, async, data, callBack, type) {
+export function ajax(url, method, async, data, callBack, type, istoken) {
     //设置参数默认值
     method = method || "GET";
     method = method.toUpperCase();
@@ -18,6 +18,7 @@ export function ajax(url, method, async, data, callBack, type) {
     };
     type = type || "text";
     type = type.toLowerCase();
+    istoken = istoken || true
     var xhr = false;
     //初始化XMLHttpRequest 对象
     if (window.XMLHttpRequest) {//Mozilla 浏览器
@@ -49,6 +50,12 @@ export function ajax(url, method, async, data, callBack, type) {
     xhr.open(method, url, async); //发起请求
     xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
 
+    if (istoken) {
+        var token = localStorage.getItem('token');
+        if(token){
+            xhr.setRequestHeader("token", token);
+        }
+    }
     if (method == "POST") { //post
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(data);
@@ -61,26 +68,26 @@ export function ajax(url, method, async, data, callBack, type) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             //成功之后调用回调函数
             if (type == "xml") {
-                console.log(xhr,'xml')
+                console.log(xhr, 'xml')
                 //   return callBack(JSON.parse(xhr.responseXML), xhr);
                 if (!xhr.responseXML || typeof xhr.responseXML != "string") {
                     return callBack(xhr.responseXML, xhr);
                 }
-                if (typeof responseXML == "string") {
+                if (typeof xhr.responseXML == "string") {
                     return callBack(JSON.parse(xhr.responseXML), xhr);
                 }
 
             } else if (type == "text") {
-                console.log(xhr,'text')
+                // console.log(xhr,'text')
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
-                    console.log('@@@@@@@@22')
-                    console.log('json',xhr.responseText)
+                    // console.log('@@@@@@@@22')
+                    // console.log('json',xhr.responseText)
                     return callBack(xhr.responseText, xhr);
                 }
-                if (typeof responseText == "string") {
-                    console.log('#######3')
-                    console.log('string',xhr.responseText)
-                    console.log(callBack(xhr.responseText, xhr))
+                if (typeof xhr.responseText == "string") {
+                    // console.log('#######3')
+                    // console.log('string',xhr.responseText)
+                    // console.log(callBack(xhr.responseText, xhr))
                     return callBack(JSON.parse(xhr.responseText), xhr);
                 }
                 //   return callBack(xhr.responseText, xhr);
