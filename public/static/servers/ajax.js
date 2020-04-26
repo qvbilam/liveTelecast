@@ -73,11 +73,11 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
             //成功之后调用回调函数
             if (type == "xml") {
                 if (!xhr.responseXML || typeof xhr.responseXML != "string") {
-                    let res = xhr.responseXML
+                    var res = xhr.responseXML
                     // return callBack(xhr.responseXML, xhr);
                 }
                 if (typeof xhr.responseXML == "string") {
-                    let res = JSON.parse(xhr.responseXML)
+                    var res = JSON.parse(xhr.responseXML)
                     // return callBack(JSON.parse(xhr.responseXML), xhr);
                 }
                 // if(xhr.responseXML&&typeof xhr.responseXML == "string"){
@@ -95,10 +95,10 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
             } else if (type == "text") {
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
                     // return callBack(xhr.responseText, xhr);
-                    let res =xhr.responseText
+                    var res =xhr.responseText
                 }
                 if (typeof xhr.responseText == "string") {
-                    let res = JSON.parse( xhr.responseText)
+                    var res = JSON.parse( xhr.responseText)
                     // return callBack(JSON.parse(xhr.responseText), xhr);
                 }
                 // if(xhr.responseText&&typeof xhr.responseText == "string"){
