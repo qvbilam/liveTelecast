@@ -16,7 +16,6 @@ export function ajax(url, method, async, data, callBack, type) {
     callBack = callBack || function () {
         console.log("默认回调函数");
     };
-    // istoken = istoken || true
     type = type || "text";
     type = type.toLowerCase();
     var xhr = false;
@@ -49,12 +48,6 @@ export function ajax(url, method, async, data, callBack, type) {
 
     xhr.open(method, url, async); //发起请求
     xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
-    // if (istoken) {
-    //     var token = localStorage.getItem('token');
-    //     if (token) {
-    //         xhr.setRequestHeader("token", token);
-    //     }
-    // }
 
     if (method == "POST") { //post
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
