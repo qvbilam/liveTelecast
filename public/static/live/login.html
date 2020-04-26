@@ -71,7 +71,7 @@
                 var formData = $('form').serialize();
                 // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
                 console.log('1111')
-                login(formData, function (res,q) {
+                login(formData,  (res,q)=> {
                     console.log("guoyi shagou")
                     console.log(res,q,'!!!!!!!!!!')
                     if (res.msg == 'perfect') {
