@@ -11,7 +11,7 @@ namespace app\index\controller;
 use app\command\Util;
 use think\Db;
 
-class Bank
+class Bank extends Auth
 {
     public $size = 6;
     /*大版块首页*/

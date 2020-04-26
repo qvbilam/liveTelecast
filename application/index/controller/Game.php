@@ -14,7 +14,8 @@ use think\Config;
 use app\command\Predis;
 use app\command\Redis;
 
-class Game
+
+class Game extends Auth
 {
     public function getData()
     {

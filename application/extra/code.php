@@ -6,6 +6,8 @@
  * Time: 15:23
  */
 return [
+    'noauth' => 403,    //  没登录
+    'error' => -1,
     'success' => 0,
     'error_phone_empty' => 100001,
     'error_phone_type' => 100002,
