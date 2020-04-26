@@ -12,12 +12,13 @@ use app\command\Util;
 use think\Config;
 use app\command\Predis;
 use app\command\Redis;
+use think\Controller;
 use think\Db;
 use app\command\Mysql;
 use Firebase\JWT\JWT;
 use app\index\controller\Token;
 
-class Base
+class Base extends Controller
 {
 
     public function getUserId($jwt)

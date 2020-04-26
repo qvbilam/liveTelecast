@@ -7,27 +7,21 @@
  */
 
 namespace app\index\controller;
+
 use think\Db;
 use Firebase\JWT\JWT;
 use app\index\controller\Token;
 
-class Chat
+class Chat extends Auth
 {
     /*接受用户聊天室传来的数据*/
     public function index()
     {
-        $authorization = $_SERVER['AUTHORIZATION'];
-        if(empty($authorization)){
-            $userId = -1;
-        }else{
-            $userId = Token::getUserId($authorization);
-        }
-        $name = Db::table('live_user')->where(['id'=>$userId])->value('name')?:'用户'.rand(1000,9999);
+        $userId = $this->userId;
+        $name = Db::table('live_user')->where(['id' => $userId])->value('name') ?: '用户' . rand(1000, 9999);
         $data = [
             'user' => $name,
             'connect' => $_POST['content'],
-            'token' => $authorization,
-            'type' => gettype($authorization)
         ];
         Db::table('live_chart')->insert([
             'game_id' => 1,
