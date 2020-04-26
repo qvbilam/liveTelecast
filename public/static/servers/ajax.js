@@ -7,7 +7,7 @@
  * @param Callback  回调函数(数据,对象)
  * @param type  回调数据类型 text||xml
  */
-export function ajax(url, method, async, data, callBack, istoken, type) {
+export function ajax(url, method, async, data, callBack, type) {
     //设置参数默认值
     method = method || "GET";
     method = method.toUpperCase();

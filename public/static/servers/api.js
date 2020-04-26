@@ -4,7 +4,7 @@ import { ajax } from './ajax.js';
 const baseUrl = 'http://live.qvbilam.xin:9503'
 //live
 // live/login
-export const login = (data, callBack) => ajax(baseUrl + '/index/login/index', 'POST', true, data, callBack,false)
+export const login = (data, callBack) => ajax(baseUrl + '/index/login/index', 'POST', true, data, callBack)
 export const sendCode = (data, callBack) => ajax(baseUrl + '/index/send/index', 'POST', true, data, callBack)
 //live/js/VerToken
 export const send = (callBack) => ajax(baseUrl + '/index/send/index', 'POST', true, null, callBack, 'json')
