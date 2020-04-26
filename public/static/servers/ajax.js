@@ -72,36 +72,46 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             //成功之后调用回调函数
             if (type == "xml") {
-                // if (!xhr.responseXML || typeof xhr.responseXML != "string") {
-                //     return callBack(xhr.responseXML, xhr);
-                // }
-                // if (typeof xhr.responseXML == "string") {
-                //     return callBack(JSON.parse(xhr.responseXML), xhr);
-                // }
-                if(xhr.responseXML&&typeof xhr.responseXML == "string"){
-                    xhr.responseXML=JSON.parse(xhr.responseXML)
+                if (!xhr.responseXML || typeof xhr.responseXML != "string") {
+                    let res = xhr.responseXML
+                    // return callBack(xhr.responseXML, xhr);
                 }
-                if(xhr.responseXML.code==403){
-                    alert(xhr.responseXML.msg)
+                if (typeof xhr.responseXML == "string") {
+                    let res = JSON.parse(xhr.responseXML)
+                    // return callBack(JSON.parse(xhr.responseXML), xhr);
+                }
+                // if(xhr.responseXML&&typeof xhr.responseXML == "string"){
+                //     xhr.responseXML=JSON.parse(xhr.responseXML)
+                // }
+                if(res.code==403){
+                    alert(res.msg)
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                }else if(res.code==-1){
+                    console.log("token为空")
                     window.location.href = agreement + '//' + host + '/live/login.html'
                 }else{
-                    return callBack(xhr.responseXML, xhr);
+                    return callBack(res, xhr);
                 }
             } else if (type == "text") {
-                // if (!xhr.responseText || typeof xhr.responseText != "string") {
-                //     return callBack(xhr.responseText, xhr);
-                // }
-                // if (typeof xhr.responseText == "string") {
-                //     return callBack(JSON.parse(xhr.responseText), xhr);
-                // }
-                if(xhr.responseText&&typeof xhr.responseText == "string"){
-                    xhr.responseText=JSON.parse(xhr.responseText)
+                if (!xhr.responseText || typeof xhr.responseText != "string") {
+                    // return callBack(xhr.responseText, xhr);
+                    let res =xhr.responseText
                 }
-                if(xhr.responseText.code==403){
-                    alert(xhr.responseText.msg)
+                if (typeof xhr.responseText == "string") {
+                    let res = JSON.parse( xhr.responseText)
+                    // return callBack(JSON.parse(xhr.responseText), xhr);
+                }
+                // if(xhr.responseText&&typeof xhr.responseText == "string"){
+                //     xhr.responseText=JSON.parse(xhr.responseText)
+                // }
+                if(res.code==403){
+                    alert(res.msg)
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                }else if(res.code==-1){
+                    console.log("token为空")
                     window.location.href = agreement + '//' + host + '/live/login.html'
                 }else{
-                    return callBack(xhr.responseText, xhr);
+                    return callBack(res, xhr);
                 }
             }
         }
