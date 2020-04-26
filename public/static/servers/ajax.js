@@ -74,42 +74,32 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
             if (type == "xml") {
                 if (!xhr.responseXML || typeof xhr.responseXML != "string") {
                     var res = xhr.responseXML
-                    // return callBack(xhr.responseXML, xhr);
                 }
                 if (typeof xhr.responseXML == "string") {
                     var res = JSON.parse(xhr.responseXML)
-                    // return callBack(JSON.parse(xhr.responseXML), xhr);
                 }
-                // if(xhr.responseXML&&typeof xhr.responseXML == "string"){
-                //     xhr.responseXML=JSON.parse(xhr.responseXML)
-                // }
                 if(res.code==403){
                     alert(res.msg)
                     window.location.href = agreement + '//' + host + '/live/login.html'
                 }else if(res.code==-1){
                     console.log("token为空")
-                    window.location.href = agreement + '//' + host + '/live/login.html'
+                    // window.location.href = agreement + '//' + host + '/live/login.html'
                 }else{
                     return callBack(res, xhr);
                 }
             } else if (type == "text") {
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
-                    // return callBack(xhr.responseText, xhr);
                     var res =xhr.responseText
                 }
                 if (typeof xhr.responseText == "string") {
                     var res = JSON.parse( xhr.responseText)
-                    // return callBack(JSON.parse(xhr.responseText), xhr);
                 }
-                // if(xhr.responseText&&typeof xhr.responseText == "string"){
-                //     xhr.responseText=JSON.parse(xhr.responseText)
-                // }
                 if(res.code==403){
                     alert(res.msg)
                     window.location.href = agreement + '//' + host + '/live/login.html'
                 }else if(res.code==-1){
                     console.log("token为空")
-                    window.location.href = agreement + '//' + host + '/live/login.html'
+                    // window.location.href = agreement + '//' + host + '/live/login.html'
                 }else{
                     return callBack(res, xhr);
                 }
