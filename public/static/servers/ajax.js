@@ -73,6 +73,7 @@ export function ajax(url, method, async, data, callBack, type) {
             } else if (type == "text") {
                 console.log(xhr,'text')
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
+                    console.log(callBack(xhr.responseText, xhr))
                     return callBack(xhr.responseText, xhr);
                 }
                 if (typeof responseText == "string") {
