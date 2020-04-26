@@ -7,7 +7,7 @@
  * @param Callback  回调函数(数据,对象)
  * @param type  回调数据类型 text||xml
  */
-export function ajax(url, method, async, data, callBack, type) {
+export function ajax(url, method, async, data, callBack, istoken, type) {
     //设置参数默认值
     method = method || "GET";
     method = method.toUpperCase();
@@ -18,7 +18,7 @@ export function ajax(url, method, async, data, callBack, type) {
     };
     type = type || "text";
     type = type.toLowerCase();
-    // istoken = istoken || true
+    istoken = istoken || true
     var xhr = false;
     //初始化XMLHttpRequest 对象
     if (window.XMLHttpRequest) {//Mozilla 浏览器
@@ -49,12 +49,12 @@ export function ajax(url, method, async, data, callBack, type) {
 
     xhr.open(method, url, async); //发起请求
     xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
-    if (istoken) {
-        var token = localStorage.getItem('token');
-        if(token){
-            xhr.setRequestHeader("token", token);
-        }
-    }
+    // if (istoken) {
+    //     var token = localStorage.getItem('token');
+    //     if (token) {
+    //         xhr.setRequestHeader("token", token);
+    //     }
+    // }
 
     if (method == "POST") { //post
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
