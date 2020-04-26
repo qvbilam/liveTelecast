@@ -61,6 +61,7 @@ export function ajax(url, method, async, data, callBack, type) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             //成功之后调用回调函数
             if (type == "xml") {
+                console.log(xhr,'xml')
                 //   return callBack(JSON.parse(xhr.responseXML), xhr);
                 if (!xhr.responseXML || typeof xhr.responseXML != "string") {
                     return callBack(xhr.responseXML, xhr);
@@ -70,6 +71,7 @@ export function ajax(url, method, async, data, callBack, type) {
                 }
 
             } else if (type == "text") {
+                console.log(xhr,'text')
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
                     return callBack(xhr.responseText, xhr);
                 }
