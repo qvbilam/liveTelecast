@@ -77,6 +77,7 @@ export function ajax(url, method, async, data, callBack, type) {
                     return callBack(xhr.responseText, xhr);
                 }
                 if (typeof responseText == "string") {
+                    console.log(callBack(xhr.responseText, xhr))
                     return callBack(JSON.parse(xhr.responseText), xhr);
                 }
                 //   return callBack(xhr.responseText, xhr);
