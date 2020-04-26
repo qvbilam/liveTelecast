@@ -7,6 +7,10 @@
  * @param Callback  回调函数(数据,对象)
  * @param type  回调数据类型 text||xml
  */
+ //获取当前的请求地址
+ const host = window.location.host;
+ //获取当前协议
+ const agreement = window.location.protocol;
 export function ajax(url, method, async, data, callBack, type, istoken) {
     //设置参数默认值
     method = method || "GET";
@@ -68,30 +72,37 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             //成功之后调用回调函数
             if (type == "xml") {
-                console.log(xhr, 'xml')
-                //   return callBack(JSON.parse(xhr.responseXML), xhr);
-                if (!xhr.responseXML || typeof xhr.responseXML != "string") {
+                // if (!xhr.responseXML || typeof xhr.responseXML != "string") {
+                //     return callBack(xhr.responseXML, xhr);
+                // }
+                // if (typeof xhr.responseXML == "string") {
+                //     return callBack(JSON.parse(xhr.responseXML), xhr);
+                // }
+                if(xhr.responseXML&&typeof xhr.responseXML == "string"){
+                    xhr.responseXML=JSON.parse(xhr.responseXML)
+                }
+                if(xhr.responseXML.code==403){
+                    alert(xhr.responseXML.msg)
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                }else{
                     return callBack(xhr.responseXML, xhr);
                 }
-                if (typeof xhr.responseXML == "string") {
-                    return callBack(JSON.parse(xhr.responseXML), xhr);
-                }
-
             } else if (type == "text") {
-                // console.log(xhr,'text')
-                if (!xhr.responseText || typeof xhr.responseText != "string") {
-                    // console.log('@@@@@@@@22')
-                    // console.log('json',xhr.responseText)
+                // if (!xhr.responseText || typeof xhr.responseText != "string") {
+                //     return callBack(xhr.responseText, xhr);
+                // }
+                // if (typeof xhr.responseText == "string") {
+                //     return callBack(JSON.parse(xhr.responseText), xhr);
+                // }
+                if(xhr.responseText&&typeof xhr.responseText == "string"){
+                    xhr.responseText=JSON.parse(xhr.responseText)
+                }
+                if(xhr.responseText.code==403){
+                    alert(xhr.responseText.msg)
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                }else{
                     return callBack(xhr.responseText, xhr);
                 }
-                if (typeof xhr.responseText == "string") {
-                    // console.log('#######3')
-                    // console.log('string',xhr.responseText)
-                    // console.log(callBack(xhr.responseText, xhr))
-                    return callBack(JSON.parse(xhr.responseText), xhr);
-                }
-                //   return callBack(xhr.responseText, xhr);
-                //   return callBack(xhr.responseText, xhr);
             }
         }
     };
