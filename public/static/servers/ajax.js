@@ -57,7 +57,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
     if (istoken) {
         var token = localStorage.getItem('token');
         if(token){
-            xhr.setRequestHeader("token", token);
+            xhr.setRequestHeader("AUTHORIZATION", token);
         }
     }
     if (method == "POST") { //post
