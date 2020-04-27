@@ -32,7 +32,7 @@ $(function () {
 				},
 				success: function (res) {
 					if (typeof res == "string") {
-						if (JSON.parse(res).code == 403 || JSON.parse(res).code == -1) {
+						if (JSON.parse(res).code && JSON.parse(res).code == 403 || JSON.parse(res).code && JSON.parse(res).code == -1) {
 							alert(JSON.parse(res).msg)
 							window.location.href = agreement + '//' + host + '/live/login.html'
 						}
