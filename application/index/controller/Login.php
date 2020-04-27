@@ -55,10 +55,10 @@ class Login extends Base
             return Util::show(Config::get('code.error_perfect_empty'), '昵称不能为空');
         }
         // 验证token
-        if (empty($_SERVER['HTTP_AUTHORIZATION'])) {
+        if (empty($_SERVER['AUTHORIZATION'])) {
             return Util::show(Config::get('code.error_perfect_empty'), 'token不能为空');
         }
-        $userId = $this->getUserId($_SERVER['HTTP_AUTHORIZATION']);
+        $userId = $this->getUserId($_SERVER['AUTHORIZATION']);
         $name = isset($_GET['name']) ? $_GET['name'] : $_POST['name'];
         if ($userId) {
             $res = Db::table('live_user')->where(['id' => $userId])->update([
