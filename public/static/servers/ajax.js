@@ -83,7 +83,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                     window.location.href = agreement + '//' + host + '/live/login.html'
                 }else if(res.code==-1){
                     console.log("token为空")
-                    // window.location.href = agreement + '//' + host + '/live/login.html'
+                    window.location.href = agreement + '//' + host + '/live/login.html'
                 }else{
                     return callBack(res, xhr);
                 }
@@ -99,7 +99,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                     window.location.href = agreement + '//' + host + '/live/login.html'
                 }else if(res.code==-1){
                     console.log("token为空")
-                    // window.location.href = agreement + '//' + host + '/live/login.html'
+                    window.location.href = agreement + '//' + host + '/live/login.html'
                 }else{
                     return callBack(res, xhr);
                 }

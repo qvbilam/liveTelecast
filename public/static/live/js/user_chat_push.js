@@ -27,7 +27,7 @@ $(function () {
 				url: send_url,
 				data: data,
 				beforeSend: function (XMLHttpRequest) {
-					XMLHttpRequest.setRequestHeader("authorization", $.cookie('token'));
+					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
 				}
 			});
 		}
