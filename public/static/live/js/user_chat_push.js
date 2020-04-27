@@ -30,12 +30,10 @@ $(function () {
 				beforeSend: function (XMLHttpRequest) {
 					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
 				},
-				success:function(data) {
-					console.log(data)
-					var	res = JSON.parse(data)
+				success:function(res) {
 					console.log(res)
-					if (res.code == 403 || res.code == -1) {
-						alert(res.msg)
+					if (JSON.parse(res).code == 403 || JSON.parse(res).code == -1) {
+						alert(JSON.parse(res).msg)
 						window.location.href = agreement + '//' + host + '/live/login.html'
 					}
 				}
