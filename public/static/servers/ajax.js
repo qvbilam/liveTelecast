@@ -7,6 +7,10 @@
  * @param Callback  回调函数(数据,对象)
  * @param type  回调数据类型 text||xml
  */
+ //获取当前的请求地址
+ const host = window.location.host;
+ //获取当前协议
+ const agreement = window.location.protocol;
 export function ajax(url, method, async, data, callBack, type, istoken) {
     //设置参数默认值
     method = method || "GET";
@@ -53,7 +57,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
     if (istoken) {
         var token = localStorage.getItem('token');
         if(token){
-            xhr.setRequestHeader("token", token);
+            xhr.setRequestHeader("AUTHORIZATION", token);
         }
     }
     if (method == "POST") { //post
@@ -68,30 +72,37 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             //成功之后调用回调函数
             if (type == "xml") {
-                console.log(xhr, 'xml')
-                //   return callBack(JSON.parse(xhr.responseXML), xhr);
                 if (!xhr.responseXML || typeof xhr.responseXML != "string") {
-                    return callBack(xhr.responseXML, xhr);
+                    var res = xhr.responseXML
                 }
                 if (typeof xhr.responseXML == "string") {
-                    return callBack(JSON.parse(xhr.responseXML), xhr);
+                    var res = JSON.parse(xhr.responseXML)
                 }
-
+                if(res.code==403){
+                    alert(res.msg)
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                }else if(res.code==-1){
+                    console.log("token为空")
+                    // window.location.href = agreement + '//' + host + '/live/login.html'
+                }else{
+                    return callBack(res, xhr);
+                }
             } else if (type == "text") {
-                // console.log(xhr,'text')
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
-                    // console.log('@@@@@@@@22')
-                    // console.log('json',xhr.responseText)
-                    return callBack(xhr.responseText, xhr);
+                    var res =xhr.responseText
                 }
                 if (typeof xhr.responseText == "string") {
-                    // console.log('#######3')
-                    // console.log('string',xhr.responseText)
-                    // console.log(callBack(xhr.responseText, xhr))
-                    return callBack(JSON.parse(xhr.responseText), xhr);
+                    var res = JSON.parse( xhr.responseText)
                 }
-                //   return callBack(xhr.responseText, xhr);
-                //   return callBack(xhr.responseText, xhr);
+                if(res.code==403){
+                    alert(res.msg)
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                }else if(res.code==-1){
+                    console.log("token为空")
+                    // window.location.href = agreement + '//' + host + '/live/login.html'
+                }else{
+                    return callBack(res, xhr);
+                }
             }
         }
     };
