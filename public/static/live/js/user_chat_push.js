@@ -1,7 +1,8 @@
 // import { chat } from './../../servers/api.js'
 $(function () {
 	var $submitBtn = $('#submit-btn');
-	var token = $.cookie('token')
+	// var token = $.cookie('token')
+	var token = localStorage.getItem('token')
 	console.log(typeof token)
 	$('#chatPush').keydown(function (event) {
 		var host = window.location.host;
@@ -27,7 +28,15 @@ $(function () {
 				url: send_url,
 				data: data,
 				beforeSend: function (XMLHttpRequest) {
-					XMLHttpRequest.setRequestHeader("authorization", $.cookie('token'));
+					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
+				},
+				success: function (res) {
+					if (typeof res == "string") {
+						if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
+							alert(JSON.parse(res).msg)
+							window.location.href = agreement + '//' + host + '/live/login.html'
+						}
+					}
 				}
 			});
 		}
