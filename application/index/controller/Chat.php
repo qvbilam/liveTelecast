@@ -18,10 +18,12 @@ class Chat extends Auth
     public function index()
     {
         $userId = $this->userId;
-        $name = Db::table('live_user')->where(['id' => $userId])->value('name') ?: '用户' . rand(1000, 9999);
+//        $name = Db::table('live_user')->where(['id' => $userId])->value('name') ?: '用户' . rand(1000, 9999);
+        $userInfo = Db::table('live_user')->where(['id' => $userId])->field('name,vip')->find();
         $data = [
-            'user' => $name,
+            'user' => $userInfo['name'] ?: '用户' . rand(1000, 9999),
             'connect' => $_POST['content'],
+            'vip' => $userInfo['vip'] ?: 0
         ];
         Db::table('live_chart')->insert([
             'game_id' => 1,
