@@ -1,7 +1,8 @@
 // import { chat } from './../../servers/api.js'
 $(function () {
 	var $submitBtn = $('#submit-btn');
-	var token = $.cookie('token')
+	// var token = $.cookie('token')
+	var token = localStorage.getItem('token')
 	console.log(typeof token)
 	$('#chatPush').keydown(function (event) {
 		var host = window.location.host;
@@ -29,7 +30,7 @@ $(function () {
 				beforeSend: function (XMLHttpRequest) {
 					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
 				},
-				success(res) {
+				success:function(res) {
 					console.log(res)
 					if (res.code == 403 || res.code == -1) {
 						alert(res.msg)
