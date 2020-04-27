@@ -32,7 +32,8 @@ $(function () {
 				},
 				success:function(data) {
 					console.log(data)
-				  var	res = JSON.parse(data)
+					var	res = JSON.parse(data)
+					console.log(res)
 					if (res.code == 403 || res.code == -1) {
 						alert(res.msg)
 						window.location.href = agreement + '//' + host + '/live/login.html'
