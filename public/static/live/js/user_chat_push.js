@@ -30,6 +30,7 @@ $(function () {
 					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
 				},
 				success(res) {
+					console.log(res)
 					if (res.code == 403 || res.code == -1) {
 						alert(res.msg)
 						window.location.href = agreement + '//' + host + '/live/login.html'
