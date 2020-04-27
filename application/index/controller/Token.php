@@ -30,13 +30,16 @@ class Token
 
     static public function getUserId($token = 0)
     {
+        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJpc3MiOiJodHRwOlwvXC93d3cucXZiaWxhbS54aW4iLCJhdWQiOiJRdkJpTGFtIiwiaWF0IjoxNTg3OTczMzM5LCJuYmYiOjE1ODc5NzMzMzksImV4cCI6MTU4Nzk4NzczOX0.eb24HVzR2UadnobWPqLlrTN2-wVe2yPvsWJuzib9qZM';
         $key = md5('nobita');
         $jwtAuth = JWT::decode($token, $key, array('HS256'));
         if ($jwtAuth['code'] != 0) {
             return 0;
-        } else {
-            return $jwtAuth['data'];
         }
+        if (empty($jwtAuth['data']->user_id)) {
+            $jwtAuth['data']->user_id = -1;
+        }
+        return $jwtAuth['data']->user_id;
     }
 
     //校验jwt权限API
