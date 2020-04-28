@@ -7,10 +7,10 @@
  * @param Callback  回调函数(数据,对象)
  * @param type  回调数据类型 text||xml
  */
- //获取当前的请求地址
- const host = window.location.host;
- //获取当前协议
- const agreement = window.location.protocol;
+//获取当前的请求地址
+const host = window.location.host;
+//获取当前协议
+const agreement = window.location.protocol;
 export function ajax(url, method, async, data, callBack, type, istoken) {
     //设置参数默认值
     method = method || "GET";
@@ -56,8 +56,28 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
 
     if (istoken) {
         var token = localStorage.getItem('token');
-        if(token){
-            xhr.setRequestHeader("AUTHORIZATION", token);
+        if (token) {
+            //请求前判断是否登录
+            $.ajax({
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                url: agreement + '//' + host + '/index/token/checkToken',
+                data: null,
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("authorization", token);
+                },
+                success: function (result) {
+                    console.log(result);
+                    xhr.setRequestHeader("AUTHORIZATION", token);
+                },
+                error: function (e) {
+                    window.location.href = agreement + '//' + host + '/live/login.html'
+                    return
+                }
+            });
+        } else {
+            window.location.href = agreement + '//' + host + '/live/login.html'
+            return
         }
     }
     if (method == "POST") { //post
@@ -78,29 +98,29 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                 if (typeof xhr.responseXML == "string") {
                     var res = JSON.parse(xhr.responseXML)
                 }
-                if(res.code==403){
+                if (res.code == 403) {
                     alert(res.msg)
                     window.location.href = agreement + '//' + host + '/live/login.html'
-                }else if(res.code==-1){
+                } else if (res.code == -1) {
                     console.log("token为空")
                     window.location.href = agreement + '//' + host + '/live/login.html'
-                }else{
+                } else {
                     return callBack(res, xhr);
                 }
             } else if (type == "text") {
                 if (!xhr.responseText || typeof xhr.responseText != "string") {
-                    var res =xhr.responseText
+                    var res = xhr.responseText
                 }
                 if (typeof xhr.responseText == "string") {
-                    var res = JSON.parse( xhr.responseText)
+                    var res = JSON.parse(xhr.responseText)
                 }
-                if(res.code==403){
+                if (res.code == 403) {
                     alert(res.msg)
                     window.location.href = agreement + '//' + host + '/live/login.html'
-                }else if(res.code==-1){
+                } else if (res.code == -1) {
                     console.log("token为空")
                     window.location.href = agreement + '//' + host + '/live/login.html'
-                }else{
+                } else {
                     return callBack(res, xhr);
                 }
             }

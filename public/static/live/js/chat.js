@@ -32,7 +32,7 @@ function chatPush(data) {
     // data = JSON.parse(data)
     html = '<div class="comment">'
     html += '<span>' + data.user + '：</span>'
-    html += '<span>' + data.connect + '</span>'
+    html += '<span>' + data.content + '</span>'
     html += '</div>'
 
     $('#comments').append(html)
