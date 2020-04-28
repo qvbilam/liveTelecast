@@ -11,6 +11,7 @@ namespace app\index\controller;
 use think\Db;
 use Firebase\JWT\JWT;
 use app\index\controller\Token;
+use app\command\Util;
 
 class Chat extends Auth
 {
@@ -21,13 +22,14 @@ class Chat extends Auth
         if(!$_POST['data']){
             return Util::show(-1,'获取数据失败');
         }
-        $params = json_decode(base64_decode($_POST['data']),true);
-        return Util::show(0,'ok',json_encode($params));
+        $data = $_POST['data'];
+        // $data = base64_encode(('{"game_id":1,"content":"傻逼赵彩霞"}'));
+        $params = json_decode(base64_decode($data),true);
         // $name = Db::table('live_user')->where(['id' => $userId])->value('name') ?: '用户' . rand(1000, 9999);
         $userInfo = Db::table('live_user')->where(['id' => $userId])->field('name,vip')->find();
         $data = [
             'user' => $userInfo['name'] ?: '用户' . rand(1000, 9999),
-            'connect' => $params['content'],
+            'content' => $params['content'],
             'vip' => $userInfo['vip'] ?: 0,
             'type' => 'chat'
         ];
