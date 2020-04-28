@@ -17,14 +17,12 @@ class Token
 
     public function checkToken()
     {
-
-        //return json_encode($_SERVER['AUTHORIZATION']);
-        $authorization = $_SERVER['AUTHORIZATION'];
-        if (empty($authorization)) {
+        if (empty($_SERVER['AUTHORIZATION'])) {
             return Util::show(-1, '获取token失败');
         } 
+        $authorization = $_SERVER['AUTHORIZATION'];
         $checkJwtToken = $this->getUserId($authorization);
-        if ($checkToken['code'] != 0){
+        if ($checkToken <= 0){
             return Util::show(-1, '验证token失败');
         }
         return Util::show(0,'ok');
