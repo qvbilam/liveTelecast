@@ -19,7 +19,10 @@ class Game extends Auth
 {
     public function getData()
     {
-        $game_id = 1;
+        if(!$_GET['game_id']){
+            return Util::show(-1,'暂无数据',[]);
+        }
+        $game_id = $_GET['game_id'];
         $live = Predis::getIntance()->get(Redis::$live_pre) ?: self::liveData($game_id);
         $chat = Predis::getIntance()->get(Redis::$chat_pre) ?: self::chatData($game_id);
         $game = Predis::getIntance()->get(Redis::$data_pre) ?: self::gameData($game_id);
