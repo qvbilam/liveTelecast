@@ -12,7 +12,7 @@ use think\Request;
 use Firebase\JWT\JWT;
 use app\command\Util;
 
-class Token
+class Token extends Base
 {
 
     public function checkToken()
