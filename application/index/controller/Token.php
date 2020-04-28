@@ -12,7 +12,7 @@ use think\Request;
 use Firebase\JWT\JWT;
 use app\command\Util;
 
-class Token extends Base
+class Token
 {
 
     public function checkToken()
@@ -22,7 +22,7 @@ class Token extends Base
         } 
         $authorization = $_SERVER['AUTHORIZATION'];
         $checkJwtToken = $this->getUserId($authorization);
-        if ($checkToken <= 0){
+        if ($checkJwtToken <= 0){
             return Util::show(-1, '验证token失败');
         }
         return Util::show(0,'ok');
