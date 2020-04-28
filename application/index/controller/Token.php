@@ -21,11 +21,14 @@ class Token
         //return json_encode($_SERVER['AUTHORIZATION']);
         $authorization = $_SERVER['AUTHORIZATION'];
         if (empty($authorization)) {
-            return 'nmsl';
-        } else {
-            $checkJwtToken = $this->verifyJwt($authorization);
-            return Util::show(0, '0k', $checkJwtToken);
+            return Util::show(-1, '获取token失败');
+        } 
+        $checkJwtToken = $this->getUserId($authorization);
+        if ($checkToken['code'] != 0){
+            return Util::show(-1, '验证token失败');
         }
+        return Util::show(0,'ok');
+        
     }
 
     static public function getUserId($token = 0)
@@ -41,7 +44,7 @@ class Token
         return $jwtAuth['data']->user_id;
     }
 
-    //校验jwt权限API
+    //校验jwt权限API | 废弃
     protected function verifyJwt($jwt)
     {
         $key = md5('nobita');
@@ -52,8 +55,8 @@ class Token
         $msg = [];
         if (!empty($authInfo['user_id'])) {
             $msg = [
-                'status' => 1001,
-                'msg' => 'Token验证通过'
+                'status' => 0,
+                'msg' => 'ok'
             ];
         } elseif ($authInfo['error'] == 'expired') {
             $msg = ['status' => 1002, 'msg' => 'token过期'];
