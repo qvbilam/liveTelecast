@@ -12,6 +12,7 @@ const host = window.location.host;
 //获取当前协议
 const agreement = window.location.protocol;
 export function ajax(url, method, async, data, callBack, type, istoken) {
+  console.log(istoken,'istoken')
   //设置参数默认值
   method = method || "GET";
   method = method.toUpperCase();
