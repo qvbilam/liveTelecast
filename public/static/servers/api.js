@@ -4,14 +4,14 @@ import { ajax } from './ajax.js';
 const baseUrl = 'http://live.qvbilam.xin:9503'
 //live
 // live/login
-export const login = (data, callBack) => ajax(baseUrl + '/index/login/index', 'POST', true, data, callBack,"text",false)
+export const login = (data, callBack) => ajax(baseUrl + '/index/login/index', 'POST', true, data, callBack, "text", false)
 export const sendCode = (data, callBack) => ajax(baseUrl + '/index/send/index', 'POST', true, data, callBack)
 //live/js/VerToken
 export const send = (callBack) => ajax(baseUrl + '/index/send/index', 'POST', true, null, callBack, 'json')
 //bank/js/user_chat_push 
 export const chat = (data, callBack) => ajax(baseUrl + '/index/chat/index', 'POST', true, data, callBack)
 //live/detail
-export const game = (data,callBack) => ajax(baseUrl + '/index/game/getdata', 'GET', false, data, callBack)
+export const game = (data, callBack) => ajax(baseUrl + '/index/game/getdata?' + data, 'GET', false, null, callBack)
 //live/perfect
 export const editUser = (data, callBack) => ajax(baseUrl + '/index/login/perfect', 'POST', true, data, callBack, 'json')
 
