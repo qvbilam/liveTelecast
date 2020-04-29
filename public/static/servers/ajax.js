@@ -24,7 +24,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
   type = type.toLowerCase();
   istoken = istoken || true
   var xhr = false;
-
+console.log(istoken,'istoken')
   if (istoken) {
     var token = localStorage.getItem('token');
     if (token) {
@@ -48,6 +48,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
       });
     } else {
       alert("用户未登录")
+      console.log('#########')
       window.location.href = agreement + '//' + host + '/live/login.html'
       return
     }
