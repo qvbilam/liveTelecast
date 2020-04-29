@@ -24,9 +24,6 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
   type = type.toLowerCase();
   istoken = istoken || true
   var xhr = false;
-  if (url.indexof('/index/login/index') !== -1) {
-    istoken = false
-  }
   console.log(istoken, 'istoken')
   if (istoken) {
     var token = localStorage.getItem('token');
