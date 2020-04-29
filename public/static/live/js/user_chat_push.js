@@ -54,7 +54,8 @@ $(function () {
 							}
 						});
 					},
-					error: function (e) {
+					error: function (err) {
+						alert(err)
 							window.location.href = agreement + '//' + host + '/live/login.html'
 							return
 					}
