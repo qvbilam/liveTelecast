@@ -70,7 +70,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                     console.log("@@@@@@@@@@@@@@@@@@@@");
                     setTimeout(function(){
                         xhr.setRequestHeader("AUTHORIZATION", token);
-                    },2)
+                    },1)
                     
                 },
                 error: function (e) {
