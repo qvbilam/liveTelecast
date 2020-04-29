@@ -71,9 +71,8 @@
                 var formData = $('form').serialize();
                 // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
                 console.log('1111')
-                login(formData,  (res,q)=> {
+                login(formData,  (res)=> {
                     console.log("guoyi shagou")
-                    console.log(res,q,'!!!!!!!!!!')
                     if (res.msg == 'perfect') {
                         localStorage.setItem('token',res.data.token);
                         console.log(res,'perfect')
@@ -89,7 +88,7 @@
                         console.log('@@@@@@@@@@2')
                     }
                     console.log('wo guoyi shigou ')
-                })
+                },false)
             });
 
             // 返回上一页
