@@ -38,87 +38,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
           XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
         },
         success: function (result) {
-          //初始化XMLHttpRequest 对象
-          if (window.XMLHttpRequest) {//Mozilla 浏览器
-            xhr = new XMLHttpRequest();
-            if (xhr.overrideMimeType) {//设置MiME 类别
-              if (type == "text") {
-                xhr.overrideMimeType("text/plain");
-              } else if (type == "xml") {
-                xhr.overrideMimeType("text/xml");
-              }
-            }
-          } else if (window.ActiveXObject) { //IE 浏览器
-            try {
-              xhr = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e) {
-              try {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-              } catch (e) {
-              }
-            }
-          }
-
-          //异常，创建对象实例失败
-          if (!xhr) {
-            console.log("不能创建XMLHttpRequest对象实例.");
-            return false;
-          }
-
-          xhr.open(method, url, async); //发起请求
-          xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
-          xhr.setRequestHeader("AUTHORIZATION", token);
-          if (method == "POST") { //post
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send(data);
-          } else {
-            xhr.send(null); //get 不能发送数据
-          }
-
-          //指定响应处理函数
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              //成功之后调用回调函数
-              if (type == "xml") {
-                if (!xhr.responseXML || typeof xhr.responseXML != "string") {
-                  var res = xhr.responseXML
-                }
-                if (typeof xhr.responseXML == "string") {
-                  var res = xhr.responseXML
-                  res = JSON.parse(res)
-                }
-                if (res.code == 403) {
-                  alert(res.msg)
-                  window.location.href = agreement + '//' + host + '/live/login.html'
-                } else if (res.code == -1) {
-                  alert(res.msg, "token为空")
-                  console.log("token为空")
-                  window.location.href = agreement + '//' + host + '/live/login.html'
-                } else {
-                  return callBack(res, xhr);
-                }
-              } else if (type == "text") {
-                if (!xhr.responseText || typeof xhr.responseText != "string") {
-                  var res = xhr.responseText
-                }
-                if (typeof xhr.responseText == "string") {
-                  var res = xhr.responseText
-                  res = JSON.parse(xhr.responseText)
-                }
-                if (res.code == 403) {
-                  alert(res.msg)
-                  window.location.href = agreement + '//' + host + '/live/login.html'
-                } else if (res.code == -1) {
-                  alert(res.msg, "token为空")
-                  console.log("token为空")
-                  window.location.href = agreement + '//' + host + '/live/login.html'
-                } else {
-                  return callBack(res, xhr);
-                }
-              }
-            }
-          };
-
+          request()
         },
         error: function (e) {
           console.log(e)
@@ -131,7 +51,90 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
       window.location.href = agreement + '//' + host + '/live/login.html'
       return
     }
+  } else {
+    request()
   }
+  function request() {
+    //初始化XMLHttpRequest 对象
+    if (window.XMLHttpRequest) {//Mozilla 浏览器
+      xhr = new XMLHttpRequest();
+      if (xhr.overrideMimeType) {//设置MiME 类别
+        if (type == "text") {
+          xhr.overrideMimeType("text/plain");
+        } else if (type == "xml") {
+          xhr.overrideMimeType("text/xml");
+        }
+      }
+    } else if (window.ActiveXObject) { //IE 浏览器
+      try {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        try {
+          xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (e) {
+        }
+      }
+    }
 
+    //异常，创建对象实例失败
+    if (!xhr) {
+      console.log("不能创建XMLHttpRequest对象实例.");
+      return false;
+    }
+
+    xhr.open(method, url, async); //发起请求
+    xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
+    xhr.setRequestHeader("AUTHORIZATION", token);
+    if (method == "POST") { //post
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send(data);
+    } else {
+      xhr.send(null); //get 不能发送数据
+    }
+
+    //指定响应处理函数
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        //成功之后调用回调函数
+        if (type == "xml") {
+          if (!xhr.responseXML || typeof xhr.responseXML != "string") {
+            var res = xhr.responseXML
+          }
+          if (typeof xhr.responseXML == "string") {
+            var res = xhr.responseXML
+            res = JSON.parse(res)
+          }
+          if (res.code == 403) {
+            alert(res.msg)
+            window.location.href = agreement + '//' + host + '/live/login.html'
+          } else if (res.code == -1) {
+            alert(res.msg, "token为空")
+            console.log("token为空")
+            window.location.href = agreement + '//' + host + '/live/login.html'
+          } else {
+            return callBack(res, xhr);
+          }
+        } else if (type == "text") {
+          if (!xhr.responseText || typeof xhr.responseText != "string") {
+            var res = xhr.responseText
+          }
+          if (typeof xhr.responseText == "string") {
+            var res = xhr.responseText
+            res = JSON.parse(xhr.responseText)
+          }
+          if (res.code == 403) {
+            alert(res.msg)
+            window.location.href = agreement + '//' + host + '/live/login.html'
+          } else if (res.code == -1) {
+            alert(res.msg, "token为空")
+            console.log("token为空")
+            window.location.href = agreement + '//' + host + '/live/login.html'
+          } else {
+            return callBack(res, xhr);
+          }
+        }
+      }
+    };
+  }
 
 }
