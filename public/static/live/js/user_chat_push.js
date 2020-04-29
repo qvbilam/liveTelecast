@@ -1,4 +1,4 @@
-import { base } from './base.js'
+import { Base64 } from './base.js'
 $(function () {
 	var $submitBtn = $('#submit-btn');
 	// var token = $.cookie('token')
@@ -18,7 +18,7 @@ $(function () {
 			var index = getData.substr(1).lastIndexOf("=");
 			var game_id = getData.substring(index + 1, getData.length);
 			var data = { 'content': text, 'game_id': game_id }
-			data = base.encode(data)
+			data = Base64.encode(data)
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
@@ -46,7 +46,7 @@ $(function () {
 								XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
 							},
 							success: function (res) {
-								var res = base.decode(res);
+								var res = Base64.decode(res);
 								if (typeof res == "string") {
 									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
 										alert(JSON.parse(res).msg)
