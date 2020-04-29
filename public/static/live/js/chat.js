@@ -1,3 +1,4 @@
+import {Base64} from './base.js'
 var WsChatUrl = "ws://39.97.177.28:9504"
 var websocketChat = new WebSocket(WsChatUrl);
 
@@ -24,17 +25,18 @@ websocketChat.onerror = function (evt, e) {
 }
 
 function chatPush(data) {
-    console.log(data,'@@@@@@@@@')
-    if (!data || typeof data != "string") {
+    console.log(Base64.decode(data))
+    let res=Base64.decode(data)
+    if (!res || typeof res != "string") {
         return false;
     }
-    if (typeof data == "string") {
-        data = JSON.parse(data)
+    if (typeof res == "string") {
+        res = JSON.parse(res)
     }
-    // data = JSON.parse(data)
+    // res = JSON.parse(res)
     html = '<div class="comment">'
-    html += '<span>' + data.user + '：</span>'
-    html += '<span>' + data.content + '</span>'
+    html += '<span>' + res.user + '：</span>'
+    html += '<span>' + res.content + '</span>'
     html += '</div>'
 
     $('#comments').append(html)
