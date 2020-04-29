@@ -72,11 +72,13 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                     header = true
                 },
                 error: function (e) {
+                    alert('1111')
                     window.location.href = agreement + '//' + host + '/live/login.html'
                     return
                 }
             });
         } else {
+            alert('1111')
             window.location.href = agreement + '//' + host + '/live/login.html'
             return
         }
