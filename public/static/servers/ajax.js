@@ -68,7 +68,10 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                 },
                 success: function (result) {
                     console.log("@@@@@@@@@@@@@@@@@@@@");
-                    xhr.setRequestHeader("AUTHORIZATION", token);
+                    setTimeout(function(){
+                        xhr.setRequestHeader("AUTHORIZATION", token);
+                    },500)
+                    
                 },
                 error: function (e) {
                     alert('1111')
