@@ -66,11 +66,11 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                 beforeSend: function (XMLHttpRequest) {
                     XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
                 },
-                success:async function (result) {
+                success: function (result) {
                     console.log("@@@@@@@@@@@@@@@@@@@@");
-                    // setTimeout(function(){
-                     await xhr.setRequestHeader("AUTHORIZATION", token);
-                    // },100)
+                    setTimeout(function(){
+                        xhr.setRequestHeader("AUTHORIZATION", token);
+                    },50)
                     
                 },
                 error: function (e) {
