@@ -24,6 +24,7 @@ export function ajax(url, method, async, istoken, data, callBack, type, istoken)
   type = type || "text";
   type = type.toLowerCase();
   // istoken = istoken ? istoken : true
+  istoken = istoken
   var xhr = false;
   console.log(istoken, 'istoken')
   if (istoken) {
