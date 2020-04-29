@@ -15,6 +15,7 @@ $(function () {
 			$(this).val('')
 			var getData = window.location.search
 			console.log(getData);
+			var token = localStorage.getItem("token")
 			var getData = getData.substr(1) //去掉?asd=123前面的问号
 			var data = { 'content': text, 'game_id': 1 }
 			/*向服务端发送数据*/
@@ -26,22 +27,42 @@ $(function () {
 			// chat(data,function(res){
 			// 	console.log(res)
 			// })
-			$.ajax({
-				type: "post",
-				url: send_url,
-				data: data,
-				beforeSend: function (XMLHttpRequest) {
-					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
-				},
-				success: function (res) {
-					if (typeof res == "string") {
-						if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
-							alert(JSON.parse(res).msg)
+			if(token){
+				$.ajax({
+					type: "GET",
+					contentType: "application/json;charset=UTF-8",
+					url: agreement + '//' + host + '/index/token/checkToken',
+					data: null,
+					beforeSend: function (XMLHttpRequest) {
+							XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
+					},
+					success: function (result) {
+						$.ajax({
+							type: "post",
+							url: send_url,
+							data: data,
+							beforeSend: function (XMLHttpRequest) {
+								XMLHttpRequest.setRequestHeader("AUTHORIZATION",token);
+							},
+							success: function (res) {
+								if (typeof res == "string") {
+									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
+										alert(JSON.parse(res).msg)
+										window.location.href = agreement + '//' + host + '/live/login.html'
+									}
+								}
+							}
+						});
+					},
+					error: function (e) {
 							window.location.href = agreement + '//' + host + '/live/login.html'
-						}
+							return
 					}
-				}
 			});
+			}else{
+				alert("用户未登录")
+				window.location.href = agreement + '//' + host + '/live/login.html'
+			}
 		}
 
 
