@@ -34,7 +34,7 @@ function chatPush(data) {
         res = JSON.parse(res)
     }
     // res = JSON.parse(res)
-    html = '<div class="comment">'
+    var html = '<div class="comment">'
     html += '<span>' + res.user + '：</span>'
     html += '<span>' + res.content + '</span>'
     html += '</div>'
