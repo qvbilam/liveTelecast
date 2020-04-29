@@ -25,6 +25,11 @@ class Chat extends Auth
         $data = $_POST['data'];
         // $data = base64_encode(('{"game_id":1,"content":"傻逼赵彩霞"}'));
         $params = json_decode(base64_decode($data),true);
+        return Util::show(0,'测试',[
+            'params' => $_POST['data'],
+            'decode_params' => $params,
+            'user_id' => $userId
+        ]);
         // $name = Db::table('live_user')->where(['id' => $userId])->value('name') ?: '用户' . rand(1000, 9999);
         $userInfo = Db::table('live_user')->where(['id' => $userId])->field('name,vip')->find();
         $data = [
