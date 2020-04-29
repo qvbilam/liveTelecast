@@ -13,6 +13,9 @@ $(function () {
 		if (event.keyCode == 13) {
 			var text = $(this).val();
 			$(this).val('')
+			var getData = window.location.search
+			console.log(getData);
+			var getData = getData.substr(1) //去掉?asd=123前面的问号
 			var data = { 'content': text, 'game_id': 1 }
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
