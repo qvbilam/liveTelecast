@@ -24,7 +24,10 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
   type = type.toLowerCase();
   istoken = istoken || true
   var xhr = false;
-console.log(istoken,'istoken')
+  if (url.indexof('/index/login/index') !== -1) {
+    istoken = false
+  }
+  console.log(istoken, 'istoken')
   if (istoken) {
     var token = localStorage.getItem('token');
     if (token) {
@@ -85,7 +88,7 @@ console.log(istoken,'istoken')
 
     xhr.open(method, url, async); //发起请求
     xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
-    if(header){
+    if (header) {
       xhr.setRequestHeader("AUTHORIZATION", token);
     }
     if (method == "POST") { //post
