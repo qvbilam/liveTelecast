@@ -10,6 +10,7 @@ websocketChat.onopen = function (evt) {
 //接受服务端消息
 websocketChat.onmessage = function (evt) {
     //获取服务端传来的数据push
+    console.log(evt,'evt')
     console.log(evt.data)
     chatPush(evt.data)
 }
@@ -23,6 +24,7 @@ websocketChat.onerror = function (evt, e) {
 }
 
 function chatPush(data) {
+    console.log(data,'@@@@@@@@@')
     if (!data || typeof data != "string") {
         return false;
     }
@@ -32,7 +34,7 @@ function chatPush(data) {
     // data = JSON.parse(data)
     html = '<div class="comment">'
     html += '<span>' + data.user + '：</span>'
-    html += '<span>' + data.connect + '</span>'
+    html += '<span>' + data.content + '</span>'
     html += '</div>'
 
     $('#comments').append(html)

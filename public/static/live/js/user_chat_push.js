@@ -1,4 +1,4 @@
-// import { chat } from './../../servers/api.js'
+import { Base64 } from './base.js'
 $(function () {
 	var $submitBtn = $('#submit-btn');
 	// var token = $.cookie('token')
@@ -13,7 +13,15 @@ $(function () {
 		if (event.keyCode == 13) {
 			var text = $(this).val();
 			$(this).val('')
-			var data = { 'content': text, 'game_id': 1 }
+			var getData = window.location.search
+			var token = localStorage.getItem("token")
+			var index = getData.substr(1).lastIndexOf("=");
+			var game_id = getData.substring(index + 1, getData.length);
+			var data = { 'content': text, 'game_id': game_id }
+			console.log(JSON.stringify(data))
+			var getdata = Base64.encode(JSON.stringify(data))
+			console.log(getdata)
+			data = { 'data': getdata }
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
@@ -23,22 +31,43 @@ $(function () {
 			// chat(data,function(res){
 			// 	console.log(res)
 			// })
-			$.ajax({
-				type: "post",
-				url: send_url,
-				data: data,
-				beforeSend: function (XMLHttpRequest) {
-					XMLHttpRequest.setRequestHeader("authorization", localStorage.getItem("token"));
-				},
-				success: function (res) {
-					if (typeof res == "string") {
-						if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
-							alert(JSON.parse(res).msg)
-							window.location.href = agreement + '//' + host + '/live/login.html'
-						}
+			if (token) {
+				$.ajax({
+					type: "GET",
+					contentType: "application/json;charset=UTF-8",
+					url: agreement + '//' + host + '/index/token/checkToken',
+					data: null,
+					beforeSend: function (XMLHttpRequest) {
+						XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
+					},
+					success: function (result) {
+						$.ajax({
+							type: "post",
+							url: send_url,
+							data: data,
+							beforeSend: function (XMLHttpRequest) {
+								XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
+							},
+							success: function (res) {
+								if (typeof res == "string") {
+									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
+										alert(JSON.parse(res).msg)
+										window.location.href = agreement + '//' + host + '/live/login.html'
+									}
+								}
+							}
+						});
+					},
+					error: function (err) {
+						alert(err)
+						window.location.href = agreement + '//' + host + '/live/login.html'
+						return
 					}
-				}
-			});
+				});
+			} else {
+				alert("用户未登录")
+				window.location.href = agreement + '//' + host + '/live/login.html'
+			}
 		}
 
 
