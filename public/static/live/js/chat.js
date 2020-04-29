@@ -24,6 +24,7 @@ websocketChat.onerror = function (evt, e) {
 }
 
 function chatPush(data) {
+    console.log(data,'@@@@@@@@@')
     if (!data || typeof data != "string") {
         return false;
     }
