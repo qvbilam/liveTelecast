@@ -38,7 +38,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
           XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
         },
         success: function (result) {
-          request()
+          request(true)
         },
         error: function (e) {
           console.log(e)
@@ -54,7 +54,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
   } else {
     request()
   }
-  function request() {
+  function request(header) {
     //初始化XMLHttpRequest 对象
     if (window.XMLHttpRequest) {//Mozilla 浏览器
       xhr = new XMLHttpRequest();
@@ -84,7 +84,9 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
 
     xhr.open(method, url, async); //发起请求
     xhr.setRequestHeader("If-Modified-Since", "0"); //每次都是获取最新的内容
-    xhr.setRequestHeader("AUTHORIZATION", token);
+    if(header){
+      xhr.setRequestHeader("AUTHORIZATION", token);
+    }
     if (method == "POST") { //post
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.send(data);
