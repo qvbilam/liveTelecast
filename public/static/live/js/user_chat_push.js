@@ -1,4 +1,4 @@
-// import { chat } from './../../servers/api.js'
+import { base } from './base.js'
 $(function () {
 	var $submitBtn = $('#submit-btn');
 	// var token = $.cookie('token')
@@ -15,11 +15,10 @@ $(function () {
 			$(this).val('')
 			var getData = window.location.search
 			var token = localStorage.getItem("token")
-			var index =  getData.substr(1).lastIndexOf("=");
+			var index = getData.substr(1).lastIndexOf("=");
 			var game_id = getData.substring(index + 1, getData.length);
 			var data = { 'content': text, 'game_id': game_id }
-			var base = new Base64();  
-			var result = base.encode(data);  
+			data = base.encode(data)
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
@@ -29,14 +28,14 @@ $(function () {
 			// chat(data,function(res){
 			// 	console.log(res)
 			// })
-			if(token){
+			if (token) {
 				$.ajax({
 					type: "GET",
 					contentType: "application/json;charset=UTF-8",
 					url: agreement + '//' + host + '/index/token/checkToken',
 					data: null,
 					beforeSend: function (XMLHttpRequest) {
-							XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
+						XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
 					},
 					success: function (result) {
 						$.ajax({
@@ -44,9 +43,10 @@ $(function () {
 							url: send_url,
 							data: result,
 							beforeSend: function (XMLHttpRequest) {
-								XMLHttpRequest.setRequestHeader("AUTHORIZATION",token);
+								XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
 							},
 							success: function (res) {
+								var res = base.decode(res);
 								if (typeof res == "string") {
 									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
 										alert(JSON.parse(res).msg)
@@ -58,11 +58,11 @@ $(function () {
 					},
 					error: function (err) {
 						alert(err)
-							window.location.href = agreement + '//' + host + '/live/login.html'
-							return
+						window.location.href = agreement + '//' + host + '/live/login.html'
+						return
 					}
-			});
-			}else{
+				});
+			} else {
 				alert("用户未登录")
 				window.location.href = agreement + '//' + host + '/live/login.html'
 			}
