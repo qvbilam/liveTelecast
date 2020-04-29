@@ -18,6 +18,8 @@ $(function () {
 			var index =  getData.substr(1).lastIndexOf("=");
 			var game_id = getData.substring(index + 1, getData.length);
 			var data = { 'content': text, 'game_id': game_id }
+			var base = new Base64();  
+			var result = base.encode(data);  
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
@@ -40,7 +42,7 @@ $(function () {
 						$.ajax({
 							type: "post",
 							url: send_url,
-							data: data,
+							data: result,
 							beforeSend: function (XMLHttpRequest) {
 								XMLHttpRequest.setRequestHeader("AUTHORIZATION",token);
 							},
