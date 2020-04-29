@@ -18,7 +18,9 @@ $(function () {
 			var index = getData.substr(1).lastIndexOf("=");
 			var game_id = getData.substring(index + 1, getData.length);
 			var data = { 'content': text, 'game_id': game_id }
+			console.log(JSON.stringify(data))
 			data = Base64.encode(JSON.stringify(data))
+			console.log(data)
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
