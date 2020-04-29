@@ -52,7 +52,7 @@ $(function () {
 								console.log(res)
 								if (typeof res == "string") {
 									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
-										alert(JSON.parse(res).msg)
+										alert("用户未登录")
 										window.location.href = agreement + '//' + host + '/live/login.html'
 									}
 								}
@@ -60,7 +60,7 @@ $(function () {
 						});
 					},
 					error: function (err) {
-						alert(err)
+						alert('用户未登录')
 						window.location.href = agreement + '//' + host + '/live/login.html'
 						return
 					}
