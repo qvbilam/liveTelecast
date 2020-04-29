@@ -11,7 +11,7 @@
 const host = window.location.host;
 //获取当前协议
 const agreement = window.location.protocol;
-export function ajax(url, method, async, istoken, data, callBack, type, istoken) {
+export function ajax(url, method, async, istoken, data, callBack, type) {
   console.log(istoken, 'istoken')
   //设置参数默认值
   method = method || "GET";
