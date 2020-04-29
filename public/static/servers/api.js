@@ -11,7 +11,7 @@ export const send = (callBack) => ajax(baseUrl + '/index/send/index', 'POST', tr
 //bank/js/user_chat_push 
 export const chat = (data, callBack) => ajax(baseUrl + '/index/chat/index', 'POST', true, data, callBack)
 //live/detail
-export const game = (callBack) => ajax(baseUrl + '/index/game/getdata', 'POST', false, null, callBack)
+export const game = (data,callBack) => ajax(baseUrl + '/index/game/getdata', 'GET', false, data, callBack)
 //live/perfect
 export const editUser = (data, callBack) => ajax(baseUrl + '/index/login/perfect', 'POST', true, data, callBack, 'json')
 
