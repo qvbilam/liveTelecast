@@ -96,7 +96,8 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                     var res = xhr.responseXML
                 }
                 if (typeof xhr.responseXML == "string") {
-                    var res = JSON.parse(xhr.responseXML)
+                    var res = xhr.responseXML
+                    res = JSON.parse(res)
                 }
                 if (res.code == 403) {
                     alert(res.msg)
@@ -112,7 +113,8 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                     var res = xhr.responseText
                 }
                 if (typeof xhr.responseText == "string") {
-                    var res = JSON.parse(xhr.responseText)
+                    var res = xhr.responseText
+                    res = JSON.parse(xhr.responseText)
                 }
                 if (res.code == 403) {
                     alert(res.msg)
