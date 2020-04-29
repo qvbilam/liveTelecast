@@ -49,6 +49,7 @@ $(function () {
 								XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
 							},
 							success: function (res) {
+								console.log(res)
 								if (typeof res == "string") {
 									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
 										alert(JSON.parse(res).msg)
