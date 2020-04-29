@@ -69,7 +69,5 @@ $(function () {
 				window.location.href = agreement + '//' + host + '/live/login.html'
 			}
 		}
-
-
 	})
 })

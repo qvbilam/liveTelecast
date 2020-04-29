@@ -27,9 +27,10 @@
 		<i id="title" class="icon iconfont icon-fanhui back" id="back"></i>
 		<div id='html_titile'></div>
 		<!--用户处于登录状态时，将该按钮隐藏-->
-		<a href="./login.html">
+		<!-- <a href="./login.html"> -->
+		<span id="perfect">
 			<i class="icon iconfont icon-wode my"></i>
-		</a>
+		</span>
 	</header>
 	<div class="content">
 		<div class="poster">
@@ -166,6 +167,32 @@
 			var $content = $('.tab-block > div');
 			var $back = $('#title');
 
+			var $perfect = $('#perfect')
+			$perfect.click(function () {
+				var token = localStorage.getItem('token')
+				if (token) {
+					$.ajax({
+						type: "GET",
+						contentType: "application/json;charset=UTF-8",
+						url: agreement + '//' + host + '/index/token/checkToken',
+						data: null,
+						beforeSend: function (XMLHttpRequest) {
+							XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
+						},
+						success: function (result) {
+							window.location.href = agreement + '//' + host + '/live/perfrct.html'
+						},
+						error: function (err) {
+							alert(err)
+							window.location.href = agreement + '//' + host + '/live/login.html'
+							return
+						}
+					});
+				} else {
+					alert("用户未登录")
+					window.location.href = agreement + '//' + host + '/live/login.html'
+				}
+			})
 			/*切换tab*/
 			$nav.click(function () {
 				var $this = $(this);
@@ -191,6 +218,7 @@
 
 		/*获取数据*/
 		var host = window.location.host;
+		var agreement = window.location.protocol;
 		var getData = window.location.search
 		var index = getData.substr(1).lastIndexOf("=");
 		var game_id = getData.substring(index + 1, getData.length);
