@@ -21,6 +21,7 @@ $(function () {
 			console.log(JSON.stringify(data))
 			var getdata = Base64.encode(JSON.stringify(data))
 			console.log(getdata)
+			data = { 'data': getdata }
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
@@ -43,12 +44,11 @@ $(function () {
 						$.ajax({
 							type: "post",
 							url: send_url,
-							data: getdata,
+							data: data,
 							beforeSend: function (XMLHttpRequest) {
 								XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
 							},
 							success: function (res) {
-								var res = Base64.decode(res);
 								if (typeof res == "string") {
 									if (res && JSON.parse(res).code == 403 || res && JSON.parse(res).code == -1) {
 										alert(JSON.parse(res).msg)
