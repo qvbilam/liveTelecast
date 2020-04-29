@@ -17,7 +17,10 @@ $(function () {
 			console.log(getData);
 			var token = localStorage.getItem("token")
 			var getData = getData.substr(1) //去掉?asd=123前面的问号
-			var data = { 'content': text, 'game_id': 1 }
+			var index = getData.lastIndexOf("=");
+			var game_id = getData.substring(index + 1, getData.length);
+			console.log(game_id)
+			var data = { 'content': text, 'game_id': game_id }
 			/*向服务端发送数据*/
 			// $.post(send_url, data, function (result) {
 			//     /**/
