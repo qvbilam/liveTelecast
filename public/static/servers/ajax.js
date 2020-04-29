@@ -11,6 +11,7 @@
 const host = window.location.host;
 //获取当前协议
 const agreement = window.location.protocol;
+var header = false
 export function ajax(url, method, async, data, callBack, type, istoken) {
     //设置参数默认值
     method = method || "GET";
@@ -64,11 +65,11 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
                 url: agreement + '//' + host + '/index/token/checkToken',
                 data: null,
                 beforeSend: function (XMLHttpRequest) {
-                    XMLHttpRequest.setRequestHeader("authorization", token);
+                    XMLHttpRequest.setRequestHeader("AUTHORIZATION", token);
                 },
                 success: function (result) {
                     console.log(result);
-                    xhr.setRequestHeader("AUTHORIZATION", token);
+                    header = true
                 },
                 error: function (e) {
                     window.location.href = agreement + '//' + host + '/live/login.html'
@@ -79,6 +80,10 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
             window.location.href = agreement + '//' + host + '/live/login.html'
             return
         }
+    }
+    if (header) {
+        xhr.setRequestHeader("AUTHORIZATION", token);
+        header = false
     }
     if (method == "POST") { //post
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
