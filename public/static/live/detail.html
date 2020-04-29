@@ -191,8 +191,8 @@
 
 		/*获取数据*/
 		var host = window.location.host;
-		var index = getData.substr(1).lastIndexOf("=");
 		var getData = window.location.search
+		var index = getData.substr(1).lastIndexOf("=");
 		var game_id = getData.substring(index + 1, getData.length);
 		var data = 'game_id=' + game_id
 		game(data, function (data) {
