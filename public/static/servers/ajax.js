@@ -84,6 +84,7 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
         }
     }
     if (header) {
+        console.log('@@@@@@@@@@@')
         xhr.setRequestHeader("AUTHORIZATION", token);
         header = false
     }
