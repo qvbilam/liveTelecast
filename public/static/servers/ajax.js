@@ -121,13 +121,13 @@ export function ajax(url, method, async, data, callBack, type, istoken) {
 
         },
         error: function (e) {
-          alert('1111')
+          console.log(e)
           window.location.href = agreement + '//' + host + '/live/login.html'
           return
         }
       });
     } else {
-      alert('1111')
+      alert("用户未登录")
       window.location.href = agreement + '//' + host + '/live/login.html'
       return
     }
