@@ -62,7 +62,6 @@ $(function () {
 					error: function (err) {
 						alert('用户未登录')
 						window.location.href = agreement + '//' + host + '/live/login.html'
-						return
 					}
 				});
 			} else {
