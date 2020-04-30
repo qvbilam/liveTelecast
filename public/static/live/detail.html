@@ -221,7 +221,7 @@
 		var getData = window.location.search
 		var index = getData.substr(1).lastIndexOf("=");
 		var game_id = getData.substring(index + 1, getData.length);
-		var data = 'game_id' + parseInt(game_id)
+		var data = 'game_id' + game_id
 		game(data, function (data) {
 			/*追加首页信息*/
 			console.log(data.data.game)
