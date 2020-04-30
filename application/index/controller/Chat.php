@@ -39,7 +39,7 @@ class Chat extends Auth
             'type' => 'chat'
         ];
         Db::table('live_chart')->insert([
-            'game_id' => $params['game_id']?:0,
+            'game_id' => $params['game_id']?intval($params['game_id']):0,
             'user_id' => $userId,
             'content' => $params['content'],
             'create_time' => time()
@@ -47,7 +47,6 @@ class Chat extends Auth
         foreach ($_POST['http_server']->ports[1]->connections as $fd) {
             $_POST['http_server']->push($fd, base64_encode(json_encode($data)));
         }
-
     }
 
 }
