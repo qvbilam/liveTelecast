@@ -17,7 +17,7 @@ $(function () {
 			var token = localStorage.getItem("token")
 			var index = getData.substr(1).lastIndexOf("=");
 			var game_id = getData.substring(index + 1, getData.length);
-			var data = { 'content': text, 'game_id': game_id.substr(1) }
+			var data = { 'content': text, 'game_id': parseInt(game_id.substr(1)) }
 			console.log(JSON.stringify(data))
 			var getdata = Base64.encode(JSON.stringify(data))
 			console.log(getdata)
