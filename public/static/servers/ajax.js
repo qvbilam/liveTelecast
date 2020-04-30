@@ -125,7 +125,7 @@ export function ajax(url, method, async, istoken, data, callBack, type) {
           }
           if (typeof xhr.responseText == "string") {
             var res = xhr.responseText
-            res = JSON.parse(xhr.responseText)
+            res = JSON.parse(res)
           }
           if (res.code == 403) {
             alert(res.msg)
