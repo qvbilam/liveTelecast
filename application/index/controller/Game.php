@@ -28,7 +28,8 @@ class Game extends Auth
         $game = Predis::getIntance()->get(Redis::$data_pre) ?: self::gameData($game_id);
         return Util::show(Config::get('code.success'), 'ok', [
             'live' => json_decode($live, true),
-            'chat' => json_decode($chat, true),
+            // 'chat' => json_decode($chat, true),
+            'chat' => [], // 不获取历史聊天数据
             'game' => json_decode($game, true)
         ]);
     }
@@ -104,7 +105,7 @@ class Game extends Auth
     /*聊天室数据*/
     public function chatData($game_id = 1)
     {
-        $data = Db::table('live_chart')->alias('t1')
+        $res = Db::table('live_chart')->alias('t1')
             ->join('live_user t2', 't1.user_id=t2.id', 'left', 'left')
             ->where(['t1.game_id' => $game_id])
             ->field('
