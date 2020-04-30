@@ -2,12 +2,13 @@ import { Base64 } from './base.js'
 var getData = window.location.search
 var index = getData.substr(1).lastIndexOf("=");
 var game_id = getData.substring(index + 1, getData.length);
-console.log(game_id)
+
 var WsChatUrl = "ws://39.97.177.28:9504"
 var websocketChat = new WebSocket(WsChatUrl);
 
 //链接websock服务
 websocketChat.onopen = function (evt) {
+    console.log(game_id)
     console.log("chat connet success")
     //向服务端发送消息hhhh
 }
