@@ -223,7 +223,7 @@
 .vip{
     display: inline-block;
     font-size: 20px;
-    margin: 10px;
+    /* margin: 10px; */
     background: linear-gradient(left, #f71605, #e0f513);
     background: -webkit-linear-gradient(left, #f71605, #e0f513);
     background: -o-linear-gradient(right, #f71605, #e0f513);
