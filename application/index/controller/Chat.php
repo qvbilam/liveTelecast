@@ -35,6 +35,7 @@ class Chat extends Auth
         $data = [
             'user' => $userInfo['name'] ?: '用户' . rand(1000, 9999),
             'content' => $params['content'],
+            'game_id' => $params['game_id']?:0,
             'vip' => $userInfo['vip'] ?: 0,
             'type' => 'chat'
         ];
