@@ -1,4 +1,4 @@
-import {Base64} from './base.js'
+import { Base64 } from './base.js'
 var WsChatUrl = "ws://39.97.177.28:9504"
 var websocketChat = new WebSocket(WsChatUrl);
 
@@ -24,7 +24,7 @@ websocketChat.onerror = function (evt, e) {
 }
 
 function chatPush(data) {
-    let res=Base64.decode(data)
+    let res = Base64.decode(data)
     if (!res || typeof res != "string") {
         return false;
     }
@@ -33,15 +33,16 @@ function chatPush(data) {
     }
     // res = JSON.parse(res)
     console.log(res)
-    var html = '<div class="comment">'
-    html += '<span>' + res.user + '：</span>'
-    html += '<span>' + res.content + '</span>'
-    html += '</div>'
+    if (res.type == "chat") {
+        var html = '<div class="comment">'
+        html += '<span>' + res.user + '：</span>'
+        html += '<span class="' + res.vip == 0 ? '' : 'vip' + '">' + res.content + '</span>'
+        html += '</div>'
 
-    $('#comments').append(html)
-    setTimeout(() => {
-        let comments = document.getElementById('comments')
-        comments.scrollTop = comments.scrollHeight
-    }, 1)
-
+        $('#comments').append(html)
+        setTimeout(() => {
+            let comments = document.getElementById('comments')
+            comments.scrollTop = comments.scrollHeight
+        }, 1)
+    }
 }
