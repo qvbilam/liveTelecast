@@ -2,7 +2,7 @@ import { Base64 } from './base.js'
 var getData = window.location.search
 var index = getData.substr(1).lastIndexOf("=");
 var game_id = getData.substring(index + 1, getData.length);
-
+game_id=game_id.substr(1)
 var WsChatUrl = "ws://39.97.177.28:9504"
 var websocketChat = new WebSocket(WsChatUrl);
 
@@ -41,7 +41,12 @@ function chatPush(data) {
     if (res.type == "chat"&&res.game_id==game_id) {
         var html = '<div class="comment">'
         html += '<span>' + res.user + '：</span>'
-        html += '<span class="' + res.vip == 0 ? '' : 'vip' + '">' + res.content + '</span>'
+        if(res.vip == 1){
+            html += '<span class="vip">' + res.content + '</span>'
+        }else{
+            html += '<span>' + res.content + '</span>'
+        }
+       
         html += '</div>'
 
         $('#comments').append(html)
