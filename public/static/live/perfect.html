@@ -7,12 +7,17 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <script src="./js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/perfect.css">
+    <link rel="stylesheet" type="text/css" href="./assert/css/main.css" />
+    <link rel="stylesheet" href="./assert/iconfont/iconfont.css">
     <script src="./js/jquery.cookie.js"></script>
     <title>完善个人信息</title>
 </head>
 
 <body>
-    <h1 class="odform-tit"><img src="">完善信息</h1>
+    <header class="header xxl-font">
+        <i id="title" class="icon iconfont icon-fanhui back" id="back"></i>
+        <div id='html_titile'>完善信息</div>
+    </header>
     <div class="odform">
         <form action="#">
             <div class="input-group">
@@ -30,6 +35,10 @@
     var $submitBtn = $('#submitBtn')
     var host = window.location.host;
     var agreement = window.location.protocol;
+    var $back = $('#title');
+    $back.click(function () {
+        window.history.back();
+    });
     // 提交表单
     $submitBtn.click(function () {
         var name = $('#name').val();
