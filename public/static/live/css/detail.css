@@ -440,13 +440,13 @@
     border-radius: 20px;
     box-shadow: #e3e3e4 0px 0px 5px 2px ;
 }
-.menu{
+#comments .menu{
     color: #7bc3fd;
 }
-.username{
+#comments .username{
     color: #676767;
 }
-.menu,.username{
+#comments .menu,#comments .username{
     display: block;
     /* width: 130px; */
     height: 40px;
