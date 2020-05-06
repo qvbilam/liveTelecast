@@ -62,7 +62,7 @@ function chatPush(data) {
     var content = document.getElementsByClassName('thecontent')
     console.log(content)
     for (var i = 0; i <= content.length; i++) {
-        content[i].oncontextmenu = menu
+        content[i].oncontextmenu = menu()
     }
     function menu(e) {
         e.preventDefault();
