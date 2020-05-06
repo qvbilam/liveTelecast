@@ -39,7 +39,7 @@ function chatPush(data) {
     // res = JSON.parse(res)
     console.log(res)
     if (res.type == "chat" && res.game_id == game_id) {
-        var html = '<div class="comment" oncontextmenu = "showMenu(e)" >'
+        var html = '<div class="comment">'
 
         if (res.vip == 1) {
             html += '<span class="vip">' + res.user + '：</span>'
@@ -58,23 +58,25 @@ function chatPush(data) {
     }
     var content = $('.comment')
     console.log(content)
-}
-function showMenu(e){
-    console.log(e, '!!!!!!!!')
-    // var menu = '<div id="menu"><span class="username">' + $("#username").text()
-    // menu += '</span><span class="menu">去TA的个人空间</span>'
-    // menu += '<span class="menu">屏蔽发送者</span>'
-    // menu += '<span class="menu">举报选中弹幕</span>'
-    // menu += '</div>'
-    // $('#comments').append(menu)
-    $('#username').html($("#user").text())
-    var menu = document.querySelector("#menu");
+    content.oncontextmenu = function (e) {
+        console.log(e, '!!!!!!!!')
+        // var menu = '<div id="menu"><span class="username">' + $("#username").text()
+        // menu += '</span><span class="menu">去TA的个人空间</span>'
+        // menu += '<span class="menu">屏蔽发送者</span>'
+        // menu += '<span class="menu">举报选中弹幕</span>'
+        // menu += '</div>'
+        // $('#comments').append(menu)
+        $('#username').html($("#user").text())
+        var menu = document.querySelector("#menu");
 
-    menu.style.left = e.clientX + 'px';
-    menu.style.top = e.clientY + 'px';
+        menu.style.left = e.clientX + 'px';
+        menu.style.top = e.clientY + 'px';
 
-    menu.style.display = 'block';
-}
-window.onclick = function (e) {
-    document.querySelector('#menu').style.height = 0;
+        menu.style.display = 'block';
+    }
+    window.onclick = function (e) {
+        document.querySelector('#menu').style.height = 0;
+    }
+
+
 }
