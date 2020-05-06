@@ -39,7 +39,7 @@ function chatPush(data) {
     // res = JSON.parse(res)
     console.log(res)
     if (res.type == "chat" && res.game_id == game_id) {
-        var html = '<div class="comment" id="thecontent">'
+        var html = '<div class="comment thecontent" id="thecontent">'
 
         if (res.vip == 1) {
             html += '<span class="vip">' + res.user + '：</span>'
@@ -57,11 +57,13 @@ function chatPush(data) {
 
     }
     // var content = $('.thecontent')
-    var content=document.getElementById('thecontent')
+    // var content=document.getElementById('thecontent')
+    // content.oncontextmenu = function (e) {
+    var content = document.getElementsByClassName('thecontent')
     console.log(content)
     content.oncontextmenu = function (e) {
         e.preventDefault();
-        console.log(e,'!!!!!!!!')
+        console.log(e, '!!!!!!!!')
         // var menu = '<div id="menu"><span class="username">' + $("#username").text()
         // menu += '</span><span class="menu">去TA的个人空间</span>'
         // menu += '<span class="menu">屏蔽发送者</span>'
