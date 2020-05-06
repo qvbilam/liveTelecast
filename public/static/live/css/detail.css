@@ -111,8 +111,6 @@
     overflow: hidden; /*隐藏溢出的元素*/
     position: absolute; /*自定义菜单相对与body元素进行定位*/
     background: #fff;
-    z-index: 999;
-    margin: 300px 200px;
     border-radius: 20px;
     box-shadow: #e3e3e4 0px 0px 5px 2px ;
 }
