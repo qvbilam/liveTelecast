@@ -58,6 +58,7 @@ function chatPush(data) {
     }
     var content = $('.thecontent')
     console.log(content)
+    console.log(window)
     content.oncontextmenu = function (e) {
         console.log(e, '!!!!!!!!')
         e.preventDefault();
