@@ -68,7 +68,7 @@ function chatPush(data) {
         // menu += '<span class="menu">举报选中弹幕</span>'
         // menu += '</div>'
         // $('#comments').append(menu)
-        $('#username').html($("#user").text())
+        $('#username').html(e.path[1].firstChild.innerText)
         var menu = document.querySelector("#menu");
 
         // menu.style.left = e.clientX + 'px';
