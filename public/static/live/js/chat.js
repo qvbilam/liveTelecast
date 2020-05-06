@@ -75,24 +75,6 @@ function chatPush(data) {
 
         // menu.style.left = e.clientX + 'px';
         // menu.style.top = e.clientY + 'px';
-        var mx = e.clientX;
-        var my = e.clientY;
-
-        var rmWidth = parseInt(menu.style.width);
-        //网页的宽度(高度用同样的方法解决)
-
-        var pageWidth = document.documentElement.clientWidth;
-        //console.log(pageWidth);
-        if ((mx + rmWidth) < pageWidth) {
-            menu.style.left = mx + "px";
-            menu.style.top = my + "px";
-        }
-        else {
-            menu.style.right = mx + "px";
-            menu.style.top = my + "px";
-        }
-
-
         menu.style.display = 'block';
     }
     window.onclick = function (e) {
