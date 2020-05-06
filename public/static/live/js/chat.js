@@ -73,8 +73,8 @@ function chatPush(data) {
         $('#username').html(e.path[1].firstChild.innerText)
         var menu = document.querySelector("#menu");
 
-        // menu.style.left = e.clientX + 'px';
-        // menu.style.top = e.clientY + 'px';
+        menu.style.left = e.clientX + 'px';
+        menu.style.top = e.clientY + 'px';
         menu.style.display = 'block';
     }
     window.onclick = function (e) {
