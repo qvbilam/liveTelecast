@@ -61,7 +61,10 @@ function chatPush(data) {
     // content.oncontextmenu = function (e) {
     var content = document.getElementsByClassName('thecontent')
     console.log(content)
-    content.oncontextmenu = function (e) {
+    for (var i = 0; i <= content.length; i++) {
+        content[i].oncontextmenu = menu(e)
+    }
+    function menu(e) {
         e.preventDefault();
         console.log(e, '!!!!!!!!')
         // var menu = '<div id="menu"><span class="username">' + $("#username").text()
