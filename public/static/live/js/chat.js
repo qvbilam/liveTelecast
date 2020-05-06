@@ -59,6 +59,9 @@ function chatPush(data) {
     var content = $('.comment')
     console.log(content)
     content.oncontextmenu = function (e) {
+        window.onclick = function (e) {
+            document.querySelector('#menu').style.height = 0;
+        }
         console.log(e, '!!!!!!!!')
         // var menu = '<div id="menu"><span class="username">' + $("#username").text()
         // menu += '</span><span class="menu">去TA的个人空间</span>'
@@ -74,9 +77,7 @@ function chatPush(data) {
 
         menu.style.display = 'block';
     }
-    window.onclick = function (e) {
-        document.querySelector('#menu').style.height = 0;
-    }
+    
 
 
 }
