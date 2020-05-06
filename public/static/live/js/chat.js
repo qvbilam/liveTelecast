@@ -39,7 +39,7 @@ function chatPush(data) {
     // res = JSON.parse(res)
     console.log(res)
     if (res.type == "chat" && res.game_id == game_id) {
-        var html = '<div class="comment thecontent">'
+        var html = '<div class="comment" id="thecontent">'
 
         if (res.vip == 1) {
             html += '<span class="vip">' + res.user + '：</span>'
@@ -57,7 +57,7 @@ function chatPush(data) {
 
     }
     // var content = $('.thecontent')
-    var content=document.getElementsByClassName('thecontent')
+    var content=document.getElementById('thecontent')
     console.log(content)
     window.oncontextmenu = function (e) {
         console.log('!!!!!!!!')
