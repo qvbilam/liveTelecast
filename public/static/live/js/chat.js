@@ -73,8 +73,18 @@ function chatPush(data) {
             $('#username').html(e.path[1].firstChild.innerText)
             var menu = document.querySelector("#menu");
 
-            menu.style.left = e.clientX + 'px';
-            menu.style.top = e.clientY + 'px';
+            //  获取窗口的宽度和高度
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+
+            //  调整宽度和高度
+            menu.style.left = Math.min(w - 180, x) + "px";
+            menu.style.top = Math.min(h - 160, y) + "px";
+
+
+
+            // menu.style.left = e.clientX + 'px';
+            // menu.style.top = e.clientY + 'px';
             menu.style.display = 'block';
         }
     }
