@@ -61,27 +61,28 @@ function chatPush(data) {
     // content.oncontextmenu = function (e) {
     var content = document.getElementsByClassName('thecontent')
     console.log(content)
-
-    for (var i = 0; i <= content.length; i++) {
-        console.log(content,content[i],content[0])
-        // content[i].oncontextmenu =   function (e) {
-        //     e.preventDefault();
-        //     console.log(e, '!!!!!!!!')
-        //     // var menu = '<div id="menu"><span class="username">' + $("#username").text()
-        //     // menu += '</span><span class="menu">去TA的个人空间</span>'
-        //     // menu += '<span class="menu">屏蔽发送者</span>'
-        //     // menu += '<span class="menu">举报选中弹幕</span>'
-        //     // menu += '</div>'
-        //     // $('#comments').append(menu)
-        //     $('#username').html(e.path[1].firstChild.innerText)
-        //     var menu = document.querySelector("#menu");
+    setTimeout(() => {
+        for (var i = 0; i <= content.length; i++) {
+            console.log(content,content[i],content[0])
+            // content[i].oncontextmenu =   function (e) {
+            //     e.preventDefault();
+            //     console.log(e, '!!!!!!!!')
+            //     // var menu = '<div id="menu"><span class="username">' + $("#username").text()
+            //     // menu += '</span><span class="menu">去TA的个人空间</span>'
+            //     // menu += '<span class="menu">屏蔽发送者</span>'
+            //     // menu += '<span class="menu">举报选中弹幕</span>'
+            //     // menu += '</div>'
+            //     // $('#comments').append(menu)
+            //     $('#username').html(e.path[1].firstChild.innerText)
+            //     var menu = document.querySelector("#menu");
+        
+            //     menu.style.left = e.clientX + 'px';
+            //     menu.style.top = e.clientY + 'px';
+            //     menu.style.display = 'block';
+            // }
+        }
+    }, 1)
     
-        //     menu.style.left = e.clientX + 'px';
-        //     menu.style.top = e.clientY + 'px';
-        //     menu.style.display = 'block';
-        // }
-    }
-  
     window.onclick = function (e) {
         document.querySelector('#menu').style.display = 'none';
     }
