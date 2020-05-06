@@ -59,9 +59,6 @@ function chatPush(data) {
     var content = $('.comment')
     console.log(content)
     content.oncontextmenu = function (e) {
-        document.oncontextmenu = function () {
-            return false;
-        };
         console.log(e, '!!!!!!!!')
         // var menu = '<div id="menu"><span class="username">' + $("#username").text()
         // menu += '</span><span class="menu">去TA的个人空间</span>'
