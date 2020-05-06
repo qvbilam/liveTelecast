@@ -56,14 +56,15 @@ function chatPush(data) {
         }, 1)
 
     }
-    $('.comment').oncontextmenu = function (e) {
+    window.oncontextmenu = function (e) {
+        e.preventDefault();
         console.log(e,'!!!!!!!!')
         var menu = '<div id="menu"><span class="username">' + $("#username").text()
         menu += '</span><span class="menu">去TA的个人空间</span>'
         menu += '<span class="menu">屏蔽发送者</span>'
         menu += '<span class="menu">举报选中弹幕</span>'
         menu += '</div>'
-        $('#comments').append(html)
+        $('#comments').append(menu)
         var menu = document.querySelector("#menu");
 
         menu.style.left = e.clientX + 'px';
