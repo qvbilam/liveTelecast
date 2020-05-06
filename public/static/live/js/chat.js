@@ -60,8 +60,7 @@ function chatPush(data) {
     var content=document.getElementsByClassName('thecontent')
     console.log(content)
     content.oncontextmenu = function (e) {
-        console.log(e, '!!!!!!!!')
-        e.preventDefault();
+        console.log('!!!!!!!!')
         // var menu = '<div id="menu"><span class="username">' + $("#username").text()
         // menu += '</span><span class="menu">去TA的个人空间</span>'
         // menu += '<span class="menu">屏蔽发送者</span>'
