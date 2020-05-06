@@ -44,7 +44,7 @@ function chatPush(data) {
         if (res.vip == 1) {
             html += '<span class="vip">' + res.user + '：</span>'
         } else {
-            html += '<span>' + res.user + '：</span>'
+            html += '<span id="username">' + res.user + '：</span>'
         }
         html += '<span>' + res.content + '</span>'
         html += '</div>'
@@ -54,5 +54,26 @@ function chatPush(data) {
             let comments = document.getElementById('comments')
             comments.scrollTop = comments.scrollHeight
         }, 1)
+
     }
+    html.oncontextmenu = function (e) {
+        e.preventDefault();
+        var menu = '<div id="menu"><span class="username">' + $("#username").text()
+        menu += '</span><span class="menu">去TA的个人空间</span>'
+        menu += '<span class="menu">屏蔽发送者</span>'
+        menu += '<span class="menu">举报选中弹幕</span>'
+        menu += '</div>'
+        $('#comments').append(html)
+        var menu = document.querySelector("#menu");
+
+        menu.style.left = e.clientX + 'px';
+        menu.style.top = e.clientY + 'px';
+
+        menu.style.width = '180px';
+    }
+    window.onclick = function (e) {
+        document.querySelector('#menu').style.height = 0;
+    }
+
+
 }
