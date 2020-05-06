@@ -71,7 +71,7 @@ function chatPush(data) {
         menu.style.left = e.clientX + 'px';
         menu.style.top = e.clientY + 'px';
 
-        menu.style.height = '160px';
+        menu.style.display = 'block';
     }
     window.onclick = function (e) {
         document.querySelector('#menu').style.height = 0;

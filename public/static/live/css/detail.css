@@ -107,7 +107,8 @@
 #menu{
     /* width: 180px; 设置为0 隐藏自定义菜单 */
     width: 180px;
-    height: 0;
+    height: 160px;
+    display: none;
     overflow: hidden; /*隐藏溢出的元素*/
     position: absolute; /*自定义菜单相对与body元素进行定位*/
     background: #fff;
