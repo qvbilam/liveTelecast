@@ -56,7 +56,9 @@ function chatPush(data) {
         }, 1)
 
     }
-    $('.').oncontextmenu = function (e) {
+    var content = $('.comment')
+    console.log(content)
+    content.oncontextmenu = function (e) {
         window.oncontextmenu = function (e) {
             e.preventDefault();
         }
