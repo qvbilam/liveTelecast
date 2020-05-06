@@ -59,6 +59,7 @@ function chatPush(data) {
     var content = $('.comment')
     console.log(content)
 }
+console.log(window)
 function showMenu(e) {
     console.log(e, '!!!!!!!!')
     // var menu = '<div id="menu"><span class="username">' + $("#username").text()
