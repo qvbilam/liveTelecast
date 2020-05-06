@@ -1,8 +1,5 @@
 import { Base64 } from './base.js'
 $(function () {
-	window.oncontextmenu = function (e) {
-		e.preventDefault();
-	}
 	var $submitBtn = $('#submit-btn');
 	// var token = $.cookie('token')
 	var token = localStorage.getItem('token')
