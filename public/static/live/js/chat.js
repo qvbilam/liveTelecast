@@ -78,8 +78,8 @@ function chatPush(data) {
             var h = window.innerHeight;
 
             //  调整宽度和高度
-            menu.style.left = Math.min(w - 180, x) + "px";
-            menu.style.top = Math.min(h - 160, y) + "px";
+            menu.style.left = Math.min(w - 180, e.clientX) + "px";
+            menu.style.top = Math.min(h - 160, e.clientY) + "px";
 
 
 
