@@ -60,9 +60,10 @@ function chatPush(data) {
     // var content=document.getElementById('thecontent')
     // content.oncontextmenu = function (e) {
     var content = document.getElementsByClassName('thecontent')
-    console.log(content[0])
+    console.log(content)
 
     for (var i = 0; i <= content.length; i++) {
+        console.log(content[i])
         // content[i].oncontextmenu =   function (e) {
         //     e.preventDefault();
         //     console.log(e, '!!!!!!!!')
