@@ -428,7 +428,7 @@
 }
 
 
-#menu{
+#comments #menu{
     /* width: 180px; 设置为0 隐藏自定义菜单 */
     width: 0;
     height: 160px;
@@ -443,10 +443,10 @@
 #comments .menu{
     color: #7bc3fd;
 }
-#comments .username{
+#comments #username{
     color: #676767;
 }
-#comments .menu,#comments .username{
+#comments .menu,#comments #username{
     display: block;
     /* width: 130px; */
     height: 40px;
