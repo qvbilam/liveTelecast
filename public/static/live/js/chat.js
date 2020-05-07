@@ -81,8 +81,6 @@ function chatPush(data) {
             menu.style.left = Math.min(w - 210, e.clientX) + "px";
             menu.style.top = Math.min(h - 200, e.clientY) + "px";
 
-
-
             // menu.style.left = e.clientX + 'px';
             // menu.style.top = e.clientY + 'px';
             menu.style.display = 'block';
