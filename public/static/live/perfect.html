@@ -42,10 +42,7 @@
     // 提交表单
     $submitBtn.click(function () {
         console.log('1111111111')
-        var name = $('#name').val();
-        // var formData = new FormData()
-        // formData.append("name",name)
-        
+        var name = $('#name').val();        
         editUser('name='+name, function (res) {
             if (res.msg == 'ok') {
                 alert('修改成功')
