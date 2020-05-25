@@ -46,7 +46,7 @@
        
         var name = $('#name').val();
         // formData.append("name", name);
-        var data = { 'name': name }
+        var data = { name: name }
         console.log(data)
         editUser(data, function (res) {
             if (data.msg == 'ok') {
