@@ -46,7 +46,7 @@
         var formData = new FormData()
         formData.append("name",name)
         editUser(formData, function (res) {
-            if (data.msg == 'ok') {
+            if (res.msg == 'ok') {
                 alert('修改成功')
                 // window.location.href = agreement + '//' + host + '/bank/index.html'
             } else {
