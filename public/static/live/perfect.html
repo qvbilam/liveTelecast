@@ -48,7 +48,7 @@
         // formData.append("name", name);
         var data = { name: name }
         console.log(data)
-        editUser(JSON.parse(data), function (res) {
+        editUser(JSON.stringify(data), function (res) {
             if (data.msg == 'ok') {
                 alert('修改成功')
                 window.location.href = agreement + '//' + host + '/bank/index.html'
