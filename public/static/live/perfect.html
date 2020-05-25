@@ -43,9 +43,12 @@
     $submitBtn.click(function () {
         console.log('1111111111')
         var name = $('#name').val();
-        var formData = new FormData()
-        formData.append("name",name)
-        editUser(formData, function (res) {
+        // var formData = new FormData()
+        // formData.append("name",name)
+        let data={
+            name:name
+        }
+        editUser(JSON.stringify(data), function (res) {
             if (res.msg == 'ok') {
                 alert('修改成功')
                 // window.location.href = agreement + '//' + host + '/bank/index.html'
