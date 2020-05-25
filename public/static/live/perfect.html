@@ -45,10 +45,12 @@
         var name = $('#name').val();
         // var formData = new FormData()
         // formData.append("name",name)
-        let data={
-            name:name
+        let data = {
+            name: name
         }
-        editUser(JSON.stringify(data), function (res) {
+        data = JSON.stringify(data)
+        data = JSON.parse(data)
+        editUser(data, function (res) {
             if (res.msg == 'ok') {
                 alert('修改成功')
                 // window.location.href = agreement + '//' + host + '/bank/index.html'
