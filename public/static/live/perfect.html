@@ -42,13 +42,13 @@
     // 提交表单
     $submitBtn.click(function () {
         console.log('1111111111')
-        var formData=new FormData()
+        // var formData=new FormData()
        
         var name = $('#name').val();
-        formData.append("name", name);
+        // formData.append("name", name);
         var data = { 'name': name }
         console.log(data)
-        editUser(formData, function (res) {
+        editUser(data, function (res) {
             if (data.msg == 'ok') {
                 alert('修改成功')
                 window.location.href = agreement + '//' + host + '/bank/index.html'
