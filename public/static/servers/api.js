@@ -13,7 +13,7 @@ export const chat = (data, callBack) => ajax(baseUrl + '/index/chat/index', 'POS
 //live/detail
 export const game = (data, callBack) => ajax(baseUrl + '/index/game/getdata?' + data, 'GET', true,true, null, callBack)
 //live/perfect
-export const editUser = (data, callBack) => ajax(baseUrl + '/index/login/perfect', 'POST', true,true, data, callBack, 'json')
+export const editUser = (data, callBack) => ajax(baseUrl + '/index/login/perfect', 'GET', true,true, data, callBack, 'json')
 
 //bank
 //bank/index
