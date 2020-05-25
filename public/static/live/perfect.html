@@ -43,8 +43,9 @@
     $submitBtn.click(function () {
         console.log('1111111111')
         var name = $('#name').val();
-        let tempState = Object.assign({}, { name: name });
-        editUser(tempState, function (res) {
+        var formData = new FormData()
+        formData.append("name",name)
+        editUser(formData, function (res) {
             if (data.msg == 'ok') {
                 alert('修改成功')
                 // window.location.href = agreement + '//' + host + '/bank/index.html'
