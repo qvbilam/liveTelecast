@@ -1,9 +1,14 @@
 import { Base64 } from './base.js'
+var getData = window.location.search
+var index = getData.substr(1).lastIndexOf("=");
+var game_id = getData.substring(index + 1, getData.length);
+game_id = game_id.substr(1)
 var WsChatUrl = "ws://39.97.177.28:9504"
 var websocketChat = new WebSocket(WsChatUrl);
 
 //链接websock服务
 websocketChat.onopen = function (evt) {
+    console.log(game_id)
     console.log("chat connet success")
     //向服务端发送消息hhhh
 }
@@ -33,10 +38,15 @@ function chatPush(data) {
     }
     // res = JSON.parse(res)
     console.log(res)
-    if (res.type == "chat") {
-        var html = '<div class="comment">'
-        html += '<span>' + res.user + '：</span>'
-        html += '<span class="' + res.vip == 0 ? '' : 'vip' + '">' + res.content + '</span>'
+    if (res.type == "chat" && res.game_id == game_id) {
+        var html = '<div class="comment thecontent" id="thecontent">'
+
+        if (res.vip == 1) {
+            html += '<span class="vip">' + res.user + '：</span>'
+        } else {
+            html += '<span id="user">' + res.user + '：</span>'
+        }
+        html += '<span>' + res.content + '</span>'
         html += '</div>'
 
         $('#comments').append(html)
@@ -44,5 +54,42 @@ function chatPush(data) {
             let comments = document.getElementById('comments')
             comments.scrollTop = comments.scrollHeight
         }, 1)
+
     }
+    // var content = $('.thecontent')
+    // var content=document.getElementById('thecontent')
+    // content.oncontextmenu = function (e) {
+    var content = document.getElementsByClassName('thecontent')
+    console.log(content)
+    for (var i = 0; i < content.length; i++) {
+        content[i].oncontextmenu = function (e) {
+            e.preventDefault();
+            // var menu = '<div id="menu"><span class="username">' + $("#username").text()
+            // menu += '</span><span class="menu">去TA的个人空间</span>'
+            // menu += '<span class="menu">屏蔽发送者</span>'
+            // menu += '<span class="menu">举报选中弹幕</span>'
+            // menu += '</div>'
+            // $('#comments').append(menu)
+            $('#username').html(e.path[1].firstChild.innerText)
+            var menu = document.querySelector("#menu");
+
+            //  获取窗口的宽度和高度
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+
+            //  调整宽度和高度
+            menu.style.left = Math.min(w - 210, e.clientX) + "px";
+            menu.style.top = Math.min(h - 200, e.clientY) + "px";
+
+            // menu.style.left = e.clientX + 'px';
+            // menu.style.top = e.clientY + 'px';
+            menu.style.display = 'block';
+        }
+    }
+
+    window.onclick = function (e) {
+        document.querySelector('#menu').style.display = 'none';
+    }
+
+
 }

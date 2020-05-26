@@ -104,6 +104,30 @@
     /*为评论输入框留位置，由于输入框是绝对定位*/
     padding-bottom: 50px;
 }
+#menu{
+    /* width: 180px; 设置为0 隐藏自定义菜单 */
+    width: 180px;
+    height: 160px;
+    display: none;
+    overflow: hidden; /*隐藏溢出的元素*/
+    position: absolute; /*自定义菜单相对与body元素进行定位*/
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: #e3e3e4 0px 0px 5px 2px ;
+}
+.menu{
+    color: #7bc3fd;
+}
+#username{
+    color: #676767;
+}
+.menu,#username{
+    display: block;
+    /* width: 130px; */
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+}
 .comment-form {
     position: fixed;
     bottom: 0;
@@ -221,8 +245,208 @@
     border-radius: 50%;
 }
 .vip{
-    background: linear-gradient(to right, red, #FFD700 );
+    display: inline-block;
+    /* font-size: 20px; */
+    /* margin: 10px; */
+    background: linear-gradient(left, #f71605, #e0f513);
+    background: -webkit-linear-gradient(left, #f71605, #e0f513);
+    background: -o-linear-gradient(right, #f71605, #e0f513);
     -webkit-background-clip: text;
-    color: transparent;
-    font-weight: 900;
+    -webkit-text-fill-color: transparent;
+    animation: scratchy 0.5s linear forwards infinite;
+    /* 其它浏览器兼容性前缀 */
+    -webkit-animation: scratchy 0.5s linear forwards infinite;
+    -moz-animation: scratchy 0.5s linear forwards infinite;
+    -ms-animation: scratchy 0.5s linear forwards infinite;
+    -o-animation: scratchy 0.5s linear forwards infinite;
+}
+@keyframes scratchy {
+    0% {
+        background-position: 0 0;
+    }
+
+    25% {
+        background-position: 0 0;
+    }
+
+    26% {
+        background-position: 20px -20px;
+    }
+
+    50% {
+        background-position: 20px -20px;
+    }
+
+    51% {
+        background-position: 40px -40px;
+    }
+
+    75% {
+        background-position: 40px -40px;
+    }
+
+    76% {
+        background-position: 60px -60px;
+    }
+
+    99% {
+        background-position: 60px -60px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* 添加兼容性前缀 */
+@-webkit-keyframes scratchy {
+    0% {
+        background-position: 0 0;
+    }
+
+    25% {
+        background-position: 0 0;
+    }
+
+    26% {
+        background-position: 20px -20px;
+    }
+
+    50% {
+        background-position: 20px -20px;
+    }
+
+    51% {
+        background-position: 40px -40px;
+    }
+
+    75% {
+        background-position: 40px -40px;
+    }
+
+    76% {
+        background-position: 60px -60px;
+    }
+
+    99% {
+        background-position: 60px -60px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@-moz-keyframes scratchy {
+    0% {
+        background-position: 0 0;
+    }
+
+    25% {
+        background-position: 0 0;
+    }
+
+    26% {
+        background-position: 20px -20px;
+    }
+
+    50% {
+        background-position: 20px -20px;
+    }
+
+    51% {
+        background-position: 40px -40px;
+    }
+
+    75% {
+        background-position: 40px -40px;
+    }
+
+    76% {
+        background-position: 60px -60px;
+    }
+
+    99% {
+        background-position: 60px -60px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@-ms-keyframes scratchy {
+    0% {
+        background-position: 0 0;
+    }
+
+    25% {
+        background-position: 0 0;
+    }
+
+    26% {
+        background-position: 20px -20px;
+    }
+
+    50% {
+        background-position: 20px -20px;
+    }
+
+    51% {
+        background-position: 40px -40px;
+    }
+
+    75% {
+        background-position: 40px -40px;
+    }
+
+    76% {
+        background-position: 60px -60px;
+    }
+
+    99% {
+        background-position: 60px -60px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@-o-keyframes scratchy {
+    0% {
+        background-position: 0 0;
+    }
+
+    25% {
+        background-position: 0 0;
+    }
+
+    26% {
+        background-position: 20px -20px;
+    }
+
+    50% {
+        background-position: 20px -20px;
+    }
+
+    51% {
+        background-position: 40px -40px;
+    }
+
+    75% {
+        background-position: 40px -40px;
+    }
+
+    76% {
+        background-position: 60px -60px;
+    }
+
+    99% {
+        background-position: 60px -60px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
 }
