@@ -20,6 +20,11 @@
 	<script src="./js/chat.js" type="module"></script>
 	<script src="./js/user_chat_push.js" type="module"></script>
 	<script src="./js/jquery.cookie.js"></script>
+	<!--播放插件-->
+	<link href="./videolib/css/video-js.min.css" rel="stylesheet" type="text/css">
+	<script src="./videolib/js/video.min.js"></script>
+	<!-- 引入的videojs-flash.js插件主要是为播放rtmp视频流-->
+	<script src="./videolib/videojs-flash.min.js"></script>
 </head>
 
 <body>
@@ -35,7 +40,11 @@
 	<div class="content">
 		<div class="poster">
 			<!--<img src="./imgs/match-poster.png" class="post-img" />-->
-			<img id="banner" class="post-img" />
+			<!--<img id="banner" class="post-img" />-->
+			<video id='myvideo'  class="post-img video-js vjs-default-skin" controls>
+				<!-- RTMP直播源地址-->
+				<source src="rtmp://liveplay.qvbilam.xin/lol/1234">
+			</video>
 			<div class="poster-title">
 				<div class="poster-title-team">
 					<!--<img src="./imgs/team1.png" width="40px" height="40px">-->
@@ -160,6 +169,11 @@
 			<!--</div>-->
 		</div>
 	</div>
+
+	<script>
+		var player = videojs('myvideo', {}, function(){console.log('videojs播放器初始化成功')})
+		player.play();
+	</script>
 	<script type="module">
 		import { game } from './../servers/api.js'
 		$(function () {
@@ -225,7 +239,7 @@
 		game(data, function (data) {
 			/*追加首页信息*/
 			console.log(data.data.game)
-			$('#banner').attr('src', data.data.game[0].banner_image)
+			// $('#banner').attr('src', data.data.game[0].banner_image)
 			$('#a_image').attr('src', data.data.game[0].a_image)
 			$('#b_image').attr('src', data.data.game[0].b_image)
 			$('#html_titile').append("<font color='red'>" + data.data.game[0].a_name + '</font> vs <font color="red">' + data.data.game[0].b_name + '</font> 赛况')
