@@ -5,6 +5,8 @@
 .post-img {
     height: 30vh;
     width: 100%;
+    display: flex;
+    
 }
 .poster-title {
     position: absolute;

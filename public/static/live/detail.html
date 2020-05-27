@@ -41,12 +41,10 @@
 		<div class="poster">
 			<!--<img src="./imgs/match-poster.png" class="post-img" />-->
 			<!--<img id="banner" class="post-img" />-->
-			<div class="post-img">
-				<video id='myvideo'  class="video-js vjs-default-skin" controls>
-					<!-- RTMP直播源地址-->
-					<source src="rtmp://liveplay.qvbilam.xin/lol/1234">
-				</video>
-			</div>
+			<video id='myvideo'  style="width:100%;height:30vh;object-fit:fill" class="video-js vjs-default-skin" controls>
+				<!-- RTMP直播源地址-->
+				<source src="rtmp://liveplay.qvbilam.xin/lol/1234">
+			</video>
 			<div class="poster-title">
 				<div class="poster-title-team">
 					<!--<img src="./imgs/team1.png" width="40px" height="40px">-->
@@ -179,7 +177,7 @@
 	</div>
 
 	<script>
-		var player = videojs('myvideo', {}, function(){console.log('videojs播放器初始化成功')})
+		var player = videojs('myvideo', {}, function () { console.log('videojs播放器初始化成功') })
 		player.play();
 	</script>
 	<script type="module">
