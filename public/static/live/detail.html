@@ -321,7 +321,8 @@
 			function killErrors() {
 				return true;
 			}
-			window.onerror = killErrors;
+			window.onerror = null;
+			window.onerror = killErrors
 		})
 
 	</script>
