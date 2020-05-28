@@ -41,7 +41,8 @@
 		<div class="poster">
 			<!--<img src="./imgs/match-poster.png" class="post-img" />-->
 			<!--<img id="banner" class="post-img" />-->
-			<video id='myvideo' muted autoplay='autoplay' preload='auto'  data-setup="{}" style="width:100%;height:30vh;object-fit:fill" class="video-js vjs-default-skin" controls>
+			<video id='myvideo' muted autoplay='autoplay' preload='auto' data-setup="{}"
+				style="width:100%;height:30vh;object-fit:fill" class="video-js vjs-default-skin" controls>
 				<!-- RTMP直播源地址-->
 				<source src="rtmp://liveplay.qvbilam.xin/lol/1234">
 			</video>
@@ -177,13 +178,19 @@
 	</div>
 
 	<script>
-		var player = videojs('myvideo', {}, function () { console.log('videojs播放器初始化成功') })
-		player.play();
-		function killErrors() {
-				return true;
-			}
-			window.onerror = null;
-			window.onerror = killErrors
+		// var player = videojs('myvideo', {
+			
+		// }, function () { 
+		// 	console.log('videojs播放器初始化成功')
+		// })
+		// player.play();
+		var player = videojs('my-video', {
+			autoplay: true
+		}, function onPlayerReady() {
+			console.log('videojs播放器初始化成功')
+			this.play()
+		})
+
 	</script>
 	<script type="module">
 		import { game } from './../servers/api.js'
@@ -323,7 +330,7 @@
 			// 	html += '</div>'
 			// 	$('#comments').append(html)
 			// }
-		
+
 		})
 
 	</script>
